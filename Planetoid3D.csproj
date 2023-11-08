@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <PublishReadyToRun>false</PublishReadyToRun>
+        <TieredCompilation>false</TieredCompilation>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <ApplicationIcon>Icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="app.manifest" />
+        <None Include="Content\antenna1.fbx" />
+        <None Include="Content\antenna2.fbx" />
+        <None Include="Content\antenna3.fbx" />
+        <None Include="Content\Arial.spritefont" />
+        <None Include="Content\Audio\PlanetoidAudio.xap" />
+        <None Include="Content\Models\asteroid.fbx" />
+        <None Include="Content\Models\buildHat.fbx" />
+        <None Include="Content\Models\catapult.fbx" />
+        <None Include="Content\Models\extractor.fbx" />
+        <None Include="Content\Models\house.fbx" />
+        <None Include="Content\Models\hunter.fbx" />
+        <None Include="Content\Models\laser_shot.fbx" />
+        <None Include="Content\Models\LKE.fbx" />
+        <None Include="Content\Models\pilotHat.fbx" />
+        <None Include="Content\Models\planet.fbx" />
+        <None Include="Content\Models\planetoid.fbx" />
+        <None Include="Content\Models\radar.fbx" />
+        <None Include="Content\Models\reactor.fbx" />
+        <None Include="Content\Models\repulser.fbx" />
+        <None Include="Content\Models\rocket.fbx" />
+        <None Include="Content\Models\sagun.fbx" />
+        <None Include="Content\Models\school.fbx" />
+        <None Include="Content\Models\shield.fbx" />
+        <None Include="Content\Models\solar.fbx" />
+        <None Include="Content\Models\Trees\cyanide_rock.fbx" />
+        <None Include="Content\Models\Trees\metane_rock.fbx" />
+        <None Include="Content\Models\Trees\sulphur_rock.fbx" />
+        <None Include="Content\Models\Trees\tree.fbx" />
+        <None Include="Content\Models\troglother.fbx" />
+        <None Include="Content\Models\turbina.fbx" />
+        <None Include="Content\Models\turret.fbx" />
+        <None Include="Content\Models\warHat.fbx" />
+        <None Include="Content\obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+        <None Include="Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache" />
+        <None Include="Content\obj\x86\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+        <None Include="Content\obj\x86\Release\ResolveAssemblyReference.cache" />
+        <None Include="Content\Pages.spritefont" />
+        <None Include=".config\dotnet-tools.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Content\AsteroidShader.Fx" />
+        <Content Include="Content\Audio\asteroid_death.wav" />
+        <Content Include="Content\Audio\button_click.wav" />
+        <Content Include="Content\Audio\button_hover.wav" />
+        <Content Include="Content\Audio\messagebox.wav" />
+        <Content Include="Content\Audio\music_battle.wav" />
+        <Content Include="Content\Audio\blackhole_appear.wav" />
+        <Content Include="Content\Audio\blackhole_die.wav" />
+        <Content Include="Content\Audio\blackhole_suck.wav" />
+        <Content Include="Content\Audio\building_completed.wav" />
+        <Content Include="Content\Audio\building_explode.wav" />
+        <Content Include="Content\Audio\building_placed.wav" />
+        <Content Include="Content\Audio\building_sold.wav" />
+        <Content Include="Content\Audio\camera_move.wav" />
+        <Content Include="Content\Audio\death_scream1.wav" />
+        <Content Include="Content\Audio\death_scream2.wav" />
+        <Content Include="Content\Audio\death_scream3.wav" />
+        <Content Include="Content\Audio\error.wav" />
+        <Content Include="Content\Audio\hominid_pickup.wav" />
+        <Content Include="Content\Audio\impact_huge1.wav" />
+        <Content Include="Content\Audio\impact_huge2.wav" />
+        <Content Include="Content\Audio\impact_soft1.wav" />
+        <Content Include="Content\Audio\impact_soft2.wav" />
+        <Content Include="Content\Audio\laser_hit.wav" />
+        <Content Include="Content\Audio\laser_huge.wav" />
+        <Content Include="Content\Audio\laser_medium.wav" />
+        <Content Include="Content\Audio\laser_soft.wav" />
+        <Content Include="Content\Audio\menu_panel_fade.wav" />
+        <Content Include="Content\Audio\message.wav" />
+        <Content Include="Content\Audio\music_ingame.wav" />
+        <Content Include="Content\Audio\music_title.wav" />
+        <Content Include="Content\Audio\page_in.wav" />
+        <Content Include="Content\Audio\page_out.wav" />
+        <Content Include="Content\Audio\planetoid_appear.wav" />
+        <Content Include="Content\Audio\planetoid_easter.wav" />
+        <Content Include="Content\Audio\music_planetoid.wav" />
+        <Content Include="Content\Audio\planetoid_meltdown.wav" />
+        <Content Include="Content\Audio\planet_real_explosion.wav" />
+        <Content Include="Content\Audio\punch1.wav" />
+        <Content Include="Content\Audio\punch2.wav" />
+        <Content Include="Content\Audio\quest_completed.wav" />
+        <Content Include="Content\Audio\repulser_impact.wav" />
+        <Content Include="Content\Audio\repulser_off.wav" />
+        <Content Include="Content\Audio\repulser_on.wav" />
+        <Content Include="Content\Audio\slap1.wav" />
+        <Content Include="Content\Audio\slap2.wav" />
+        <Content Include="Content\Audio\slap3.wav" />
+        <Content Include="Content\Audio\start_game.wav" />
+        <Content Include="Content\Audio\swish_in.wav" />
+        <Content Include="Content\Audio\swish_out.wav" />
+        <Content Include="Content\Audio\trogloid_death1.wav" />
+        <Content Include="Content\Audio\trogloid_death2.wav" />
+        <Content Include="Content\Audio\troglother_death.wav" />
+        <Content Include="Content\Audio\troglother_hiss.wav" />
+        <Content Include="Content\Audio\troglother_scream.wav" />
+        <Content Include="Content\Audio\turbina_loop.wav" />
+        <Content Include="Content\Audio\turbina_start.wav" />
+        <Content Include="Content\Audio\turbina_stop.wav" />
+        <Content Include="Content\bronze_medal.png" />
+        <Content Include="Content\BuildingShader.Fx" />
+        <Content Include="Content\Credits\credit0.png" />
+        <Content Include="Content\Credits\credit1.png" />
+        <Content Include="Content\Credits\credit10.png" />
+        <Content Include="Content\Credits\credit11.png" />
+        <Content Include="Content\Credits\credit12.png" />
+        <Content Include="Content\Credits\credit13.png" />
+        <Content Include="Content\Credits\credit14.png" />
+        <Content Include="Content\Credits\credit15.png" />
+        <Content Include="Content\Credits\credit16.png" />
+        <Content Include="Content\Credits\credit2.png" />
+        <Content Include="Content\Credits\credit3.png" />
+        <Content Include="Content\Credits\credit4.png" />
+        <Content Include="Content\Credits\credit5.png" />
+        <Content Include="Content\Credits\credit6.png" />
+        <Content Include="Content\Credits\credit7.png" />
+        <Content Include="Content\Credits\credit8.png" />
+        <Content Include="Content\Credits\credit9.png" />
+        <Content Include="Content\dot.png" />
+        <Content Include="Content\effects.fx">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Content\flare1.png" />
+        <Content Include="Content\flare2.png" />
+        <Content Include="Content\flare3.png" />
+        <Content Include="Content\glow.png" />
+        <Content Include="Content\gold_medal.png" />
+        <Content Include="Content\GravityShader.fx" />
+        <Content Include="Content\Icons\backIcon.png" />
+        <Content Include="Content\Icons\baseIcon.png" />
+        <Content Include="Content\Icons\build.png" />
+        <Content Include="Content\Icons\catapult.png" />
+        <Content Include="Content\Icons\defense.png" />
+        <Content Include="Content\Icons\extractor.png" />
+        <Content Include="Content\Icons\house.png" />
+        <Content Include="Content\Icons\hunter.png" />
+        <Content Include="Content\Icons\LKE.png" />
+        <Content Include="Content\Icons\lockIcon.png" />
+        <Content Include="Content\Icons\production.png" />
+        <Content Include="Content\Icons\radar.png" />
+        <Content Include="Content\Icons\reactor.png" />
+        <Content Include="Content\Icons\repulser.png" />
+        <Content Include="Content\Icons\research.png" />
+        <Content Include="Content\Icons\Research\energy.png" />
+        <Content Include="Content\Icons\Research\engines.png" />
+        <Content Include="Content\Icons\Research\graviton.png" />
+        <Content Include="Content\Icons\Research\laser.png" />
+        <Content Include="Content\Icons\Research\polymers.png" />
+        <Content Include="Content\Icons\Research\structure.png" />
+        <Content Include="Content\Icons\rocket.png" />
+        <Content Include="Content\Icons\sagun.png" />
+        <Content Include="Content\Icons\school.png" />
+        <Content Include="Content\Icons\ships.png" />
+        <Content Include="Content\Icons\solar.png" />
+        <Content Include="Content\Icons\solarpanel.png" />
+        <Content Include="Content\Icons\support.png" />
+        <Content Include="Content\Icons\turbina.png" />
+        <Content Include="Content\Icons\turret.png" />
+        <Content Include="Content\Intro.wmv" />
+        <Content Include="Content\Models\asteroid_texture.png" />
+        <Content Include="Content\Models\building_body_texture.png" />
+        <Content Include="Content\Models\catapult_body_texture.png" />
+        <Content Include="Content\Models\catapult_edge_texture.png" />
+        <Content Include="Content\Models\catapult_wing_texture.png" />
+        <Content Include="Content\Models\extractor_head_texture.png" />
+        <Content Include="Content\Models\extractor_texture.png" />
+        <Content Include="Content\hominid.png" />
+        <Content Include="Content\Models\house_texture.png" />
+        <Content Include="Content\Models\hunter_texture.png" />
+        <Content Include="Content\Models\LKEc_texture.png" />
+        <Content Include="Content\planetoid.png" />
+        <Content Include="Content\Models\radar_head_texture.png" />
+        <Content Include="Content\Models\reactor_texture.png" />
+        <Content Include="Content\Models\repulser_texture.png" />
+        <Content Include="Content\Models\rocket_texture.png" />
+        <Content Include="Content\Models\solarPanel_texture.png" />
+        <Content Include="Content\Models\texture_sagun.png" />
+        <Content Include="Content\Models\Trees\cyanide_texture.png" />
+        <Content Include="Content\Models\Trees\metane_texture.jpg" />
+        <Content Include="Content\Models\Trees\sulphur_texture.jpg" />
+        <Content Include="Content\Models\Trees\tree_texture.png" />
+        <Content Include="Content\Models\troglother_body.png" />
+        <Content Include="Content\Models\troglother_head.png" />
+        <Content Include="Content\Models\turbina_body_texture.png" />
+        <Content Include="Content\Models\turret_body_texture.png" />
+        <Content Include="Content\Models\turret_head_texture.png" />
+        <Content Include="Content\mouse_standard.png" />
+        <Content Include="Content\mouse_target.png" />
+        <Content Include="Content\obj\Content.contentproj.XactOutput.FileList.txt" />
+        <Content Include="Content\obj\x86\Debug\antenna1_0.xml" />
+        <Content Include="Content\obj\x86\Debug\antenna2_0.xml" />
+        <Content Include="Content\obj\x86\Debug\antenna3_0.xml" />
+        <Content Include="Content\obj\x86\Debug\ContentPipeline.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\asteroid_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\buildHat_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\catapult_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\extractor_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\hominid_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\house_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\hunter_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\laser_shot_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\LKE_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\pilotHat_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\planetoid_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\planet_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\radar_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\reactor_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\repulser_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\rocket_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\sagun_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\school_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\shield_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\solar_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\Trees\cyanide_rock_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\Trees\metane_rock_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\Trees\sulphur_rock_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\Trees\tree_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\tree_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\troglother_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\turbina_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\turret_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Models\warHat_0.xml" />
+        <Content Include="Content\obj\x86\Debug\Content.contentproj.FileListAbsolute.txt" />
+        <Content Include="Content\obj\x86\Release\antenna1_0.xml" />
+        <Content Include="Content\obj\x86\Release\antenna2_0.xml" />
+        <Content Include="Content\obj\x86\Release\antenna3_0.xml" />
+        <Content Include="Content\obj\x86\Release\Audio\PlanetoidAudio.xml" />
+        <Content Include="Content\obj\x86\Release\ContentPipeline.xml" />
+        <Content Include="Content\obj\x86\Release\Models\asteroid_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\buildHat_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\catapult_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\extractor_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\hominid_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\house_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\hunter_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\laser_shot_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\LKE_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\pilotHat_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\planetoid_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\planet_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\radar_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\reactor_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\repulser_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\rocket_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\sagun_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\school_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\shield_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\solar_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\Trees\cyanide_rock_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\Trees\metane_rock_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\Trees\sulphur_rock_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\Trees\tree_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\troglother_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\turbina_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\turret_0.xml" />
+        <Content Include="Content\obj\x86\Release\Models\warHat_0.xml" />
+        <Content Include="Content\obj\x86\Release\Content.contentproj.FileListAbsolute.txt" />
+        <Content Include="Content\Pages\old_page.png" />
+        <Content Include="Content\Pages\page0.png" />
+        <Content Include="Content\Pages\page11.png" />
+        <Content Include="Content\Pages\page12.png" />
+        <Content Include="Content\Pages\page13.png" />
+        <Content Include="Content\Pages\page2.png" />
+        <Content Include="Content\Pages\page4.png" />
+        <Content Include="Content\Pages\page5.png" />
+        <Content Include="Content\Pages\page6.png" />
+        <Content Include="Content\Pages\page7.png" />
+        <Content Include="Content\Pages\page8.png" />
+        <Content Include="Content\Pages\pages.xml" />
+        <Content Include="Content\Panels\panel_balloon.png" />
+        <Content Include="Content\Panels\panel_bottom.png" />
+        <Content Include="Content\Panels\panel_button.png" />
+        <Content Include="Content\Panels\panel_deal.png" />
+        <Content Include="Content\Panels\panel_energy.png" />
+        <Content Include="Content\Panels\panel_icon.png" />
+        <Content Include="Content\Panels\panel_icon_enemy.png" />
+        <Content Include="Content\Panels\panel_icon_friend.png" />
+        <Content Include="Content\Panels\panel_icon_home.png" />
+        <Content Include="Content\Panels\panel_icon_inhabit.png" />
+        <Content Include="Content\Panels\panel_info.png" />
+        <Content Include="Content\Panels\panel_keldanyum.png" />
+        <Content Include="Content\Panels\panel_object.png" />
+        <Content Include="Content\Panels\panel_planet.png" />
+        <Content Include="Content\ParticleEffect.fx" />
+        <Content Include="Content\Particles\fire.png" />
+        <Content Include="Content\Particles\gray.png" />
+        <Content Include="Content\Particles\smoke.png" />
+        <Content Include="Content\Particles\smokeToon.png" />
+        <Content Include="Content\PlanetShader.Fx" />
+        <Content Include="Content\PostProcess.Fx" />
+        <Content Include="Content\questSign.png" />
+        <Content Include="Content\Races\Alien.png" />
+        <Content Include="Content\Races\Aquae.png" />
+        <Content Include="Content\Races\Astronaut.png" />
+        <Content Include="Content\Races\Baffogiallo.png" />
+        <Content Include="Content\Races\Cats.png" />
+        <Content Include="Content\Races\Cleaved.png" />
+        <Content Include="Content\Races\Cosence.png" />
+        <Content Include="Content\Races\Custom.png" />
+        <Content Include="Content\Races\Cyclop.png" />
+        <Content Include="Content\Races\Feminid.png" />
+        <Content Include="Content\Races\Ginger.png" />
+        <Content Include="Content\Races\Hominid.png" />
+        <Content Include="Content\Races\Melon.png" />
+        <Content Include="Content\Races\Mineinid.png" />
+        <Content Include="Content\Races\Numby.png" />
+        <Content Include="Content\Races\Planeminid.png" />
+        <Content Include="Content\Races\Rablosh.png" />
+        <Content Include="Content\Races\Races.xml" />
+        <Content Include="Content\Races\Sommo.png" />
+        <Content Include="Content\Races\Strange.png" />
+        <Content Include="Content\Races\Sulpho.png" />
+        <Content Include="Content\Races\texture.png" />
+        <Content Include="Content\Races\Trogloid.png" />
+        <Content Include="Content\Races\Ubscur.png" />
+        <Content Include="Content\Races\Ultimate.png" />
+        <Content Include="Content\Races\Vertex.png" />
+        <Content Include="Content\Races\Ymo.png" />
+        <Content Include="Content\Races\Zombie.png" />
+        <Content Include="Content\Races\Zorgul.png" />
+        <Content Include="Content\RandomGameNames.txt" />
+        <Content Include="Content\ShieldShader.fx" />
+        <Content Include="Content\silver_medal.png" />
+        <Content Include="Content\StarEffect.fx" />
+        <Content Include="Content\Textures\terrain0.png" />
+        <Content Include="Content\Textures\terrain0_Normal.png" />
+        <Content Include="Content\Textures\terrain1.png" />
+        <Content Include="Content\Textures\terrain1_Normal.png" />
+        <Content Include="Content\Textures\terrain2.png" />
+        <Content Include="Content\Textures\terrain2_Normal.png" />
+        <Content Include="Content\Textures\terrain3.png" />
+        <Content Include="Content\Textures\terrain3_Normal.png" />
+        <Content Include="Content\Textures\terrain4.png" />
+        <Content Include="Content\Textures\terrain4_Normal.png" />
+        <Content Include="Content\Textures\terrain5.png" />
+        <Content Include="Content\Textures\terrain5_Normal.png" />
+        <Content Include="Content\Textures\terrain6.png" />
+        <Content Include="Content\Textures\terrain6_Normal.png" />
+        <Content Include="Content\Textures\terrain7.png" />
+        <Content Include="Content\Textures\terrain7_Normal.png" />
+        <Content Include="Content\Title\background.png" />
+        <Content Include="Content\Title\number.png" />
+        <Content Include="Content\Title\text.png" />
+        <Content Include="Content\Title\TextShader.fx" />
+        <Content Include="Icon.ico" />
+    </ItemGroup>
+    <ItemGroup>
+        <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Properties\" />
+        <Folder Include=".config\" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Content\Audio\PlanetoidAudio.xgs">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Content\Audio\Sound Bank.xsb">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Content\Audio\Wave Bank.xwb">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
+        <Message Text="Restoring dotnet tools" Importance="High" />
+        <Exec Command="dotnet tool restore" />
+    </Target>
+</Project>

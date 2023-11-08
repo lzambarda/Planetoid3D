@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/antenna1.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/antenna2.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/antenna3.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Arial.spritefont</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/AsteroidShader.Fx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/asteroid_death.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/blackhole_appear.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/blackhole_die.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/blackhole_suck.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/building_completed.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/building_explode.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/building_placed.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/building_sold.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/button_click.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/button_hover.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/camera_move.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/death_scream1.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/death_scream2.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/death_scream3.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/error.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/hominid_pickup.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/impact_huge1.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/impact_huge2.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/impact_soft1.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/impact_soft2.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/laser_hit.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/laser_huge.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/laser_medium.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/laser_soft.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/menu_panel_fade.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/message.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/messagebox.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/music_battle.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/music_ingame.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/music_planetoid.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/music_title.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/page_in.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/page_out.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/planet_real_explosion.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/planetoid_appear.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/planetoid_easter.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/planetoid_meltdown.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/punch1.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/punch2.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/quest_completed.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/repulser_impact.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/repulser_off.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/repulser_on.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/slap1.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/slap2.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/slap3.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/start_game.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/swish_in.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/swish_out.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/trogloid_death1.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/trogloid_death2.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/troglother_death.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/troglother_hiss.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/troglother_scream.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/turbina_loop.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/turbina_start.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/turbina_stop.wav</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/bronze_medal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/BuildingShader.Fx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit0.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit1.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit10.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit11.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit12.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit13.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit14.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit15.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit16.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit2.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit3.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit4.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit5.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit6.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit7.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit8.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Credits/credit9.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/dot.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/flare1.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/flare2.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/flare3.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/glow.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/gold_medal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/GravityShader.fx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/hominid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/backIcon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/baseIcon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/build.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/catapult.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/defense.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/extractor.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/house.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/hunter.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/LKE.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/lockIcon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/production.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/radar.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/reactor.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/repulser.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/research.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/Research/energy.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/Research/engines.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/Research/graviton.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/Research/laser.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/Research/polymers.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/Research/structure.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/rocket.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/sagun.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/school.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/ships.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/solar.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/solarpanel.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/support.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/turbina.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Icons/turret.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Intro.wmv</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/messagebox_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/asteroid.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/buildHat.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/building_body_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/catapult.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/catapult_body_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/catapult_edge_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/catapult_wing_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/extractor.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/extractor_head_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/extractor_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/hominid.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/hominid_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/house.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/house_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/hunter.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/hunter_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/laser_shot.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/lke.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/lkec_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/pilotHat.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/planet.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/planetoid.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/planetoid_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/radar.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/radar_head_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/reactor.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/reactor_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/repulser.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/repulser_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/rocket.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/rocket_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/sagun.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/school.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/shield.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/solar.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/solarPanel_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/texture_sagun.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/cyanide_rock.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/cyanide_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/metane_rock.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/metane_texture.jpg</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/sulphur_rock.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/sulphur_texture.jpg</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/tree.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/Trees/tree_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/troglother.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/troglother_body.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/troglother_head.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/turbina.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/turbina_body_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/turret.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/turret_body_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/turret_head_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Models/warHat.fbx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/mouse_standard.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/mouse_target.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages.spritefont</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/old_page.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page0.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page11.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page12.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page13.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page2.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page4.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page5.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page6.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page7.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Pages/page8.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_balloon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_bottom.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_button.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_deal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_energy.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_icon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_icon_enemy.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_icon_friend.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_icon_home.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_icon_inhabit.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_info.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_keldanyum.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_object.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Panels/panel_planet.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/ParticleEffect.fx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Particles/fire.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Particles/gray.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Particles/smoke.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Particles/smokeToon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/planetoid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/questSign.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Alien.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Aquae.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Astronaut.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Baffogiallo.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Cats.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Cleaved.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Cosence.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Custom.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Cyclop.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Feminid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Ginger.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Hominid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Melon.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Mineinid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Numby.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Planeminid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Rablosh.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Sommo.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Strange.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Sulpho.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Trogloid.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Ubscur.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Ultimate.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Vertex.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Ymo.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Zombie.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Races/Zorgul.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/ray_texture.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/silver_medal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/StarEffect.fx</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain0.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain0_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain1.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain1_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain2.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain2_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain3.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain3_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain4.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain4_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain5.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain5_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain6.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain6_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain7.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Textures/terrain7_Normal.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Title/background.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Title/number.png</File>
+    <File>/Users/lucazambarda/Desktop/Planetoid3D/Content/Title/text.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

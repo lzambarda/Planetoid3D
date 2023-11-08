@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Luca/Desktop/Planetoid3DMonoGame/Planetoid3D/Planetoid3D/Content/Audio/UI_Clicks14.wav</SourceFile>
+  <SourceTime>2019-12-23T09:02:31.3158483+01:00</SourceTime>
+  <DestFile>C:/Users/Luca/Desktop/Planetoid3DMonoGame/Planetoid3D/Planetoid3D/Content/bin/DesktopGL/Audio/UI_Clicks14.xnb</DestFile>
+  <DestTime>2019-12-26T12:02:03.3488075+01:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

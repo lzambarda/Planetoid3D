@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Luca/Desktop/Planetoid3DMonoGame/Planetoid3D/Planetoid3D/Content/PostProcess.Fx</SourceFile>
+  <SourceTime>2019-12-24T18:19:53.6692109+01:00</SourceTime>
+  <DestFile>C:/Users/Luca/Desktop/Planetoid3DMonoGame/Planetoid3D/Planetoid3D/Content/bin/DesktopGL/PostProcess.xnb</DestFile>
+  <DestTime>2019-12-26T12:02:23.6148072+01:00</DestTime>
+  <Importer>EffectImporter</Importer>
+  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
+  <Processor>EffectProcessor</Processor>
+  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
+  <Parameters>
+    <Key>DebugMode</Key>
+    <Value>Auto</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

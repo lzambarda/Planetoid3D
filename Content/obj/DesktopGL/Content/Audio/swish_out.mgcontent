@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/swish_out.wav</SourceFile>
+  <SourceTime>2019-12-23T08:02:31.2378507+00:00</SourceTime>
+  <DestFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/bin/DesktopGL/Content/Audio/swish_out.xnb</DestFile>
+  <DestTime>2020-12-15T22:37:25.0811654+00:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2020-08-10T16:17:54+01:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2020-08-10T16:17:54+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

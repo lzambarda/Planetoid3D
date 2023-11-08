@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<Races>
+	<Race>
+		<Name>Hominid</Name>
+		<Atmosphere>Oxygen</Atmosphere>
+		<Description>Hominids... In 3D!?!? Oh YEAH!</Description>
+		<Feature>0</Feature>
+    <Ability>0</Ability>
+	</Race>
+	<Race>
+		<Name>Strange</Name>
+		<Atmosphere>Chlorine</Atmosphere>
+		<Description>o_O</Description>
+		<Feature>0</Feature>
+    <Ability>1</Ability>
+	</Race>
+	<Race>
+		<Name>Alien</Name>
+		<Atmosphere>Chlorine</Atmosphere>
+		<Description>"I don't know why the others always look at us as if we were nasty."\n-Said by an Alien</Description>
+		<Feature>1</Feature>
+    <Ability>12</Ability>
+	</Race>
+	<Race>
+		<Name>Zorgul</Name>
+		<Atmosphere>Ammonia</Atmosphere>
+		<Description>Their home planet was destroyed by the war between Hominids and Aliens\nNow their entire life is devoted to one thing:\nDestroy everyone who menace their new home!</Description>
+		<Feature>2</Feature>
+    <Ability>11</Ability>
+	</Race>
+	<Race>
+		<Name>Rablosh</Name>
+		<Atmosphere>Cyanide</Atmosphere>
+		<Description>The force of their mother earth, Rablusia, is very strong!\nAvoid understimating them!</Description>
+		<Feature>0</Feature>
+    <Ability>10</Ability>
+	</Race>
+	<Race>
+		<Name>Sulpho</Name>
+		<Atmosphere>Sulphur</Atmosphere>
+		<Description>Sulpho are from Sulphurea, the capital planet of Sulphur, the capital solar system of Sulphea, the...</Description>
+		<Feature>0</Feature>
+    <Ability>7</Ability>
+	</Race>
+	<Race>
+		<Name>Aquae</Name>
+		<Atmosphere>Metane</Atmosphere>
+		<Description>This race born when a group of hominids landed on a aquatic planet.\nTheir bodies changed to adapt theirselves and now they are 99% of water.</Description>
+		<Feature>0</Feature>
+    <Ability>6</Ability>
+	</Race>
+	<Race>
+		<Name>Ymo</Name>
+		<Atmosphere>Oxygen</Atmosphere>
+		<Description>Their void face betrayes an inner evil mind.\nThey are able mind-reader and they are nasty!\nDon't tell anyone of them one of your secrets!\nYou could wake up and find that everyone knows it!!</Description>
+		<Feature>0</Feature>
+    <Ability>2</Ability>
+	</Race>
+	<Race>
+		<Name>Cyclop</Name>
+		<Atmosphere>Cyanide</Atmosphere>
+		<Description>Interested on a 240 degrees field of view?\nCall 555-768-CYCLOPS to know more!</Description>
+		<Feature>0</Feature>
+    <Ability>1</Ability>
+	</Race>
+	<Race>
+		<Name>Baffogiallo</Name>
+		<Atmosphere>Metane</Atmosphere>
+		<Description>A tea-based civilization.\nSome races may be war-fond, other ones could live on commerce...\nBaffogiallos just drink tea. Want some?</Description>
+		<Feature>0</Feature>
+    <Ability>3</Ability>
+	</Race>
+  <Race>
+    <Name>Cats</Name>
+    <Atmosphere>Oxygen</Atmosphere>
+    <Description>With a "meow" and a "frrr" they will scratch you off from your planet!</Description>
+    <Feature>3</Feature>
+    <Ability>4</Ability>
+  </Race>
+	<Race>
+		<Name>Ginger</Name>
+		<Atmosphere>Oxygen</Atmosphere>
+		<Description>Lovely, aren't they?\nWell NO! STAY AWAY FROM THEM!\nAn evil Cook gave them life to conquer the universe!</Description>
+		<Feature>0</Feature>
+    <Ability>9</Ability>
+	</Race>
+  <Race>
+    <Name>Cosence</Name>
+    <Atmosphere>Oxygen</Atmosphere>
+    <Description>The ultimate model of washing mac... Uops wrong description!\nThey are super intelligent computers, be aware!</Description>
+    <Feature>0</Feature>
+    <Ability>2</Ability>
+  </Race>
+	<Race>
+		<Name>Sommo</Name>
+		<Atmosphere>None</Atmosphere>
+		<Description>Look at their faces!\nLook at their slackness!\nDon't you feel their power flowing to you?</Description>
+		<Feature>0</Feature>
+    <Ability>8</Ability>
+	</Race>
+  <Race>
+    <Name>Astronaut</Name>
+    <Atmosphere>Ammonia</Atmosphere>
+    <Description>Every small step from one of them is a big step for all of them!</Description>
+    <Feature>0</Feature>
+    <Ability>7</Ability>
+  </Race>
+  <Race>
+    <Name>Vertex</Name>
+    <Atmosphere>Oxygen</Atmosphere>
+    <Description>24 vertices of rage...</Description>
+    <Feature>0</Feature>
+    <Ability>3</Ability>
+  </Race>
+  <Race>
+    <Name>Zombie</Name>
+    <Atmosphere>Metane</Atmosphere>
+    <Description>BRAAAAAAAINS...</Description>
+    <Feature>0</Feature>
+    <Ability>0</Ability>
+  </Race>
+  <Race>
+    <Name>Numby</Name>
+    <Atmosphere>Cyanide</Atmosphere>
+    <Description>There's nothing worst than a stupid hominid!</Description>
+    <Feature>0</Feature>
+    <Ability>1</Ability>
+  </Race>
+  <Race>
+    <Name>Cleaved</Name>
+    <Atmosphere>Chlorine</Atmosphere>
+    <Description>Cloth can be tough, that's their motto!</Description>
+    <Feature>0</Feature>
+    <Ability>10</Ability>
+  </Race>
+  <Race>
+    <Name>Trogloid</Name>
+    <Atmosphere>Ammonia</Atmosphere>
+    <Description>The scourge from outher space</Description>
+    <Feature>0</Feature>
+    <Ability>5</Ability>
+  </Race>
+  <Race>
+    <Name>Ubscur</Name>
+    <Atmosphere>Ammonia</Atmosphere>
+    <Description>Right from the darkest star in the whole universe, Ubscurs will make you hurt yourself!\nBe careful when you sleep!</Description>
+    <Feature>0</Feature>
+    <Ability>13</Ability>
+  </Race>
+  <Race>
+    <Name>Feminid</Name>
+    <Atmosphere>Oxygen</Atmosphere>
+    <Description>The Feminids evolved from original Hominids many years ago due to the presence of feminist hominid communities all over Homina.\nFeminids are more intelligent than the average Hominid, thus allowing to research technologies faster..\nMade by Karhu05</Description>
+    <Feature>0</Feature>
+    <Ability>2</Ability>
+  </Race>
+  <Race>
+    <Name>Melon</Name>
+    <Atmosphere>Oxygen</Atmosphere>
+    <Description>The melons are a proud and ancient race. They are notorious for their ability to regenerate even the most severe of injuries. Although it is delicious, their flesh is forbiden from consumption since they are a sentient race. However, their diplomats are a hit on all parties they are invited to.\nMade by Kerlc</Description>
+    <Feature>0</Feature>
+    <Ability>0</Ability>
+  </Race>
+  <Race>
+    <Name>Mineinid</Name>
+    <Atmosphere>Oxygen</Atmosphere>
+    <Description>They came from a planet, a very low-res planet. This poor creature is constantly being beaten by picaxes and shovels, then arranged in stacks of 64.\nMade by Dude759</Description>
+    <Feature>0</Feature>
+    <Ability>1</Ability>
+  </Race>
+  <Race>
+    <Name>Ultimate</Name>
+    <Atmosphere>Chlorine</Atmosphere>
+    <Description>This is the ultimate of the ultamate, the leaders of all, the destroyers of all, the...\nMade by Caleb</Description>
+    <Feature>0</Feature>
+    <Ability>7</Ability>
+  </Race>
+  <Race>
+    <Name>Planeminid</Name>
+    <Atmosphere>Chlorine</Atmosphere>
+    <Description>Long ago when a planetoid hit a planet, chunks of the planetoid mutated into a race of its own forming the Planeminids!\nMade by Shockerz</Description>
+    <Feature>0</Feature>
+    <Ability>13</Ability>
+  </Race>
+</Races>

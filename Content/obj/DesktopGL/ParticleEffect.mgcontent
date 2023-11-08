@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/ParticleEffect.fx</SourceFile>
+  <SourceTime>2023-05-13T22:36:10.7221834+01:00</SourceTime>
+  <DestFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/bin/DesktopGL/ParticleEffect.xnb</DestFile>
+  <DestTime>2023-05-13T22:38:05.4910557+01:00</DestTime>
+  <Importer>EffectImporter</Importer>
+  <ImporterTime>2022-01-21T04:57:48+00:00</ImporterTime>
+  <Processor>EffectProcessor</Processor>
+  <ProcessorTime>2022-01-21T04:57:48+00:00</ProcessorTime>
+  <Parameters>
+    <Key>DebugMode</Key>
+    <Value>Debug</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

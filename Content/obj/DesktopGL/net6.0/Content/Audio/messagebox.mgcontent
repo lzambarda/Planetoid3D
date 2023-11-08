@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/messagebox.wav</SourceFile>
+  <SourceTime>2019-12-23T08:02:31.3058495+00:00</SourceTime>
+  <DestFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/bin/DesktopGL/Content/Audio/messagebox.xnb</DestFile>
+  <DestTime>2023-05-13T22:55:11.4427106+01:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2022-07-26T12:44:56+01:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2022-07-26T12:44:56+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

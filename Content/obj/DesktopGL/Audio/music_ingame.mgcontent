@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/Audio/music_ingame.wav</SourceFile>
+  <SourceTime>2019-12-23T08:02:30.7978503+00:00</SourceTime>
+  <DestFile>/Users/lucazambarda/Desktop/Planetoid3D/Content/bin/DesktopGL/Audio/music_ingame.xnb</DestFile>
+  <DestTime>2023-05-13T22:37:51.7415825+01:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2022-01-21T04:57:48+00:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2022-01-21T04:57:48+00:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>/Users/lucazambarda/Desktop/Planetoid3D/Content/bin/DesktopGL/Audio/music_ingame.ogg</string>
+  </BuildOutput>
+</PipelineBuildEvent>
