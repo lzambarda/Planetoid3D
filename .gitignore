@@ -1,4 +1,5 @@
-bin
-.vs/Planetoid3D/xs
+Planetoid3D/bin
+Planetoid3D/Content/bin
+Planetoid3D/Content/obj
 
 .DS_Store
