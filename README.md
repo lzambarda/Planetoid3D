@@ -2,6 +2,8 @@
 
 This is the original code from Planetoid 3D minus some authentication code I had to remove to make this work without the authentication server.
 
+For the older Planetoid games published on YoYo Games, see https://github.com/lzambarda/planetoid-games
+
 ## Development
 
 The game uses [MonoGame](https://github.com/mono/MonoGame) as a replacement for XNA.
