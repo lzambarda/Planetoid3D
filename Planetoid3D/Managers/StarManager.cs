@@ -23,32 +23,29 @@ namespace Planetoid3D
 
             //Set up
             starEffect.CurrentTechnique = starEffect.Techniques["StarField"];
-            stars = new VertexPositionColor[starAmount*4];
+            stars = new VertexPositionColorTexture[starAmount*4];
             indices = new short[starAmount * 6];
 
             //Initialize star positions
             Random rand = new Random();
 
             Vector3 position;
-            Vector3 up;
-            Vector3 right;
             Color color;
-            float amount;
+            float radius;
 
             for (int current = 0; current < starAmount * 4; current += 4)
             {
                 position = Util.RandomPointOnSphere(12000 + rand.Next(250));
 
-                amount = 4 + (float)Util.random.NextDouble() * 8;
-                right = amount * Vector3.Normalize(Vector3.Cross(Vector3.Down, Vector3.Normalize(position)));
-                up = amount * Vector3.Normalize(Vector3.Cross(Vector3.Normalize(position), right));
+                //Radius in pixels, the quad is expanded around the star position by the shader
+                radius = 1 + (float)Util.random.NextDouble() * 2;
 
                 color = new Color(0.7f, 0.7f, 0.7f + (float)Util.random.NextDouble() / 2, 0.5f + (float)Util.random.NextDouble() / 2);
 
-                stars[current] = new VertexPositionColor(position - right - up, color);
-                stars[current + 1] = new VertexPositionColor(position + right - up, color);
-                stars[current + 2] = new VertexPositionColor(position + right + up, color);
-                stars[current + 3] = new VertexPositionColor(position - right + up, color);
+                stars[current] = new VertexPositionColorTexture(position, color, new Vector2(-radius, -radius));
+                stars[current + 1] = new VertexPositionColorTexture(position, color, new Vector2(radius, -radius));
+                stars[current + 2] = new VertexPositionColorTexture(position, color, new Vector2(radius, radius));
+                stars[current + 3] = new VertexPositionColorTexture(position, color, new Vector2(-radius, radius));
             }
            /* for (int current = 0; current < starAmount * 4; current += 4)
             {
@@ -113,7 +110,7 @@ namespace Planetoid3D
         }
 
         private static Effect starEffect;
-        private static VertexPositionColor[] stars;
+        private static VertexPositionColorTexture[] stars;
         private static short[] indices;
 
         /// <summary>
@@ -124,13 +121,27 @@ namespace Planetoid3D
             starEffect.Parameters["World"].SetValue(Matrix.Identity);
             starEffect.Parameters["View"].SetValue(view);
             starEffect.Parameters["Projection"].SetValue(projection);
+            starEffect.Parameters["PixelSize"].SetValue(new Vector2(2f / Game.GraphicsDevice.Viewport.Width, 2f / Game.GraphicsDevice.Viewport.Height));
+
+            //Stars are the background, don't depend on the states left by the previous frame
+            GraphicsDevice device = Game.GraphicsDevice;
+            BlendState blendState = device.BlendState;
+            DepthStencilState depthStencilState = device.DepthStencilState;
+            RasterizerState rasterizerState = device.RasterizerState;
+            device.BlendState = BlendState.AlphaBlend;
+            device.DepthStencilState = DepthStencilState.None;
+            device.RasterizerState = RasterizerState.CullNone;
 
             foreach (EffectPass pass in starEffect.CurrentTechnique.Passes)
             {
                 pass.Apply();
             }
 
-            Game.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, stars, 0, stars.Length, indices, 0, indices.Length / 3);
+            device.DrawUserIndexedPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleList, stars, 0, stars.Length, indices, 0, indices.Length / 3);
+
+            device.BlendState = blendState;
+            device.DepthStencilState = depthStencilState;
+            device.RasterizerState = rasterizerState;
             //Game.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, stars, 0, stars.Length / 3);
         }
     }
