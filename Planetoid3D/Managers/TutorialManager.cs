@@ -30,7 +30,7 @@ namespace Planetoid3D
         public static string MissionDescription;
 
         private static string TextToDisplay;
-        
+
         private static bool beginMission;
         private static TimeSpan cinematicSpan;
 
@@ -45,7 +45,7 @@ namespace Planetoid3D
             //Campaigns are precompiled
             switch (MissionIndex)
             {
-                    //BUILD A HOUSE
+                //BUILD A HOUSE
                 #region MISSION 0
                 case 0:
                     if (beginMission)
@@ -53,7 +53,7 @@ namespace Planetoid3D
                         MissionName = "Intro";
                         MissionDescription = "|G| - Build a house\n|W| - Use B to enter in the menu mode and place it on the planet.\n - Right Mouse Button to cancel building.\n - Middle Mouse Button (or Left Alt Key) to move camera view.";
                         CinematicMode = true;
-                        cinematicSpan = new TimeSpan(0, 0, 1);
+                        cinematicSpan = new TimeSpan(0, 0, 30);
                         beginMission = false;
                         CameraLocked = true;
                         //Look at sun
@@ -105,7 +105,7 @@ namespace Planetoid3D
                     }
                     break;
                 #endregion
-                    //LAUNCH A ROCKET
+                //LAUNCH A ROCKET
                 #region MISSION 1
                 case 1:
                     if (beginMission)
@@ -151,18 +151,18 @@ namespace Planetoid3D
                     GameEngine.planetoid.speed = buildingActor.planet.matrix.Translation - GameEngine.planetoid.matrix.Translation;
                     break;
                 #endregion
-                    //GET A RADAR
+                //GET A RADAR
                 #region MISSION 2
                 case 2:
                     if (beginMission)
                     {
                         MissionName = "Again, as the first title";
                         MissionDescription = "|G| - Build a radar.\n|W| - You can access the research menu from the building one.\n - Click on an active research to cancel it and gain half of its used resources.\n - Right Mouse Button on a planet to lock view on it!\n - Scroll wheel to zoom.\n - Right Mouse Button on the locked planet to full zoom on it!\n - Click on buildings or hominids to view info.";
-                        
+
                         beginMission = false;
                         CameraLocked = false;
                     }
-                    else if (PlayerManager.players[0].radarAmount>0)
+                    else if (PlayerManager.players[0].radarAmount > 0)
                     {
                         BeginMission(3);
                     }
@@ -176,7 +176,7 @@ namespace Planetoid3D
 
                         //Vector3 dir = Vector3.Normalize(GameEngine.gameCamera.target.matrix.Translation - HUD.lastTargetObject.matrix.Translation);
 
-                       // Vector3 pos=GameEngine.gameCamera.
+                        // Vector3 pos=GameEngine.gameCamera.
 
                         //Camera position updating
                         /*position.X = tempTar.X + (float)(Math.Cos(horizontalAngle) * zoom);
@@ -195,20 +195,20 @@ namespace Planetoid3D
                         TextToDisplay = "You have to help them rebuild everything...";
                         GameEngine.gameCamera.horizontalAngle += 0.01f;
                     }
-                    if (buildingActor!=null && buildingActor.planet.life > 0)
+                    if (buildingActor != null && buildingActor.planet.life > 0)
                     {
                         GameEngine.planetoid.speed = buildingActor.planet.matrix.Translation - GameEngine.planetoid.matrix.Translation;
                     }
                     break;
                 #endregion
-                    //DESTROY THE OPPONENT OR ALLY
+                //DESTROY THE OPPONENT OR ALLY
                 #region MISSION 3
                 case 3:
                     if (beginMission)
                     {
                         MissionName = "Why you hate us so much?";
                         MissionDescription = "|G| - Destroy the Aliens or create an alliance with them.\n|W| - Use the diplomacy menu to communicate.\n - When selecting a hominid, you can give orders right-clicking somewhere on the planet!.";
-                        cinematicSpan = new TimeSpan(0, 0,30);
+                        cinematicSpan = new TimeSpan(0, 0, 30);
                         beginMission = false;
                         CameraLocked = false;
 
@@ -237,7 +237,7 @@ namespace Planetoid3D
                     }
                     break;
                 #endregion
-                    //DESTROY THE NEW MENACE
+                //DESTROY THE NEW MENACE
                 #region MISSION 4
                 case 4:
                     if (beginMission)
@@ -288,7 +288,7 @@ namespace Planetoid3D
                     }
                     break;
                 #endregion
-                    //TROGLOTHERS
+                //TROGLOTHERS
                 #region MISSION 5
                 case 5:
                     if (beginMission)
@@ -301,7 +301,7 @@ namespace Planetoid3D
                     }
                     else if (cinematicSpan > new TimeSpan(0, 0, 10))
                     {
-                        TextToDisplay="Sulphos were a real pain in the neck, weren't they?";
+                        TextToDisplay = "Sulphos were a real pain in the neck, weren't they?";
                     }
                     else if (cinematicSpan > new TimeSpan(0, 0, 5))
                     {
@@ -311,7 +311,7 @@ namespace Planetoid3D
                     else if (cinematicSpan > new TimeSpan(0, 0, 0))
                     {
                         if (GameEngine.gameCamera.target is Sun)
-                        {                    
+                        {
                             GameEngine.gameCamera.target = GameEngine.planets.Find(p => p.DominatingRace() == 0);
                             //GameEngine.gameCamera.target.life += 5;
                             //GameEngine.asteroids.Add(new Asteroid(GameEngine.gameCamera.target.matrix.Translation + new Vector3(0, 100, 0), Vector3.Zero));
@@ -327,7 +327,7 @@ namespace Planetoid3D
                     }
                     break;
                 #endregion
-                    //FINAL BATTLE  
+                //FINAL BATTLE  
                 #region MISSION 6
                 case 6:
                     if (beginMission)
@@ -390,7 +390,7 @@ namespace Planetoid3D
 
                     break;
                 #endregion
-                    //CONGRATS
+                //CONGRATS
                 #region MISSION 7
                 case 7:
                     if (beginMission)
@@ -485,13 +485,13 @@ namespace Planetoid3D
         public static void Draw(SpriteBatch spriteBatch, SpriteFont font)
         {
             //Mission title
-            spriteBatch.DrawString(font, "\"" + MissionName + "\"", new Vector2(PlanetoidGame.scene.Width-100 - font.MeasureString(MissionName).X, 100), Color.Lerp(Color.Transparent, Color.Green, CinematicFade));
+            spriteBatch.DrawString(font, "\"" + MissionName + "\"", new Vector2(PlanetoidGame.scene.Width - 100 - font.MeasureString(MissionName).X, 100), Color.Lerp(Color.Transparent, Color.Green, CinematicFade));
             //Current text to display
             spriteBatch.DrawString(font, TextToDisplay, new Vector2(40, PlanetoidGame.scene.Height - 100), Color.Lerp(Color.Transparent, Color.White, CinematicFade));
             if (CinematicFade < 0.1f)
             {
                 //Mission briefing
-                Util.DrawColoredString(font, "\""+MissionName+"\"" + (visible ? " (M to hide)\n" + MissionDescription : " (M to show)"), new Vector2(40, 100), 1-CinematicFade);
+                Util.DrawColoredString(font, "\"" + MissionName + "\"" + (visible ? " (M to hide)\n" + MissionDescription : " (M to show)"), new Vector2(40, 100), 1 - CinematicFade);
             }
         }
     }

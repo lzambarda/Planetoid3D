@@ -42,8 +42,8 @@ public class PlanetoidGame : Game
 
     //GAME VARIABLES
     public static Thread loader;
-    public static GameScreen game_screen = GameScreen.Loading;
-    public static GameScreen game_screen_next = GameScreen.Loading;
+    public static GameScreen game_screen = GameScreen.Intro;
+    public static GameScreen game_screen_next = GameScreen.Intro;
     public static float game_screen_fader = 1;
     public static bool loaded = true;
     public static float elapsed;
@@ -92,8 +92,8 @@ public class PlanetoidGame : Game
         graphics.PreferMultiSampling = true;
         GraphicsDevice.PresentationParameters.MultiSampleCount = 16;
         RasterizerState state = new RasterizerState();
-        state.MultiSampleAntiAlias=true;
-        GraphicsDevice.RasterizerState=state;
+        state.MultiSampleAntiAlias = true;
+        GraphicsDevice.RasterizerState = state;
         graphics.ApplyChanges();
 
         //Initialize Game Engine
@@ -106,7 +106,7 @@ public class PlanetoidGame : Game
         AudioManager.Initialize(Content);
 
         //Initialize Menu
-        MenuManager.Initialize(Window,graphics);
+        MenuManager.Initialize(Window, graphics);
 
         //Initialize Stars
         StarManager.Initialize(this, (details * 350) + 400);
@@ -173,7 +173,7 @@ public class PlanetoidGame : Game
         Console.WriteLine(yaxis);
         Console.WriteLine(Matrix.CreateLookAt(new Vector3(100, 100, 100), Vector3.Zero, Vector3.UnitY));
         this.Exit();*/
-        
+
         if (HUDManager.showDebug)
         {
             DebugManager.StartCounting();
@@ -182,7 +182,7 @@ public class PlanetoidGame : Game
         //Input state update
         GameEngine.GetNextInputState();
 
-        if (gameTime.TotalGameTime.TotalHours>=2)
+        if (gameTime.TotalGameTime.TotalHours >= 2)
         {
             QuestManager.QuestCall(4);
         }
