@@ -444,8 +444,9 @@ namespace Planetoid3D
         private static GraphicsDeviceManager graphics;
         public static int currentPanel;
         public static int nextPanel;
-        private static float translationSpeed;
+        //Progress of the camera rotation between two panels, from 0 to 1 over panelTransitionDuration seconds
         private static float panelTranslation;
+        private const float panelTransitionDuration = 2.3f;
 
         private static readonly float[] angles = new float[] { 0, -MathHelper.PiOver2, MathHelper.PiOver2, -MathHelper.Pi, MathHelper.PiOver2 };
 
@@ -573,6 +574,14 @@ namespace Planetoid3D
             return (PlanetoidGame.details == 0 ? "Low" : (PlanetoidGame.details == 1 ? "Normal" : "High"));
         }
 
+        /// <summary>
+        /// Ease in and out from 0 to 1, with zero speed and acceleration at both ends
+        /// </summary>
+        private static float SmootherStep(float t)
+        {
+            return t * t * t * (t * (t * 6 - 15) + 10);
+        }
+
         //Methods
         public static bool Update(GameTime gameTime)
         {
@@ -591,7 +600,7 @@ namespace Planetoid3D
                 //So the race name and description will be readable
                 if (nextPanel == 3)
                 {
-                    postProcessDark = panelTranslation / 2f;
+                    postProcessDark = SmootherStep(panelTranslation) / 2f;
                 }
                 else
                 {
@@ -600,25 +609,10 @@ namespace Planetoid3D
                 //If the menu is fading from a panel to another
                 if (panelTranslation < 1)
                 {
-                    //Accelerates and after half, decelerates
-                    if (panelTranslation < 0.745f)
-                    {
-                        if (translationSpeed < 0.01f)
-                        {
-                            translationSpeed += 0.0002f;
-                        }
-                    }
-                    else
-                    {
-                        if (translationSpeed > 0)
-                        {
-                            translationSpeed -= 0.0002f;
-                        }
-                    }
                     //Update translation
-                    panelTranslation += translationSpeed;//*10 only during debug
-                    //And also camera
-                    camera.horizontalAngle = MathHelper.Lerp(angles[currentPanel], angles[nextPanel], panelTranslation);
+                    panelTranslation = Math.Min(1, panelTranslation + (float)gameTime.ElapsedGameTime.TotalSeconds / panelTransitionDuration);
+                    //And also camera, easing in and out so that it doesn't start or stop abruptly
+                    camera.horizontalAngle = MathHelper.Lerp(angles[currentPanel], angles[nextPanel], SmootherStep(panelTranslation));
                 }
                 else
                 {
@@ -626,7 +620,6 @@ namespace Planetoid3D
                     currentPanel = nextPanel;
                     camera.horizontalAngle = angles[currentPanel];
                     panelTranslation = 0;
-                    translationSpeed = 0;
                 }
             }
             #endregion
