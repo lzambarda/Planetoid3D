@@ -61,7 +61,7 @@ namespace Planetoid3D
         private static float timer_asteroid;
         public static int dragIndex;
         public static float dragDistance;
-        public static string gameToLoad = null;
+        public static string gameToLoad;
 
         public static string currentGameName;
         public static GameMode gameMode;
@@ -526,8 +526,7 @@ namespace Planetoid3D
         /// <returns></returns>
         public static string RandomName()
         {
-            StreamReader sr = new StreamReader("Content//RandomGameNames.txt");
-            string[] all = sr.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] all = File.ReadAllLines("Content//RandomGameNames.txt").Where(name => name.Length > 0).ToArray();
             return all[Util.random.Next(all.Length)];
         }
 
@@ -1012,6 +1011,9 @@ namespace Planetoid3D
         /// <summary>
         /// Load the game state
         /// </summary>
+        //Saves are only read from the local saves folder, still don't process DTDs (character checking stays off like the previous reader)
+        private static readonly XmlReaderSettings saveReaderSettings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, CheckCharacters = false };
+
         public static void LoadGameState(string savename)
         {
             currentGameName = savename;
@@ -1028,7 +1030,7 @@ namespace Planetoid3D
             //Use a string reader to get the stream from the xml element
             StringReader sr = new StringReader(MenuManager.document.GetElementsByTagName("Planets")[0].InnerXml);
             //Deserialize
-            planets = (List<Planet>)serializer.Deserialize(sr);
+            planets = (List<Planet>)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             foreach (Planet planet in planets)
             {
                 planet.OutSerialization();
@@ -1040,7 +1042,7 @@ namespace Planetoid3D
             //<BUILDINGS>
             /* serializer = new XmlSerializer(typeof(List<BaseObjectBuilding>));
              sr = new StringReader(MenuManager.document.GetElementsByTagName("Buildings")[0].InnerXml);
-            buildings = (List<BaseObjectBuilding>)serializer.Deserialize(sr);
+            buildings = (List<BaseObjectBuilding>)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             foreach (BaseObjectBuilding building in buildings)
             {
                 building.OutSerialization();
@@ -1051,35 +1053,35 @@ namespace Planetoid3D
             //<SUNSHOTS>
             serializer = new XmlSerializer(typeof(List<Sunshot>));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Sunshots")[0].InnerXml);
-            ((Sun)planets[0]).sunShots = (List<Sunshot>)serializer.Deserialize(sr);
+            ((Sun)planets[0]).sunShots = (List<Sunshot>)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             sr.Close();
             //</SUNSHOTS>
 
             //<ASTEROIDS>
             serializer = new XmlSerializer(typeof(List<Asteroid>));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Asteroids")[0].InnerXml);
-            asteroids = (List<Asteroid>)serializer.Deserialize(sr);
+            asteroids = (List<Asteroid>)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             sr.Close();
             //</ASTEROIDS>
 
             //<PLANETOID>
             serializer = new XmlSerializer(typeof(Planetoid));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Planetoid")[0].InnerXml);
-            planetoid = (Planetoid)serializer.Deserialize(sr);
+            planetoid = (Planetoid)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             sr.Close();
             //</PLANETOID>
 
             //<BLACK HOLE>
             serializer = new XmlSerializer(typeof(BlackHole));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Blackhole")[0].InnerXml);
-            blackHole = (BlackHole)serializer.Deserialize(sr);
+            blackHole = (BlackHole)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             sr.Close();
             //</BLACK HOLE>
 
             //<SHOTS>
             serializer = new XmlSerializer(typeof(List<Shot>));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Shots")[0].InnerXml);
-            shots = (List<Shot>)serializer.Deserialize(sr);
+            shots = (List<Shot>)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             sr.Close();
             //</SHOTS>
 
@@ -1088,14 +1090,14 @@ namespace Planetoid3D
             //<PLAYERS>
             serializer = new XmlSerializer(typeof(SerializablePlayerManager));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Players")[0].InnerXml);
-            PlayerManager.OutSerialization((SerializablePlayerManager)serializer.Deserialize(sr));
+            PlayerManager.OutSerialization((SerializablePlayerManager)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings)));
             sr.Close();
             //</PLAYERS>
 
             //<CAMERA>
             serializer = new XmlSerializer(typeof(Camera));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Camera")[0].InnerXml);
-            gameCamera = (Camera)serializer.Deserialize(sr);
+            gameCamera = (Camera)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             gameCamera.OutSerialization();
             sr.Close();
             //</CAMERA>
@@ -1103,7 +1105,7 @@ namespace Planetoid3D
             //<RESEARCHES>
             serializer = new XmlSerializer(typeof(List<ResearchButton>));
             sr = new StringReader(MenuManager.document.GetElementsByTagName("Researches")[0].InnerXml);
-            BuildingManager.researchList = (List<ResearchButton>)serializer.Deserialize(sr);
+            BuildingManager.researchList = (List<ResearchButton>)serializer.Deserialize(XmlReader.Create(sr, saveReaderSettings));
             //</RESEARCHES>
 
             //<CAMPAIGN>
@@ -1116,12 +1118,12 @@ namespace Planetoid3D
             //</CAMPAIGN>
 
             //<GAME>
-            GameEngine.gameMode = (GameMode)Enum.Parse(typeof(GameMode), MenuManager.document.GetElementsByTagName("Game")[0].Attributes[0].Value);
+            GameEngine.gameMode = Enum.Parse<GameMode>(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[0].Value);
             BuildingManager.currentSecond = int.Parse(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[1].Value, CultureInfo.InvariantCulture);
             BuildingManager.totalSeconds = int.Parse(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[2].Value, CultureInfo.InvariantCulture);
 
             //FIX RACES
-            string[] addedRaces = MenuManager.document.GetElementsByTagName("Game")[0].Attributes[3].Value.Split(new char[] { ':' });
+            string[] addedRaces = MenuManager.document.GetElementsByTagName("Game")[0].Attributes[3].Value.Split(':');
             bool notify = false;
             if (addedRaces.Length > 0)
             {

@@ -47,7 +47,7 @@ namespace Planetoid3D
                 //Description
                 descriptions.Add(race.ChildNodes[2].InnerText.Replace("\\n", "\n"));
                 //Atmosphere
-                atmospheres.Add((Atmosphere)Enum.Parse(typeof(Atmosphere), race.ChildNodes[1].InnerText));
+                atmospheres.Add(Enum.Parse<Atmosphere>(race.ChildNodes[1].InnerText));
                 //Texture
                 textures.Add(GameEngine.Game.Content.Load<Texture2D>("Races//" + names.Last()));
                 //textures.Add(Texture2D.FromStream(GameEngine.Game.GraphicsDevice,new StreamReader("Content//Races//" + names.Last() + ".png").BaseStream));
@@ -74,7 +74,7 @@ namespace Planetoid3D
                         try
                         {
                             document.Load(dir + "//data.xml");
-                            atmosphere = (Atmosphere)Enum.Parse(typeof(Atmosphere), document.GetElementsByTagName("Atmosphere")[0].InnerText);
+                            atmosphere = Enum.Parse<Atmosphere>(document.GetElementsByTagName("Atmosphere")[0].InnerText);
                             ability = (int)MathHelper.Clamp(int.Parse(document.GetElementsByTagName("Ability")[0].InnerText, CultureInfo.InvariantCulture), 0, abilityNames.Length - 1);
                             description = document.GetElementsByTagName("Description")[0].InnerText.Replace("\\n", "\n");
 

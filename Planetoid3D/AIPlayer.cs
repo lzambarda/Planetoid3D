@@ -1366,7 +1366,7 @@ namespace Planetoid3D
             return (myPlanets.Find(p => p.planet == planet) != null);
         }
 
-        public void PerformTrade(int A, int B)
+        public static void PerformTrade(int A, int B)
         {
             //Can use maximum half of the player resources
             Point resA = new Point((int)PlayerManager.GetKeldanyum(A) / 2, (int)PlayerManager.GetEnergy(A) / 2);

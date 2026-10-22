@@ -122,9 +122,9 @@ namespace Planetoid3D
         private static string[][] DealAnswers = new string[][]
         {
             //DECLARE WAR
-            new string[]{},
+            Array.Empty<string>(),
             //HATE
-            new string[]{},
+            Array.Empty<string>(),
             //GREETING
             new string[]{"What do you want from us?","...","Hi!","Hello!"},
             //CLAIM PEACE

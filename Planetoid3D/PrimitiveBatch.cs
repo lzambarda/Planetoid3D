@@ -41,7 +41,7 @@ namespace Planetoid3D
         // keeps track of how many vertices have been added. this value increases until
         // we run out of space in the buffer, at which time Flush is automatically
         // called.
-        int positionInBuffer = 0;
+        int positionInBuffer;
 
 
         // a basic effect, which contains the shaders that we will use to draw our
@@ -61,9 +61,9 @@ namespace Planetoid3D
 
         // hasBegun is flipped to true once Begin is called, and is used to make
         // sure users don't call End before Begin is called.
-        bool hasBegun = false;
+        bool hasBegun;
 
-        bool isDisposed = false;
+        bool isDisposed;
 
         #endregion
 
@@ -71,10 +71,7 @@ namespace Planetoid3D
         // that PrimitiveBatch will need.
         public PrimitiveBatch(GraphicsDevice graphicsDevice)
         {
-            if (graphicsDevice == null)
-            {
-                throw new ArgumentNullException("graphicsDevice");
-            }
+            ArgumentNullException.ThrowIfNull(graphicsDevice);
             device = graphicsDevice;
 
             // create a vertex declaration, which tells the graphics card what kind of

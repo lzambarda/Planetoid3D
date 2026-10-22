@@ -275,8 +275,8 @@ namespace Planetoid3D
                     }
                 }
                 //New quests may have been added too
-                XmlNode quests = root["Quests"];
-                XmlNode defaultQuests = defaults.DocumentElement["Quests"];
+                XmlElement quests = root["Quests"];
+                XmlElement defaultQuests = defaults.DocumentElement["Quests"];
                 for (int a = quests.ChildNodes.Count; a < defaultQuests.ChildNodes.Count; a++)
                 {
                     quests.AppendChild(settings.ImportNode(defaultQuests.ChildNodes[a], true));
@@ -429,7 +429,7 @@ namespace Planetoid3D
                     graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
                     break;
                 default:
-                    string[] vals = currentResolution.ToString().Substring(1).Split(new char[] { 'x' });
+                    string[] vals = currentResolution.ToString().Substring(1).Split('x');
                     graphics.PreferredBackBufferWidth = int.Parse(vals[0], CultureInfo.InvariantCulture);
                     graphics.PreferredBackBufferHeight = int.Parse(vals[1], CultureInfo.InvariantCulture);
                     break;
@@ -1105,7 +1105,7 @@ namespace Planetoid3D
                             infoText = "Change the resolution of the game window, REQUIRES GAME RESTART TO TAKE EFFECT";
                             if (option_resolution.IsClicked())
                             {
-                                if ((int)(++currentResolution) == Enum.GetValues(typeof(Resolution)).Length)
+                                if ((int)(++currentResolution) == Enum.GetValues<Resolution>().Length)
                                 {
                                     currentResolution = 0;
                                 }
@@ -1488,7 +1488,7 @@ namespace Planetoid3D
                 {
                     if (QuestManager.QuestUnlocked(content_page.Keys.ElementAt(a)))
                     {
-                        Util.DrawCenteredText(PlanetoidGame.pageFont, content_page.Values.ElementAt(a).Split(new char[] { '\n' })[0], new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 150 + a * 30), (temp_page == a ? Color.Red : Color.Black));
+                        Util.DrawCenteredText(PlanetoidGame.pageFont, content_page.Values.ElementAt(a).Split('\n')[0], new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 150 + a * 30), (temp_page == a ? Color.Red : Color.Black));
                     }
                 }
                 //Draw further page
@@ -1851,7 +1851,7 @@ namespace Planetoid3D
                     if (MessageBox.Input != "")
                     {
                         GameEngine.currentGameName = MessageBox.Input;
-                        if (MessageBox.Input.ToLowerInvariant() == "cyclop")
+                        if (string.Equals(MessageBox.Input, "cyclop", StringComparison.OrdinalIgnoreCase))
                         {
                             QuestManager.QuestCall(16);
                         }

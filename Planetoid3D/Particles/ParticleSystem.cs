@@ -281,8 +281,7 @@ namespace Planetoid3D
         /// </summary>
         public override void Update(GameTime gameTime)
         {
-            if (gameTime == null)
-                throw new ArgumentNullException("gameTime");
+            ArgumentNullException.ThrowIfNull(gameTime);
 
             currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 

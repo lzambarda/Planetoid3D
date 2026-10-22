@@ -19,7 +19,7 @@ namespace Planetoid3D
     /// <summary>
     /// Custom particle system for creating a flame effect.
     /// </summary>
-    class ExplosionParticleSystem : ParticleSystem
+    sealed class ExplosionParticleSystem : ParticleSystem
     {
         public ExplosionParticleSystem(Game game, ContentManager content)
             : base(game, content)

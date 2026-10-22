@@ -25,7 +25,7 @@ namespace Planetoid3D
         // The lensflare effect is made up from several individual flare graphics,
         // which move across the screen depending on the position of the sun. This
         // helper class keeps track of the position, size, and color for each flare.
-        class Flare
+        sealed class Flare
         {
             public Flare(float position, float scale, Color color, string textureName)
             {

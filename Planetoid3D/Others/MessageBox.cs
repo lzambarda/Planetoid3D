@@ -356,7 +356,7 @@ namespace Planetoid3D
         {
             PlanetoidGame.spriteBatch.Draw(texture, position, Color.White);
             PlanetoidGame.spriteBatch.DrawString(font, title, position + new Vector2(8), Util.PanelGray);
-            Util.DrawCenteredText(font, text + " " + (title.Equals("Login Password") ? new string('*', input.Length) : input) + (inputType == 1 ? "_" : ""), position + new Vector2(texture.Width / 2, texture.Height / 2 - 25), Util.PanelGray);
+            Util.DrawCenteredText(font, text + " " + (title == "Login Password" ? new string('*', input.Length) : input) + (inputType == 1 ? "_" : ""), position + new Vector2(texture.Width / 2, texture.Height / 2 - 25), Util.PanelGray);
             if (inputType < 2)
             {
                 accept.Draw(font, Color.LawnGreen);

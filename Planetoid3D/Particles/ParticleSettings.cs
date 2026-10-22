@@ -22,7 +22,7 @@ namespace Planetoid3D
     public class ParticleSettings
     {
         // Name of the texture used by this particle system.
-        public string TextureName = null;
+        public string TextureName;
 
 
         // Maximum number of particles that can be displayed at one time.
@@ -34,7 +34,7 @@ namespace Planetoid3D
 
 
         // If greater than zero, some particles will last a shorter time than others.
-        public float DurationRandomness = 0;
+        public float DurationRandomness;
 
 
         // Controls how much particles are influenced by the velocity of the object
@@ -87,8 +87,8 @@ namespace Planetoid3D
         // support rotation, and thus requires significantly less GPU power. This
         // means if you don't need the rotation effect, you may get a performance
         // boost from leaving these values at 0.
-        public float MinRotateSpeed = 0;
-        public float MaxRotateSpeed = 0;
+        public float MinRotateSpeed;
+        public float MaxRotateSpeed;
 
 
         // Range of values controlling how big the particles are when first created.

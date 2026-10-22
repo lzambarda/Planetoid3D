@@ -169,7 +169,7 @@ namespace Planetoid3D
         /// <summary>
         /// Get a random name
         /// </summary>
-        private string RandomName()
+        private static string RandomName()
         {
             int count = 2 + Util.random.Next(3);
             int chosen = 0;

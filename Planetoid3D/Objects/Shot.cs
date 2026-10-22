@@ -25,7 +25,7 @@ namespace Planetoid3D
             owner = Owner;
         }
 
-        private BaseObjectOwned building;
+        private BaseObjectBuilding building;
 
         public new void InSerialization()
         {
@@ -76,7 +76,7 @@ namespace Planetoid3D
             if (building != null && !returner)
             {
                 building.Damage(this, life);
-                if ((building as BaseObjectBuilding).flying)
+                if (building.flying)
                 {
                     if (HUDManager.lastTargetObject != building && building.owner == 0 && GameEngine.gameCamera.target != building.planet)
                     {
