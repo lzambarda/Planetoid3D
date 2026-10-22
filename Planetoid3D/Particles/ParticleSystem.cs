@@ -357,11 +357,6 @@ namespace Planetoid3D {
         public override void Draw(GameTime gameTime) {
             GraphicsDevice device = GraphicsDevice;
 
-            // Restore the vertex buffer contents if the graphics device was lost.
-            if (vertexBuffer.IsContentLost) {
-                vertexBuffer.SetData(particles);
-            }
-
             // If there are any particles waiting in the newly added queue,
             // we'd better upload them to the GPU ready for drawing.
             if (firstNewParticle != firstFreeParticle) {

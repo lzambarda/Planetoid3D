@@ -118,7 +118,7 @@ namespace Planetoid3D
                 {
                     for (int a = 0; a < text.Length; a++)
                     {
-                        if (char.ToUpper(text[a]) == shortcut)
+                        if (char.ToUpperInvariant(text[a]) == shortcut)
                         {
                             PlanetoidGame.spriteBatch.DrawString(font, "_", position - font.MeasureString(text) / 2 + new Vector2(width / 2, 25) + font.MeasureString(text.Substring(0, a)), Util.PanelGray);
                             break;

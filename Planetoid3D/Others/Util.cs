@@ -215,7 +215,7 @@ namespace Planetoid3D
                 int amount;
 
                 Matrix matrix;
-                for (int planet = 1; planet < GameEngine.planets.Count(); planet++)
+                for (int planet = 1; planet < GameEngine.planets.Count; planet++)
                 {
                     if (GameEngine.planets[planet].planet != null)
                     {

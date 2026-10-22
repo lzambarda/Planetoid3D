@@ -231,7 +231,6 @@ namespace Planetoid3D
         }
 
         private PlanetInterface currentInterface;
-        private int index;
 
         /// <summary>
         /// Ask the AI player to take a decision about the current game state
@@ -276,8 +275,6 @@ namespace Planetoid3D
                 {
                     stat_skill += 0.00025f; // NOTE: This should be affected by to elapsed
                 }
-
-                index = 0;
 
                 //First , the planets owned by this AI must be safe
                 //So start a cycle on them to check their conditions
@@ -950,7 +947,7 @@ namespace Planetoid3D
 
         public void ManageRockets(int hunterPriority,int rocketPriority,int catapultPriority)
         {
-            if (CountBuildings(BuildingType.House, false) == 0 || (currentInterface.planet.hominids.Count(h=>h.owner==myPlayerIndex) == 0 && currentInterface.planet.TotalPopulation()==currentInterface.planet.maxPopulation) || currentInterface.action==PlanetAction.Defend)
+            if (CountBuildings(BuildingType.House, false) == 0 || (!currentInterface.planet.hominids.Any(h=>h.owner==myPlayerIndex) && currentInterface.planet.TotalPopulation()==currentInterface.planet.maxPopulation) || currentInterface.action==PlanetAction.Defend)
             {
                 for (int a = 0; a < currentInterface.planet.buildings.Count; a++)
                 {

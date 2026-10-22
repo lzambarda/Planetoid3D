@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 using System.Xml;
 using System.IO;
+using System.Globalization;
 
 namespace Planetoid3D
 {
@@ -55,9 +56,9 @@ namespace Planetoid3D
                 textures.Last().GetData(0, new Rectangle(47, 77, 1, 1), myUint, 0, 1);
                 colors.Add(myUint[0]);
                 //Features
-                features.Add(int.Parse(race.ChildNodes[3].InnerText));
+                features.Add(int.Parse(race.ChildNodes[3].InnerText, CultureInfo.InvariantCulture));
                 //Abilities
-                abilities.Add(int.Parse(race.ChildNodes[4].InnerText));
+                abilities.Add(int.Parse(race.ChildNodes[4].InnerText, CultureInfo.InvariantCulture));
             }
 
             //Read custom races
@@ -74,7 +75,7 @@ namespace Planetoid3D
                         {
                             document.Load(dir + "//data.xml");
                             atmosphere = (Atmosphere)Enum.Parse(typeof(Atmosphere), document.GetElementsByTagName("Atmosphere")[0].InnerText);
-                            ability = (int)MathHelper.Clamp(int.Parse(document.GetElementsByTagName("Ability")[0].InnerText), 0, abilityNames.Length - 1);
+                            ability = (int)MathHelper.Clamp(int.Parse(document.GetElementsByTagName("Ability")[0].InnerText, CultureInfo.InvariantCulture), 0, abilityNames.Length - 1);
                             description = document.GetElementsByTagName("Description")[0].InnerText.Replace("\\n", "\n");
 
                             //The custom race is valid!
@@ -95,7 +96,7 @@ namespace Planetoid3D
                             //Features
                             features.Add(0);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                         }
                     }

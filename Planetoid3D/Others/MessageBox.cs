@@ -214,7 +214,7 @@ namespace Planetoid3D
                                             }
                                             else
                                             {
-                                                input += char.ToLower((char)currentKey);
+                                                input += char.ToLowerInvariant((char)currentKey);
                                             }
                                         }
                                         break;

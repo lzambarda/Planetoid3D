@@ -23,13 +23,11 @@ namespace Planetoid3D
             {
                 if (PlayerManager.GetState(owner) > PlayerState.Human && planet!=null)
                 {
-                    //Raise dangerometer
-                    try
+                    //Raise dangerometer, if the AI knows about this planet
+                    PlanetInterface planetInterface = PlayerManager.players[owner].cpuController.myPlanets.Find(p => p.planet == planet);
+                    if (planetInterface != null)
                     {
-                        PlayerManager.players[owner].cpuController.myPlanets.Find(p => p.planet == planet).danger += 0.1f;
-                    }
-                    catch (NullReferenceException e)
-                    {
+                        planetInterface.danger += 0.1f;
                     }
                 }
                 //Modify Relationships
@@ -45,7 +43,7 @@ namespace Planetoid3D
         {
             float temp;
             repairable = null;
-            for (int a = 0; a < planet.buildings.Count(); a++)
+            for (int a = 0; a < planet.buildings.Count; a++)
             {
                 if (planet.buildings[a].life < 100)
                 {

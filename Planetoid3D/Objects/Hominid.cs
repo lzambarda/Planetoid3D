@@ -320,7 +320,7 @@ namespace Planetoid3D
                     float temp;
                     float minDist = 100;
                     target = null;
-                    for (int b = 0; b < planet.buildings.Count(); b++)
+                    for (int b = 0; b < planet.buildings.Count; b++)
                     {
                         if (planet.buildings[b] is PreBuilding == true)
                         {
@@ -645,7 +645,7 @@ namespace Planetoid3D
             BaseObjectOwned stuff = null;
             float temp;
             float minDist = 80;
-            for (int a = 0; a < planet.hominids.Count(); a++)
+            for (int a = 0; a < planet.hominids.Count; a++)
             {
                 //XOR USAGE
                 //object not friendly and looking for allied: FALSE
@@ -666,7 +666,7 @@ namespace Planetoid3D
             {
                 return stuff;
             }*/
-            for (int a = 0; a < planet.buildings.Count(); a++)
+            for (int a = 0; a < planet.buildings.Count; a++)
             {
                 if (PlayerManager.GetFriendship(owner, planet.buildings[a].owner) < 0.5f)// >= 0.5f ^ enemy)
                 {

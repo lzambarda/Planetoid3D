@@ -488,7 +488,7 @@ namespace Planetoid3D
         /// </summary>
         public static void RemovePlayer(int player)
         {
-            TextBoard.AddMessage(RaceManager.GetRace(PlayerManager.GetRace(player)).ToUpper() + " HAS BEEN DEFEATED!");
+            TextBoard.AddMessage(RaceManager.GetRace(PlayerManager.GetRace(player)).ToUpperInvariant() + " HAS BEEN DEFEATED!");
             //Set it to close
             players[player].Dispose();
 

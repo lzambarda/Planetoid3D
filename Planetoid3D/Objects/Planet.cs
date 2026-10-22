@@ -179,7 +179,7 @@ namespace Planetoid3D {
                     case 19: name += "z" + vocals[Util.random.Next(6)]; break;
                 }
             }
-            name = name.Insert(0, name[0].ToString().ToUpper());
+            name = name.Insert(0, char.ToUpperInvariant(name[0]).ToString());
             name = name.Remove(1, 1);
             return name;
         }
@@ -316,7 +316,7 @@ namespace Planetoid3D {
             int a;
             trees.Clear();
             hominids.Clear();
-            for (a = 0; a < buildings.Count(); a++) {
+            for (a = 0; a < buildings.Count; a++) {
                 //Save buildings which are flying, since they're not physically connected to the planet
                 if (buildings[a].flying == true) {
                     buildings[a].NearestPlanet(false, ref buildings[a].planet);
@@ -336,7 +336,7 @@ namespace Planetoid3D {
             buildings.Clear();
 
             //Check if the dying planet has moons
-            for (a = 0; a < GameEngine.planets.Count(); a++) {
+            for (a = 0; a < GameEngine.planets.Count; a++) {
                 if (GameEngine.planets[a].planet == this) {
                     //Set the moon free
                     Matrix oldMatrix = GameEngine.planets[a].matrix;

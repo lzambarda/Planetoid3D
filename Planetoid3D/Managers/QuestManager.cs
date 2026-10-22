@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using System.Xml;
+using System.Globalization;
 
 namespace Planetoid3D
 {
@@ -137,7 +138,7 @@ namespace Planetoid3D
 
                 //Update data, only when the quest progressed (completed quests are called every frame by some checks)
                 DataManager.LoadEncryptedXml(MenuManager.document, MenuManager.GetSettingPath());
-                MenuManager.document.GetElementsByTagName("Quest")[quest].InnerText = quests[quest].actual.ToString();
+                MenuManager.document.GetElementsByTagName("Quest")[quest].InnerText = quests[quest].actual.ToString(CultureInfo.InvariantCulture);
                 DataManager.SaveEncryptedXml(MenuManager.document, MenuManager.GetSettingPath());
             }
         }

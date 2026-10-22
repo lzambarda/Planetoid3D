@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Media;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Globalization;
 
 namespace Planetoid3D {
     public enum GameMode {
@@ -561,14 +562,14 @@ namespace Planetoid3D {
             //Update Planets
             Planet p;
             Hominid h;
-            for (int a = 1; a < planets.Count(); a++) {
+            for (int a = 1; a < planets.Count; a++) {
                 p = planets[a];
                 if (p.Update(elapsed)) {
                     planets.RemoveAt(a);
                     a--;
                 } else {
                     //Update Hominids
-                    for (int b = 0; b < p.hominids.Count(); b++) {
+                    for (int b = 0; b < p.hominids.Count; b++) {
                         h = p.hominids[b];
                         if (h.Update(elapsed)) {
                             if (h.life <= 0) {
@@ -608,7 +609,7 @@ namespace Planetoid3D {
                     }
 
                     //Update Trees
-                    for (int b = 0; b < p.trees.Count(); b++) {
+                    for (int b = 0; b < p.trees.Count; b++) {
                         if (p.trees[b].Update(elapsed)) {
                             p.trees.RemoveAt(b);
                             b--;
@@ -952,18 +953,18 @@ namespace Planetoid3D {
             //</RESEARCHES>
 
             //<CAMPAIGN>
-            TutorialManager.MissionIndex = int.Parse(MenuManager.document.GetElementsByTagName("Story")[0].Attributes[0].Value);
+            TutorialManager.MissionIndex = int.Parse(MenuManager.document.GetElementsByTagName("Story")[0].Attributes[0].Value, CultureInfo.InvariantCulture);
             TutorialManager.MissionName = MenuManager.document.GetElementsByTagName("Story")[0].Attributes[1].Value;
             TutorialManager.MissionDescription = MenuManager.document.GetElementsByTagName("Story")[0].Attributes[2].Value;
             TutorialManager.CameraLocked = bool.Parse(MenuManager.document.GetElementsByTagName("Story")[0].Attributes[3].Value);
-            int index = int.Parse(MenuManager.document.GetElementsByTagName("Story")[0].Attributes[4].Value);
+            int index = int.Parse(MenuManager.document.GetElementsByTagName("Story")[0].Attributes[4].Value, CultureInfo.InvariantCulture);
             TutorialManager.tplanet = (index == -1 ? null : planets[index]);
             //</CAMPAIGN>
 
             //<GAME>
             GameEngine.gameMode = (GameMode)Enum.Parse(typeof(GameMode), MenuManager.document.GetElementsByTagName("Game")[0].Attributes[0].Value);
-            BuildingManager.currentSecond = int.Parse(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[1].Value);
-            BuildingManager.totalSeconds = int.Parse(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[2].Value);
+            BuildingManager.currentSecond = int.Parse(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[1].Value, CultureInfo.InvariantCulture);
+            BuildingManager.totalSeconds = int.Parse(MenuManager.document.GetElementsByTagName("Game")[0].Attributes[2].Value, CultureInfo.InvariantCulture);
 
             //FIX RACES
             string[] addedRaces = MenuManager.document.GetElementsByTagName("Game")[0].Attributes[3].Value.Split(new char[] { ':' });

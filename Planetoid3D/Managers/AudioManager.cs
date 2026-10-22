@@ -67,8 +67,6 @@ namespace Planetoid3D
         private static WaveBank waveBank;
 
         private static AudioEngine audioEngine;
-        private static Dictionary<string, SoundEffect> soundEffects;
-        private static Dictionary<string, Song> songs;
         private static Cue ingame;
         private static Cue battle;
         private static Cue planetoid;

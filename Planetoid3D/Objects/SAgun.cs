@@ -107,7 +107,6 @@ namespace Planetoid3D
             myTarget = null;
             Ray collisionRay = new Ray(matrix.Translation + matrix.Backward * 9, Vector3.Zero);
             BoundingSphere planetSphere = new BoundingSphere(planet.matrix.Translation, planet.radius);
-            Vector3 dist;
             //if (GameEngine.ks.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.M))
             /*{
                 DataSectorSubdivider.FindObjectsInSectors<BaseObjectBuilding>(matrix.Translation, 600);
@@ -134,7 +133,7 @@ namespace Planetoid3D
             {
                 for (int b = 0; b < GameEngine.planets.Count; b++)
                 {
-                    for (int a = 0; a < GameEngine.planets[b].buildings.Count(); a++)
+                    for (int a = 0; a < GameEngine.planets[b].buildings.Count; a++)
                     {
                         if (GameEngine.planets[b].buildings[a].flying)
                         {

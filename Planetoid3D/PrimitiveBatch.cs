@@ -43,9 +43,6 @@ namespace Planetoid3D
         // called.
         int positionInBuffer = 0;
 
-        // the vertex declaration that will be set on the device for drawing. this is 
-        // created automatically using VertexPositionColor's vertex elements.
-        VertexDeclaration vertexDeclaration;
 
         // a basic effect, which contains the shaders that we will use to draw our
         // primitives.
@@ -108,9 +105,6 @@ namespace Planetoid3D
         {
             if (disposing && !isDisposed)
             {
-                if (vertexDeclaration != null)
-                    vertexDeclaration.Dispose();
-
                 if (basicEffect != null)
                     basicEffect.Dispose();
 

@@ -15,6 +15,7 @@ using System.Xml;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Globalization;
 
 namespace Planetoid3D {
     public enum Resolution {
@@ -181,8 +182,8 @@ namespace Planetoid3D {
 
             document.Load("Content//Pages//pages.xml");
             foreach (XmlNode node in document.GetElementsByTagName("Page")) {
-                content_page.Add(int.Parse(node.ChildNodes[0].InnerText), node.ChildNodes[1].InnerText);
-                texture_pages.Add(int.Parse(node.ChildNodes[0].InnerText), GameEngine.Game.Content.Load<Texture2D>("Pages//page" + node.ChildNodes[0].InnerText));
+                content_page.Add(int.Parse(node.ChildNodes[0].InnerText, CultureInfo.InvariantCulture), node.ChildNodes[1].InnerText);
+                texture_pages.Add(int.Parse(node.ChildNodes[0].InnerText, CultureInfo.InvariantCulture), GameEngine.Game.Content.Load<Texture2D>("Pages//page" + node.ChildNodes[0].InnerText));
             }
 
             pauseScreen = new RenderTarget2D(graphics.GraphicsDevice, Graphics.PreferredBackBufferWidth, Graphics.PreferredBackBufferHeight, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.PreserveContents);
@@ -293,23 +294,23 @@ namespace Planetoid3D {
         /// </summary>
         private static void ApplySettings() {
                 //music volume
-                AudioManager.music_volume = int.Parse(document.GetElementsByTagName("Music")[0].FirstChild.Value);
+                AudioManager.music_volume = int.Parse(document.GetElementsByTagName("Music")[0].FirstChild.Value, CultureInfo.InvariantCulture);
                 //sound volume
-                AudioManager.sound_volume = int.Parse(document.GetElementsByTagName("Sound")[0].FirstChild.Value);
+                AudioManager.sound_volume = int.Parse(document.GetElementsByTagName("Sound")[0].FirstChild.Value, CultureInfo.InvariantCulture);
                 //fullscreen
                 graphics.IsFullScreen = bool.Parse(document.GetElementsByTagName("Fullscreen")[0].FirstChild.Value);
                 graphics.ApplyChanges();
                 //details
-                PlanetoidGame.details = short.Parse(document.GetElementsByTagName("Details")[0].FirstChild.Value);
+                PlanetoidGame.details = short.Parse(document.GetElementsByTagName("Details")[0].FirstChild.Value, CultureInfo.InvariantCulture);
                 Util.InitializeVertices();
                 //dynamic camera
                 GameEngine.gameCamera.eyeCorner = bool.Parse(document.GetElementsByTagName("Cameye")[0].FirstChild.Value);
                 //Lens Flare
                 PlanetoidGame.lens.Enabled = bool.Parse(document.GetElementsByTagName("Lens")[0].FirstChild.Value);
                 //Get the resolution, only at the beginning of the game
-                currentResolution = (Resolution)int.Parse(document.GetElementsByTagName("Resolution")[0].FirstChild.Value);
+                currentResolution = (Resolution)int.Parse(document.GetElementsByTagName("Resolution")[0].FirstChild.Value, CultureInfo.InvariantCulture);
                 //Get the orbits setting
-                currentOrbit = (Orbit)int.Parse(document.GetElementsByTagName("Orbits")[0].FirstChild.Value);
+                currentOrbit = (Orbit)int.Parse(document.GetElementsByTagName("Orbits")[0].FirstChild.Value, CultureInfo.InvariantCulture);
 
                 SetViewport();
 
@@ -355,7 +356,7 @@ namespace Planetoid3D {
                 foreach (XmlNode achievement in document.GetElementsByTagName("Quests")[0].ChildNodes) {
                     QuestManager.SetQuest(
                         count,
-                        int.Parse(achievement.InnerText)
+                        int.Parse(achievement.InnerText, CultureInfo.InvariantCulture)
                         );
                     count++;
                 }
@@ -389,8 +390,8 @@ namespace Planetoid3D {
                     break;
                 default:
                     string[] vals = currentResolution.ToString().Substring(1).Split(new char[] { 'x' });
-                    graphics.PreferredBackBufferWidth = int.Parse(vals[0]);
-                    graphics.PreferredBackBufferHeight = int.Parse(vals[1]);
+                    graphics.PreferredBackBufferWidth = int.Parse(vals[0], CultureInfo.InvariantCulture);
+                    graphics.PreferredBackBufferHeight = int.Parse(vals[1], CultureInfo.InvariantCulture);
                     break;
             }
             graphics.ApplyChanges();
@@ -865,10 +866,10 @@ namespace Planetoid3D {
                             if (all_back.IsClicked()) {
                                 //save settings
                                 DataManager.LoadEncryptedXml(document, GetSettingPath());
-                                document.GetElementsByTagName("Music")[0].FirstChild.Value = AudioManager.music_volume.ToString();
-                                document.GetElementsByTagName("Sound")[0].FirstChild.Value = AudioManager.sound_volume.ToString();
+                                document.GetElementsByTagName("Music")[0].FirstChild.Value = AudioManager.music_volume.ToString(CultureInfo.InvariantCulture);
+                                document.GetElementsByTagName("Sound")[0].FirstChild.Value = AudioManager.sound_volume.ToString(CultureInfo.InvariantCulture);
                                 document.GetElementsByTagName("Fullscreen")[0].FirstChild.Value = graphics.IsFullScreen.ToString();
-                                document.GetElementsByTagName("Details")[0].FirstChild.Value = PlanetoidGame.details.ToString();
+                                document.GetElementsByTagName("Details")[0].FirstChild.Value = PlanetoidGame.details.ToString(CultureInfo.InvariantCulture);
                                 document.GetElementsByTagName("Cameye")[0].FirstChild.Value = GameEngine.gameCamera.eyeCorner.ToString();
                                 document.GetElementsByTagName("Lens")[0].FirstChild.Value = PlanetoidGame.lens.Enabled.ToString();
                                 document.GetElementsByTagName("ShortNames")[0].FirstChild.Value = HUDManager.button_names.shortcut.ToString();
@@ -1445,7 +1446,7 @@ namespace Planetoid3D {
                 infoText = "No more panels, now the real game will start!";
                 if (lobby_play.IsClicked()) {
                     //Can't start if there are locked race in the lobby
-                    if (PlayerManager.players.Count(p => !RaceManager.IsUnlocked(p.race)) == 0) {
+                    if (!PlayerManager.players.Any(p => !RaceManager.IsUnlocked(p.race))) {
                         GetSavedGames();
                         if (load_slotsDetails.Exists(f => f.Name == GameEngine.currentGameName) == false) {
                             if (PlanetoidGame.game_screen_next == PlanetoidGame.game_screen) {
@@ -1579,7 +1580,7 @@ namespace Planetoid3D {
                 if (MessageBox.Title == "Game Name") {
                     if (MessageBox.Input != "") {
                         GameEngine.currentGameName = MessageBox.Input;
-                        if (MessageBox.Input.ToLower() == "cyclop") {
+                        if (MessageBox.Input.ToLowerInvariant() == "cyclop") {
                             QuestManager.QuestCall(16);
                         }
                     }
@@ -1704,7 +1705,7 @@ namespace Planetoid3D {
                 load_slots.Clear();
 
                 for (int a = 0; a < load_slotsDetails.Count; a++) {
-                    load_slots.Add(new Button(new Vector2(back.Width / 2 - 250, 200 + a * 60), load_slotsDetails[a].Name.Split('.')[0] + " - " + load_slotsDetails[a].CreationTimeUtc.ToString(), 500, null));
+                    load_slots.Add(new Button(new Vector2(back.Width / 2 - 250, 200 + a * 60), load_slotsDetails[a].Name.Split('.')[0] + " - " + load_slotsDetails[a].CreationTime.ToString(CultureInfo.CurrentCulture), 500, null));
                 }
                 load_selected = -1;
                 yspdload = 0;

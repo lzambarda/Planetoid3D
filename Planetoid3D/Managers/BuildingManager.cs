@@ -460,7 +460,7 @@ namespace Planetoid3D
         /// </summary>
         public static bool FreeBuildingPosition(Planet planet, Vector3 position)
         {
-            for (int a = 0; a < planet.buildings.Count(); a++)
+            for (int a = 0; a < planet.buildings.Count; a++)
             {
                 if (planet.buildings[a].matrix.Translation != position)
                 {
@@ -471,7 +471,7 @@ namespace Planetoid3D
                 }
             }
 
-            for (int a = 0; a < planet.trees.Count(); a++)
+            for (int a = 0; a < planet.trees.Count; a++)
             {
                 if (!planet.trees[a].gaseous && Vector3.Distance(position, planet.trees[a].matrix.Translation) < 15)
                 {
