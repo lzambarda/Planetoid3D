@@ -253,8 +253,9 @@ namespace Planetoid3D {
                     foreach (EffectPass pass in asteroidShader.CurrentTechnique.Passes) {
                         pass.Apply();
 
+                        // baseVertex is 0: the vertex buffer binding above already applies meshPart.VertexOffset
                         game.GraphicsDevice.DrawInstancedPrimitives(PrimitiveType.TriangleList,
-                                                               meshPart.NumVertices, meshPart.StartIndex,
+                                                               0, meshPart.StartIndex,
                                                                meshPart.PrimitiveCount, instancingTransforms.Length);
                     }
                 }
