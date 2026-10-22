@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class Turret : BaseObjectBuilding
     {
-         public Turret() { }
+        public Turret() { }
         public Turret(Planet Planet, Matrix initial, int Owner)
         {
             planet = Planet;
@@ -56,12 +56,12 @@ namespace Planetoid3D
                 //Since the turret shots have speed equal to 80
                 //Calculate the distance between the head and the asteroid
                 //Then divide it by 80 and obtain the portion of space covered in one step
-                float amount = Vector3.Distance(matrix.Translation+matrix.Backward*9, myTarget.matrix.Translation) / 80f;
+                float amount = Vector3.Distance(matrix.Translation + matrix.Backward * 9, myTarget.matrix.Translation) / 80f;
 
                 //Now get the direction from the head position to the asteroid position
                 //Add the asteroid speed and the value found before to the asteroid position
                 //THIS DIRECTION STARTS FROM THE HEAD POSITION AND GOES TO THE ASTEROID FUTURE POSITION
-                direction =myTarget.matrix.Translation + myTarget.speed * amount - (matrix.Translation+matrix.Backward*9);
+                direction = myTarget.matrix.Translation + myTarget.speed * amount - (matrix.Translation + matrix.Backward * 9);
                 if (direction.Length() > 0)
                 {
                     direction.Normalize();
@@ -69,7 +69,7 @@ namespace Planetoid3D
 
                 //Rotate body and head to face direction      
                 float dot = Vector3.Dot(matrix.Right, direction);
-                matrix *= Matrix.CreateFromAxisAngle(Vector3.Normalize(matrix.Backward), dot/5f);
+                matrix *= Matrix.CreateFromAxisAngle(Vector3.Normalize(matrix.Backward), dot / 5f);
                 matrix.Translation = planet.matrix.Translation + matrix.Backward * planet.radius;
 
                 //Now rotate head to aim at the target
@@ -86,7 +86,7 @@ namespace Planetoid3D
                         //Shoot
                         reload = 160;
                         GameEngine.shots.Add(new Shot(head, head.Backward * 80, owner, 5));
-                        AudioManager.Play3D(this, "laser_huge");              
+                        AudioManager.Play3D(this, "laser_huge");
                     }
                 }
                 else

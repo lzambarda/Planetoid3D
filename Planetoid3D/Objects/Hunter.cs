@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class Hunter : BaseObjectBuilding
     {
-         public Hunter() { }
+        public Hunter() { }
         public Hunter(Planet Start, Matrix Initial, int Owner)
         {
             type = BuildingType.Hunter;
@@ -20,7 +20,7 @@ namespace Planetoid3D
             matrix = Initial;
             owner = Owner;
         }
-       
+
         public Vector3 target;
         public Planet destination;
         public int index_destination;
@@ -39,7 +39,7 @@ namespace Planetoid3D
         {
             get
             {
-                return (pilot==null? "Sell" : "Evacuate");
+                return (pilot == null ? "Sell" : "Evacuate");
             }
         }
 
@@ -58,7 +58,7 @@ namespace Planetoid3D
 
         public override string GetHudText()
         {
-            if (pilot!=null)
+            if (pilot != null)
             {
                 return "Pilot Specialization: " + pilot.specialization + base.GetHudText();
             }
@@ -104,7 +104,7 @@ namespace Planetoid3D
                 TextBoard.AddMessage("YOU CAN'T COLONIZE THE SUN!");
                 return;
             }
-            if (pilot!=null)
+            if (pilot != null)
             {
                 if (flying == false)
                 {
@@ -121,10 +121,10 @@ namespace Planetoid3D
 
         public override bool LeaveHominid()
         {
-            if (pilot!=null && planet != null && flying == false)
+            if (pilot != null && planet != null && flying == false)
             {
                 pilot.planet = planet;
-                pilot.matrix= GetMatrix(10,Vector3.Transform(matrix.Left,Matrix.CreateFromAxisAngle(matrix.Backward,(float)Util.random.NextDouble()*MathHelper.TwoPi)));
+                pilot.matrix = GetMatrix(10, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, (float)Util.random.NextDouble() * MathHelper.TwoPi)));
                 pilot.speed = Vector3.Zero;
                 planet.hominids.Add(pilot);
                 pilot = null;
@@ -216,7 +216,7 @@ namespace Planetoid3D
                                 //If my base planet is dead, search for the nearest planet
                                 if (planet == null || planet.life <= 0)
                                 {
-                                    NearestPlanet(false,ref destination);
+                                    NearestPlanet(false, ref destination);
                                     //If there is no planet nearby
                                     if (destination == null)
                                     {
@@ -240,7 +240,7 @@ namespace Planetoid3D
                             }
                         }
                         //Go to destination planet
-                        NearestPlanet(false,ref planet);
+                        NearestPlanet(false, ref planet);
 
                         ray.Position = matrix.Translation;
                         ray.Direction = Vector3.Normalize(direction);
@@ -278,7 +278,7 @@ namespace Planetoid3D
                         {
                             Rotate(direction, 0.05f);
                             //matrix.Down =//Vector3.Lerp(matrix.Down, direction, 0.1f);
-                            matrix.Translation += matrix.Down * (pilot.specialization == Specialization.Pilot || pilot.Ability==6 ? 1.7f : 1.2f);
+                            matrix.Translation += matrix.Down * (pilot.specialization == Specialization.Pilot || pilot.Ability == 6 ? 1.7f : 1.2f);
                         }
 
                         //I'm on the planet surface and I'm flying
@@ -335,9 +335,9 @@ namespace Planetoid3D
                     matrix.Translation = Vector3.Zero;
                     matrix *= Matrix.CreateFromAxisAngle(planet.axis, planet.spinSpeed * elapsed);
                     matrix.Translation = planet.matrix.Translation + (matrix.Backward * planet.radius);
-                    if (pilot==null)
+                    if (pilot == null)
                     {
-                        GetCollidingObject( 10,ref collider);
+                        GetCollidingObject(10, ref collider);
                         if (collider != null && collider is Hominid && ((Hominid)collider).owner == owner)
                         {
                             pilot = ((Hominid)collider);
@@ -351,7 +351,7 @@ namespace Planetoid3D
                 LeaveHominid();
             }
 
-            return (life<=0);
+            return (life <= 0);
         }
 
         public void Rotate(Vector3 wantedDirection, float turnSpeed)
@@ -431,7 +431,7 @@ namespace Planetoid3D
         public override void Draw()
         {
             //Util.DrawLine(matrix.Translation, planet.matrix.Translation, Color.Lime, Color.Lime, GameEngine.gameCamera);
-            if (destination != null && nearestEnemy==null && flying)
+            if (destination != null && nearestEnemy == null && flying)
             {
                 Util.DrawLine(matrix.Translation, destination.matrix.Translation, RaceManager.GetColor(PlayerManager.GetRace(owner)), destination.GetColor(), GameEngine.gameCamera);
             }

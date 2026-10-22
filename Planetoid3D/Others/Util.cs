@@ -285,7 +285,7 @@ namespace Planetoid3D
         {
             effect.CurrentTechnique = effect.Techniques["Atmosphere"];
             Matrix m = building.matrix;
-            if (building is Rocket && (building as Rocket).destination == building.planet)  
+            if (building is Rocket && (building as Rocket).destination == building.planet)
             {
                 Vector3 l = m.Left;
                 m.Left = m.Right;

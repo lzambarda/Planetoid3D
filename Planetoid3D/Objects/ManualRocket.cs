@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class ManualRocket : BaseObjectBuilding
     {
-         public ManualRocket() { }
-         public ManualRocket(Planet Start, Matrix Initial, int Owner)
+        public ManualRocket() { }
+        public ManualRocket(Planet Start, Matrix Initial, int Owner)
         {
             type = BuildingType.Rocket;
             planet = Start;
@@ -25,7 +25,7 @@ namespace Planetoid3D
             passengers = new Hominid[3];
             life = 150;
         }
-       
+
         public Planet destination;
         public int index_destination;
 
@@ -105,14 +105,14 @@ namespace Planetoid3D
         {
             if (passengersCount > 0)
             {
-                string text="Passengers:\n   ";
+                string text = "Passengers:\n   ";
                 for (int a = 0; a < passengersCount; a++)
                 {
                     text += passengers[a].specialization + "  ";
                 }
                 return text + base.GetHudText();
             }
-            return "NO PASSENGERS"+base.GetHudText();
+            return "NO PASSENGERS" + base.GetHudText();
         }
 
         public override void LiftOff(Planet Destination)
@@ -123,23 +123,23 @@ namespace Planetoid3D
                 TextBoard.AddMessage("YOU CAN'T COLONIZE THE SUN!");
                 return;
             }
-            if (passengersCount==3)
+            if (passengersCount == 3)
             {
                 destination = Destination;
                 if (flying == false)
                 {
-                    
+
                 }
                 flying = true;
-                
+
             }
             else
             {
-                TextBoard.AddMessage("YOU NEED "+(3-passengersCount)+" MORE PASSENGER"+(passengersCount<2?"S":""));
+                TextBoard.AddMessage("YOU NEED " + (3 - passengersCount) + " MORE PASSENGER" + (passengersCount < 2 ? "S" : ""));
             }
         }
 
-        public override bool  LeaveHominid()
+        public override bool LeaveHominid()
         {
             if (flying == false)
             {
@@ -147,7 +147,7 @@ namespace Planetoid3D
                 {
                     //Add the hominids and reload their specializations
                     passengers[a].planet = planet;
-                    passengers[a].matrix= GetMatrix(20, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, a)));
+                    passengers[a].matrix = GetMatrix(20, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, a)));
                     passengers[a].speed = Vector3.Zero;
                     planet.hominids.Add(passengers[a]);
                     passengers[a] = null;
@@ -196,9 +196,9 @@ namespace Planetoid3D
             }
             if (BlackHoleGravity())
                 return true;
-            GameEngine.explosionParticles.SetSize(speed/2f);
+            GameEngine.explosionParticles.SetSize(speed / 2f);
             GameEngine.explosionParticles.SetColor(RaceManager.GetColor(PlayerManager.GetRace(owner)));
-            GameEngine.explosionParticles.AddParticle(matrix.Translation+matrix.Forward*10, Vector3.Zero);
+            GameEngine.explosionParticles.AddParticle(matrix.Translation + matrix.Forward * 10, Vector3.Zero);
             GameEngine.explosionParticles.SetColor(Color.White);
             GameEngine.explosionParticles.SetSize(1);
             return (life <= 0);

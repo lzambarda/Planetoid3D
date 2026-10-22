@@ -19,9 +19,9 @@ namespace Planetoid3D
 
         public override void Damage(BaseObjectOwned damager, float damages)
         {
-            if (damager != null && owner<8)
+            if (damager != null && owner < 8)
             {
-                if (PlayerManager.GetState(owner) > PlayerState.Human && planet!=null)
+                if (PlayerManager.GetState(owner) > PlayerState.Human && planet != null)
                 {
                     //Raise dangerometer, if the AI knows about this planet
                     PlanetInterface planetInterface = PlayerManager.players[owner].cpuController.myPlanets.Find(p => p.planet == planet);
@@ -31,7 +31,7 @@ namespace Planetoid3D
                     }
                 }
                 //Modify Relationships
-                PlayerManager.PlayerAttack(damager.owner,owner, -damages / 500f, -damages / 750f);
+                PlayerManager.PlayerAttack(damager.owner, owner, -damages / 500f, -damages / 750f);
             }
             base.Damage(null, damages);
         }
@@ -39,7 +39,7 @@ namespace Planetoid3D
         /// <summary>
         /// Get the nearest building within a given range
         /// </summary>
-        public void NearestRepairable(float minDist,ref BaseObjectOwned repairable)
+        public void NearestRepairable(float minDist, ref BaseObjectOwned repairable)
         {
             float temp;
             repairable = null;
@@ -65,10 +65,10 @@ namespace Planetoid3D
         /// </summary>
         public void CheckForBattleMusic(BaseObjectOwned target)
         {
-            if (target.owner==0 && PlayerManager.GetFriendship(owner,0) < 0.5f )
+            if (target.owner == 0 && PlayerManager.GetFriendship(owner, 0) < 0.5f)
             {
                 //This is used as a timer, so the music will not stop if a hominid avoid another for a few seconds :)
-                AudioManager.battleIsHappening = (int)MathHelper.Min(AudioManager.battleIsHappening+5, 700);
+                AudioManager.battleIsHappening = (int)MathHelper.Min(AudioManager.battleIsHappening + 5, 700);
             }
         }
     }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class Turbina : BaseObjectBuilding
     {
         public Turbina() { }
@@ -23,11 +23,11 @@ namespace Planetoid3D
             owner = Owner;
             replacer = Atmosphere.None;
             //Find a breathable atmosphere for my owner's race
-            while (!RaceManager.Tolerate(PlayerManager.GetRace(owner),replacer))
+            while (!RaceManager.Tolerate(PlayerManager.GetRace(owner), replacer))
             {
                 replacer = (Atmosphere)Util.random.Next(7);
             }
-           // AudioManager.Load(ref audio);
+            // AudioManager.Load(ref audio);
         }
 
         Atmosphere replacer;
@@ -64,24 +64,24 @@ namespace Planetoid3D
         public override void Switch(bool active)
         {
             turned_on = active;
-           /* if (active)
-            {
-                AudioManager.Play3D(this, "turbina_start");
-                timerout = 1.35f;
-            }
-            else
-            {
-                audio.Stop(AudioStopOptions.AsAuthored);
-                AudioManager.Play3D(this, "turbina_stop");
-                AudioManager.Load(ref audio);
-            }*/
+            /* if (active)
+             {
+                 AudioManager.Play3D(this, "turbina_start");
+                 timerout = 1.35f;
+             }
+             else
+             {
+                 audio.Stop(AudioStopOptions.AsAuthored);
+                 AudioManager.Play3D(this, "turbina_stop");
+                 AudioManager.Load(ref audio);
+             }*/
         }
 
         public override string GetHudText()
         {
             if (turned_on)
             {
-                return "Status: Active and working.\nCompletion: " + (100-planet.atmosphere_level) + "%" + base.GetHudText();
+                return "Status: Active and working.\nCompletion: " + (100 - planet.atmosphere_level) + "%" + base.GetHudText();
             }
 
             return "Status: Currently offline." + base.GetHudText();
@@ -92,15 +92,15 @@ namespace Planetoid3D
             //If turned on and with enough energy
             if (PlayerManager.GetEnergy(owner) > 5 && turned_on)
             {
-               /* if (audio.IsPlaying)
-                {
-                    float distance = MathHelper.Clamp(Vector3.Distance(matrix.Translation, GameEngine.gameCamera.position), 0, 3000);
-                    distance = (float)Math.Pow(1 - (distance / 3000f), 2);
-                    audio.SetVariable("Distance", distance * (AudioManager.sound_volume / 10f));
-                    AudioManager.soundBank.GetCue("turbina_loop").SetVariable("Distance", distance * (AudioManager.sound_volume / 10f));
-                }*/
+                /* if (audio.IsPlaying)
+                 {
+                     float distance = MathHelper.Clamp(Vector3.Distance(matrix.Translation, GameEngine.gameCamera.position), 0, 3000);
+                     distance = (float)Math.Pow(1 - (distance / 3000f), 2);
+                     audio.SetVariable("Distance", distance * (AudioManager.sound_volume / 10f));
+                     AudioManager.soundBank.GetCue("turbina_loop").SetVariable("Distance", distance * (AudioManager.sound_volume / 10f));
+                 }*/
                 //If rotation completed
-                if (angle+speed.X*2 > MathHelper.TwoPi)
+                if (angle + speed.X * 2 > MathHelper.TwoPi)
                 {
                     //Add particle
                     GameEngine.smokeParticles.SetColor(Planet.GetAtmoshpereColor(replacer));
@@ -119,11 +119,11 @@ namespace Planetoid3D
                                 audio.Play();
                             }*/
                             //The atmosphere conversion speed is proportional to the planet size
-                            timerout = planet.radius/1.2f;
+                            timerout = planet.radius / 1.2f;
                             //Decrease owner's energy
-                            PlayerManager.ChangeEnergy(owner, - 5);
+                            PlayerManager.ChangeEnergy(owner, -5);
                             //Decrease planet's atmosphere
-                            planet.atmosphere_level -= (1 + PlayerManager.players[owner].researchLevels[3]/2);
+                            planet.atmosphere_level -= (1 + PlayerManager.players[owner].researchLevels[3] / 2);
                             //Replace atmosphere
                             if (planet.atmosphere_level < 1)
                             {

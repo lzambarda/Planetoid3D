@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Media;
 namespace Planetoid3D
 {
     [Serializable]
-    public class BlackHole: BaseObject
+    public class BlackHole : BaseObject
     {
         public BlackHole()
         {
@@ -33,14 +33,14 @@ namespace Planetoid3D
 
         public bool Update(float elapsed)
         {
-            matrix.Translation += speed*elapsed*20;
+            matrix.Translation += speed * elapsed * 20;
 
             if (Vector3.Distance(matrix.Translation, Vector3.Zero) > 4000)
             {
                 speed -= Vector3.Normalize(matrix.Translation);
             }
 
-            NearestPlanet(true,ref planet);
+            NearestPlanet(true, ref planet);
 
             //Planet repulsion
             if (planet != null)
@@ -52,15 +52,15 @@ namespace Planetoid3D
                 speed += 5 * Vector3.Normalize(matrix.Translation - GameEngine.planetoid.matrix.Translation) / Vector3.Distance(matrix.Translation, GameEngine.planetoid.matrix.Translation);
             }
             speed.Normalize();
-            speed *=3;
+            speed *= 3;
             life += 0.00001f;
             if (life > 15)
             {
                 Flash(2);
-                GameEngine.planets.Add(new Planet((int)(Vector3.Distance(Vector3.Zero,matrix.Translation)/200),50,GameEngine.planets[0],1));
+                GameEngine.planets.Add(new Planet((int)(Vector3.Distance(Vector3.Zero, matrix.Translation) / 200), 50, GameEngine.planets[0], 1));
                 GameEngine.planets.Last().matrix.Translation = matrix.Translation;
                 GameEngine.planets.Last().planet = null;
-                GameEngine.planets.Last().speed = speed*15;
+                GameEngine.planets.Last().speed = speed * 15;
                 GameEngine.planets.Last().color = Color.Lerp(Color.LightGray, Color.DimGray, (float)Util.random.NextDouble());
                 GameEngine.planets.Last().life *= 1.5f;
                 if (GameEngine.gameCamera.target == this)

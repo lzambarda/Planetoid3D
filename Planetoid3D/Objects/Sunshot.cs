@@ -15,7 +15,7 @@ namespace Planetoid3D
             //Get a good shoot direction
             matrix = Matrix.Identity;
             matrix.Translation = Position;
-            speed = Util.RandomPointOnSphere(1f+(float)(Util.random.NextDouble()*4f));
+            speed = Util.RandomPointOnSphere(1f + (float)(Util.random.NextDouble() * 4f));
             speed += Position / 150f;
             life = 1;
         }
@@ -23,7 +23,7 @@ namespace Planetoid3D
         public bool Update(float elapsed)
         {
             //Don't mind main menu, without this condition the game would cause NullReferenceException
-            if (PlanetoidGame.game_screen==GameScreen.Menu)
+            if (PlanetoidGame.game_screen == GameScreen.Menu)
             {
                 return false;
             }

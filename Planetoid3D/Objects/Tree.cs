@@ -27,21 +27,21 @@ namespace Planetoid3D
             //Initialize position on planet and tree scale
             if (myAtmosphere > Atmosphere.Cyanide)
             {
-                gaseous=true;
+                gaseous = true;
                 maxScale = 1;
             }
             else
             {
-                gaseous=false;
+                gaseous = false;
                 maxScale = myPlanet.radius / 10f - (float)Util.random.NextDouble() * 2;
             }
             matrix = Matrix.Invert(Matrix.CreateLookAt(Util.RandomPointOnSphere(planet.radius), Vector3.Zero, Vector3.Up));
             scale = maxScale / 75f;
             matrix *= Matrix.CreateFromAxisAngle(matrix.Backward, (float)Util.random.NextDouble() * MathHelper.TwoPi);
-            matrix.Translation = planet.matrix.Translation + matrix.Backward * (planet.radius-0.5f);
+            matrix.Translation = planet.matrix.Translation + matrix.Backward * (planet.radius - 0.5f);
         }
 
-        public Tree(Planet myPlanet,Matrix initial)
+        public Tree(Planet myPlanet, Matrix initial)
         {
             life = 100;
             planet = myPlanet;
@@ -62,7 +62,7 @@ namespace Planetoid3D
             matrix = initial;
 
             timer = Util.random.Next(15);
-            
+
         }
 
         public float maxScale;
@@ -97,15 +97,15 @@ namespace Planetoid3D
         {
             if (timer <= 0)
             {
-                    timer = 8;
-                    if (planet.atmosphere == myAtmosphere)
-                    {
-                        planet.atmosphere_level += (1 + (int)scale);
-                    }
-                    else
-                    {
-                        planet.atmosphere_level -= (1 + (int)scale);
-                    }
+                timer = 8;
+                if (planet.atmosphere == myAtmosphere)
+                {
+                    planet.atmosphere_level += (1 + (int)scale);
+                }
+                else
+                {
+                    planet.atmosphere_level -= (1 + (int)scale);
+                }
             }
 
             timer -= elapsed;

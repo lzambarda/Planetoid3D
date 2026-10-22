@@ -136,13 +136,13 @@ namespace Planetoid3D
 
         public override string GetHudText()
         {
-            return "A "+specialization + " "+RaceManager.GetRace(Race) + base.GetHudText();
+            return "A " + specialization + " " + RaceManager.GetRace(Race) + base.GetHudText();
         }
 
         public void Speak(SpeechType speech)
         {
-            Balloon myB=GameEngine.balloons.Find(b => b.myCaller == this);
-            if (myB==null)
+            Balloon myB = GameEngine.balloons.Find(b => b.myCaller == this);
+            if (myB == null)
             {
                 GameEngine.balloons.Add(new Balloon(this, speech));
             }
@@ -173,21 +173,21 @@ namespace Planetoid3D
                 pos = Util.RandomPointOnSphere(planet.radius + 3);
             }
             while (GetCollisionObjects(pos));
-            matrix = Matrix.Invert(Matrix.CreateLookAt(pos,Vector3.Zero, Vector3.Up));
+            matrix = Matrix.Invert(Matrix.CreateLookAt(pos, Vector3.Zero, Vector3.Up));
             matrix.Translation = pos;
         }
 
         public void SetGoal(Vector3 goalPosition, Vector3 pivot)
         {
             goal = Matrix.Invert(Matrix.CreateLookAt(goalPosition, pivot, Vector3.Up));
-            goal.Translation = goalPosition-pivot;
+            goal.Translation = goalPosition - pivot;
         }
 
         protected void UpdateGoal(float elapsed)
         {
             //Rotate with planet
             goal *= Matrix.CreateFromAxisAngle(planet.axis, planet.spinSpeed * elapsed);
-            tempGoal*= Matrix.CreateFromAxisAngle(planet.axis, planet.spinSpeed * elapsed);
+            tempGoal *= Matrix.CreateFromAxisAngle(planet.axis, planet.spinSpeed * elapsed);
 
             //Find new cross Vector
             crossVector = Vector3.Normalize(Vector3.Cross(realPosition, tempGoal.Translation));
@@ -203,7 +203,7 @@ namespace Planetoid3D
                 //Flying in the planet atmosphere
                 matrix.Translation += speed;
                 //Avoid infinite flying
-                matrix.Translation += Vector3.Normalize(planet.matrix.Translation - matrix.Translation)/5f;
+                matrix.Translation += Vector3.Normalize(planet.matrix.Translation - matrix.Translation) / 5f;
                 dist = Vector3.Distance(matrix.Translation, planet.matrix.Translation);
                 //You flew off the planet's atmosphere, die
                 if (dist > planet.radius * 2.5f)
@@ -213,7 +213,7 @@ namespace Planetoid3D
                 }
 
                 //Update matrix
-                matrix  = Matrix.Invert(Matrix.CreateLookAt(matrix.Translation, planet.matrix.Translation, Vector3.Up));
+                matrix = Matrix.Invert(Matrix.CreateLookAt(matrix.Translation, planet.matrix.Translation, Vector3.Up));
                 matrix *= Matrix.CreateFromAxisAngle(matrix.Backward, rotation);
 
                 //Land on the planet
@@ -266,7 +266,7 @@ namespace Planetoid3D
                     {
                         PlayerManager.ChangeKeldanyum(owner, 0.5f);
                     }
-                    if (toleratingAtmosphere==planet.atmosphere)// RaceManager.Tolerate(Race, planet.atmosphere))
+                    if (toleratingAtmosphere == planet.atmosphere)// RaceManager.Tolerate(Race, planet.atmosphere))
                     {
                         if (planet.atmosphere_level < 1)
                         {
@@ -346,7 +346,7 @@ namespace Planetoid3D
                 //Otherwise, no enemies, if your are a Builder check for damaged buildings
                 if (target == null && specialization == Specialization.Builder)
                 {
-                    NearestRepairable(100+planet.radius,ref target);
+                    NearestRepairable(100 + planet.radius, ref target);
                     //If it exists, go to repair it
                     if (target != null && target.life < 100)
                     {
@@ -361,12 +361,12 @@ namespace Planetoid3D
                 int a = 0;
                 for (a = 0; a < 3; a++)
                 {
-                    if (colliders[a] != null && colliders[a]!=target)
+                    if (colliders[a] != null && colliders[a] != target)
                     {
                         //There is somekind of obstacle,must avoid it
                         tempGoal = colliders[a].matrix;// Matrix.Invert(Matrix.CreateLookAt(colliders[a].matrix.Translation, planet.matrix.Translation, Vector3.Up));
                         tempGoal.Translation = colliders[a].matrix.Translation - planet.matrix.Translation;
-                        tempGoal *= Matrix.CreateFromAxisAngle(Vector3.Normalize(goal.Translation + planet.matrix.Translation - matrix.Translation)/*matrix.Down*/, 0.5f*(Vector3.Distance(matrix.Translation,colliders[a].matrix.Translation+matrix.Left*10)<Vector3.Distance(matrix.Translation,colliders[a].matrix.Translation+matrix.Right*10)?1:-1));
+                        tempGoal *= Matrix.CreateFromAxisAngle(Vector3.Normalize(goal.Translation + planet.matrix.Translation - matrix.Translation)/*matrix.Down*/, 0.5f * (Vector3.Distance(matrix.Translation, colliders[a].matrix.Translation + matrix.Left * 10) < Vector3.Distance(matrix.Translation, colliders[a].matrix.Translation + matrix.Right * 10) ? 1 : -1));
                         break;
                     }
                 }
@@ -386,7 +386,7 @@ namespace Planetoid3D
                 //Take a temp...
                 //Matrix temp = matrix;
                 //Rotate facing direction
-                float dot=Vector3.Dot(matrix.Right, tempGoal.Backward) / 10;
+                float dot = Vector3.Dot(matrix.Right, tempGoal.Backward) / 10;
                 matrix *= Matrix.CreateFromAxisAngle(matrix.Backward, dot);
                 rotation += dot;
                 //If there is enough distance from the actual position to the goal position
@@ -399,7 +399,7 @@ namespace Planetoid3D
                     if ((int)(timer * 10) % 7 == 0 && Vector3.Dot(matrix.Right, crossVector) > 0.5f)
                     {
                         //Move to goalPosition
-                        matrix *= Matrix.CreateFromAxisAngle(crossVector, MathHelper.PiOver4 * elapsed*(Ability == 4 ? 2 : 1));
+                        matrix *= Matrix.CreateFromAxisAngle(crossVector, MathHelper.PiOver4 * elapsed * (Ability == 4 ? 2 : 1));
                     }
                 }
                 else if (tempGoal == goal && colliders[1] is PreBuilding == false)
@@ -420,7 +420,7 @@ namespace Planetoid3D
                         {
                             //STUCK CASE
                             flying = true;
-                            speed = (matrix.Backward + Vector3.Normalize(matrix.Translation - colliders[a].matrix.Translation))/3f;
+                            speed = (matrix.Backward + Vector3.Normalize(matrix.Translation - colliders[a].matrix.Translation)) / 3f;
                             GetRandomPosition(ref goal);
                         }
                         else
@@ -562,15 +562,15 @@ namespace Planetoid3D
         /// <summary>
         /// Get the BaseObject on the arc going from "start" to "end" with center "offset"
         /// </summary>
-        protected void ArcCollision(Matrix start, Matrix end,Vector3 offset)
+        protected void ArcCollision(Matrix start, Matrix end, Vector3 offset)
         {
-            start.Translation -=offset;
+            start.Translation -= offset;
             Vector3 pivot = Vector3.Cross(Vector3.Normalize(start.Translation), Vector3.Normalize(end.Translation));
             start *= Matrix.CreateFromAxisAngle(pivot, 0.2f);
-            start.Translation +=offset;
+            start.Translation += offset;
             GetCollisionObjects(start.Translation);
         }
-      
+
         /// <summary>
         /// Update the drag effect
         /// </summary>
@@ -592,7 +592,7 @@ namespace Planetoid3D
 
             Vector3 direction = Vector3.Normalize(far - near);
 
-            speed = (near + (direction * Math.Min(Vector3.Distance(GameEngine.gameCamera.position,planet.matrix.Translation)-planet.radius,distance))) - matrix.Translation;
+            speed = (near + (direction * Math.Min(Vector3.Distance(GameEngine.gameCamera.position, planet.matrix.Translation) - planet.radius, distance))) - matrix.Translation;
         }
 
         /// <summary>
@@ -608,8 +608,8 @@ namespace Planetoid3D
                 {
                     if (Vector3.Distance(position, planet.hominids[h].matrix.Translation) <= 10)
                     {
-                       colliders[0]=planet.hominids[h];
-                       found++;
+                        colliders[0] = planet.hominids[h];
+                        found++;
                         if (PlayerManager.GetFriendship(planet.hominids[h].owner, owner) < 0.5f)
                         {
                             break;
@@ -708,7 +708,7 @@ namespace Planetoid3D
                     //}
                     //else
                     //{
-                        effect.DiffuseColor = Vector3.One;
+                    effect.DiffuseColor = Vector3.One;
                     //}
                     effect.Texture = RaceManager.GetTexture(Race);
                     effect.TextureEnabled = true;
@@ -719,7 +719,7 @@ namespace Planetoid3D
                 }
                 mm.Draw();
             }
-            
+
             if (specialization == Specialization.Normal)
             {
                 if (RaceManager.GetFeature(Race) > 0)
@@ -760,7 +760,7 @@ namespace Planetoid3D
             {
                 foreach (BasicEffect effect in mm.Effects)
                 {
-  
+
                     effect.DiffuseColor = Vector3.One;
                     //}
                     effect.Texture = RaceManager.GetTexture(Race);

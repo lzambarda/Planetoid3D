@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class Catapult : BaseObjectBuilding
     {
-         public Catapult() { }
-         public Catapult(Planet Start, Matrix Initial, int Owner)
+        public Catapult() { }
+        public Catapult(Planet Start, Matrix Initial, int Owner)
         {
             type = BuildingType.Catapult;
             planet = Start;
@@ -48,7 +48,7 @@ namespace Planetoid3D
         {
             get
             {
-                return (flying ? (target!=null ? "Cancel Target" : "Set Target") : "Launch");
+                return (flying ? (target != null ? "Cancel Target" : "Set Target") : "Launch");
             }
         }
 
@@ -195,14 +195,14 @@ namespace Planetoid3D
                     {
                         charge += 0.05f;
                     }
-                    else if (target!=null)
+                    else if (target != null)
                     {
                         phase = 3;
                     }
 
                     break;
                 case 3:
-                    if ( target == null ||target.life <= 0)
+                    if (target == null || target.life <= 0)
                     {
                         target = null;
                         phase = 2;
@@ -229,7 +229,7 @@ namespace Planetoid3D
                     {
                         wingAngle -= 0.002f;
                     }
-                    else if (target != null && Vector3.Distance(matrix.Backward,direction) < 0.1f )
+                    else if (target != null && Vector3.Distance(matrix.Backward, direction) < 0.1f)
                     {
                         if (speed.Length() > 3f)
                         {
@@ -251,7 +251,7 @@ namespace Planetoid3D
                     }
                     break;
                 case 4:
-                    if (charge > 0 && target!=null && target.life>0)
+                    if (charge > 0 && target != null && target.life > 0)
                     {
                         charge -= 0.025f;
                     }
@@ -260,7 +260,7 @@ namespace Planetoid3D
                         life = 0;
                         return true;
                     }
-                    direction = Vector3.Normalize(target.matrix.Translation+target.ParticleSpeedFix*Vector3.Distance(target.matrix.Translation,matrix.Translation)/200f - matrix.Translation);
+                    direction = Vector3.Normalize(target.matrix.Translation + target.ParticleSpeedFix * Vector3.Distance(target.matrix.Translation, matrix.Translation) / 200f - matrix.Translation);
                     if (speed.Length() < 300)
                     {
                         speed += direction / 2f;
@@ -275,7 +275,7 @@ namespace Planetoid3D
                     GameEngine.explosionParticles.AddParticle(matrix.Translation + matrix.Backward * 15 + Util.RandomPointOnSphere(5), Vector3.Zero);
                     GameEngine.explosionParticles.SetColor(Color.White);
 
-                    if (Vector3.Distance(planet.matrix.Translation, matrix.Translation)<planet.radius+10)
+                    if (Vector3.Distance(planet.matrix.Translation, matrix.Translation) < planet.radius + 10)
                     {
                         int own = planet.DominatingRace();
                         if (own > -1)
@@ -326,7 +326,7 @@ namespace Planetoid3D
              }*/
             if (phase > 0)
             {
-                RotateToFace(-Vector3.Normalize(direction), (phase==4?0.05f:0.02f));
+                RotateToFace(-Vector3.Normalize(direction), (phase == 4 ? 0.05f : 0.02f));
 
                 if (BlackHoleGravity())
                 {
@@ -354,7 +354,7 @@ namespace Planetoid3D
             nearestAsteroid = null;
             foreach (Asteroid asteroid in GameEngine.asteroids)
             {
-                temp = Vector3.Distance(matrix.Translation, asteroid.matrix.Translation)-asteroid.life*20;
+                temp = Vector3.Distance(matrix.Translation, asteroid.matrix.Translation) - asteroid.life * 20;
                 if (temp < min)
                 {
                     min = temp;
@@ -384,7 +384,7 @@ namespace Planetoid3D
 
             model.Bones["Body"].Transform = matrix;
             Matrix temp = matrix;
-            temp.Translation += matrix.Backward * (2+edgeAmount*7);
+            temp.Translation += matrix.Backward * (2 + edgeAmount * 7);
             model.Bones["Edge"].Transform = temp;
 
             temp = matrix * Matrix.CreateFromAxisAngle(matrix.Left, wingAngle);
@@ -408,7 +408,7 @@ namespace Planetoid3D
             {
                 if (PlanetoidGame.details > 0)
                 {
-                    Util.DrawTextureLine(matrix.Translation + matrix.Backward * 15, Vector3.Normalize(matrix.Translation)*GameEngine.planets[0].radius,4, GameEngine.gameCamera, Color.DodgerBlue);
+                    Util.DrawTextureLine(matrix.Translation + matrix.Backward * 15, Vector3.Normalize(matrix.Translation) * GameEngine.planets[0].radius, 4, GameEngine.gameCamera, Color.DodgerBlue);
                     GameEngine.Game.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
                     GameEngine.Game.GraphicsDevice.BlendState = BlendState.Opaque;
                 }

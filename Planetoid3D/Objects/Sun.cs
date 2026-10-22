@@ -66,7 +66,7 @@ namespace Planetoid3D
                         a--;
                     }
                 }
-                
+
                 color = Color.Lerp(color, new Color(255, 200, 0), 0.02f);
                 realColor = Color.Lerp(realColor, Color.White, 0.02f);
                 if (radius > 150)

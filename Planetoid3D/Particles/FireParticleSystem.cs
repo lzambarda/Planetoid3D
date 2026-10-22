@@ -1,4 +1,4 @@
-#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
 // FireParticleSystem.cs
 //
@@ -14,16 +14,19 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 #endregion
 
-namespace Planetoid3D {
+namespace Planetoid3D
+{
     /// <summary>
     /// Custom particle system for creating a flame effect.
     /// </summary>
-    class FireParticleSystem : ParticleSystem {
+    class FireParticleSystem : ParticleSystem
+    {
         public FireParticleSystem(Game game, ContentManager content)
             : base(game, content) { }
 
 
-        protected override void InitializeSettings(ParticleSettings settings) {
+        protected override void InitializeSettings(ParticleSettings settings)
+        {
             settings.TextureName = "Particles//fire";
 
             // The sun alone keeps up to ~6000 particles alive on High details (50 per frame, 2s duration),

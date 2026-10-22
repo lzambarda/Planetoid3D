@@ -42,22 +42,22 @@ namespace Planetoid3D
 
         public override void Switch(bool active)
         {
-           this.active = active;
+            this.active = active;
         }
 
         public void ShieldHit(BaseObject body)
         {
             //body.life -= charge;
             hitPosition = Vector3.Normalize(body.matrix.Translation - planet.matrix.Translation);
-            body.speed += hitPosition*5;
-            hitTimer = (float)Math.Min(body.life*2,1);
-            charge -= (body is Asteroid ? body.life * 20 : body.life)*1.2f;
+            body.speed += hitPosition * 5;
+            hitTimer = (float)Math.Min(body.life * 2, 1);
+            charge -= (body is Asteroid ? body.life * 20 : body.life) * 1.2f;
             if (body.life <= 5 && body is Asteroid)
             {
                 AudioManager.Play3D(body, "asteroid_death");
                 for (int a = 0; a < body.life * 20; a++)
                 {
-                    GameEngine.fireParticles.AddParticle(body.matrix.Translation +  Util.RandomPointOnSphere(body.life * 4), Vector3.Zero);
+                    GameEngine.fireParticles.AddParticle(body.matrix.Translation + Util.RandomPointOnSphere(body.life * 4), Vector3.Zero);
                 }
                 GameEngine.asteroids.Remove((Asteroid)body);
             }
@@ -76,7 +76,7 @@ namespace Planetoid3D
             {
                 for (int a = 0; a < planet.buildings.Count; a++)
                 {
-                    if (planet.buildings[a]!=this && planet.buildings[a] is Repulser && (planet.buildings[a] as Repulser).presence > 0.1)
+                    if (planet.buildings[a] != this && planet.buildings[a] is Repulser && (planet.buildings[a] as Repulser).presence > 0.1)
                     {
                         return false;
                     }
@@ -145,7 +145,7 @@ namespace Planetoid3D
                                     }
                                 }
                             }
-                            if (GameEngine.planets[a] != planet && GameEngine.planets[a].life>0 && Vector3.Distance(GameEngine.planets[a].matrix.Translation, planet.matrix.Translation) <= GameEngine.planets[a].radius + planet.radius * 2)
+                            if (GameEngine.planets[a] != planet && GameEngine.planets[a].life > 0 && Vector3.Distance(GameEngine.planets[a].matrix.Translation, planet.matrix.Translation) <= GameEngine.planets[a].radius + planet.radius * 2)
                             {
                                 GameEngine.planets[a].speed *= 0.5f;
                                 life = 0;
@@ -153,7 +153,7 @@ namespace Planetoid3D
                             }
                             for (int b = 0; b < GameEngine.planets[a].buildings.Count; b++)
                             {
-                                if (GameEngine.planets[a].buildings[b].owner!=owner && GameEngine.planets[a].buildings[b] is Catapult && (GameEngine.planets[a].buildings[b] as Catapult).phase==4 && Vector3.Distance(GameEngine.planets[a].buildings[b].matrix.Translation, planet.matrix.Translation) <= planet.radius * 2)
+                                if (GameEngine.planets[a].buildings[b].owner != owner && GameEngine.planets[a].buildings[b] is Catapult && (GameEngine.planets[a].buildings[b] as Catapult).phase == 4 && Vector3.Distance(GameEngine.planets[a].buildings[b].matrix.Translation, planet.matrix.Translation) <= planet.radius * 2)
                                 {
                                     ShieldHit(GameEngine.planets[a].buildings[b]);
                                     GameEngine.planets[a].buildings[b].life = 0;
@@ -206,9 +206,9 @@ namespace Planetoid3D
             GameEngine.explosionParticles.SetColor(Color.DodgerBlue);
             GameEngine.explosionParticles.SetSize(charge / 400f);
             GameEngine.explosionParticles.AddParticle(matrix.Translation + matrix.Backward * 5, planet.ParticleSpeedFix + planet.speed);
-            if (presence >= 0.4f && PlanetoidGame.details>0)
+            if (presence >= 0.4f && PlanetoidGame.details > 0)
             {
-                GameEngine.explosionParticles.AddParticle(matrix.Translation + matrix.Backward * (planet.radius - 4), planet.ParticleSpeedFix+planet.speed);
+                GameEngine.explosionParticles.AddParticle(matrix.Translation + matrix.Backward * (planet.radius - 4), planet.ParticleSpeedFix + planet.speed);
             }
             GameEngine.explosionParticles.SetSize(1);
             GameEngine.explosionParticles.SetColor(Color.White);

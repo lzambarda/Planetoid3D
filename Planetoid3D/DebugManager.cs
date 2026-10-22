@@ -93,7 +93,7 @@ namespace Planetoid3D
             umsMean = 0;
             for (int a = 0; a < ums_index; a++)
             {
-                PlanetoidGame.spriteBatch.Draw(dot, startingPoint + new Vector2(10 + a / 2f, -(float)ums[a]/10), Util.PanelLightGray);
+                PlanetoidGame.spriteBatch.Draw(dot, startingPoint + new Vector2(10 + a / 2f, -(float)ums[a] / 10), Util.PanelLightGray);
                 umsMean += ums[a];
             }
             umsMean /= ums_index;
@@ -101,12 +101,12 @@ namespace Planetoid3D
             dmsMean = 0;
             for (int a = 0; a < dms_index; a++)
             {
-                PlanetoidGame.spriteBatch.Draw(dot, startingPoint + new Vector2(10 + a / 2f, 40 - (float)dms[a]/10), Util.PanelLightGray);
+                PlanetoidGame.spriteBatch.Draw(dot, startingPoint + new Vector2(10 + a / 2f, 40 - (float)dms[a] / 10), Util.PanelLightGray);
                 dmsMean += dms[a];
             }
             dmsMean /= dms_index;
             dmsMean = Math.Round(dmsMean, 6);
-            PlanetoidGame.spriteBatch.DrawString(font, "Update: "+umsMean+" avg ms\n\nDraw: "+dmsMean+" avg ms\nMemory: " + GC.GetTotalMemory(false) / 1024 + " kb", startingPoint, Util.PanelLightGray);
+            PlanetoidGame.spriteBatch.DrawString(font, "Update: " + umsMean + " avg ms\n\nDraw: " + dmsMean + " avg ms\nMemory: " + GC.GetTotalMemory(false) / 1024 + " kb", startingPoint, Util.PanelLightGray);
         }
     }
 }

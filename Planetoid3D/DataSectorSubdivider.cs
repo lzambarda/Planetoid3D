@@ -14,7 +14,7 @@ namespace Planetoid3D
     {
         public static void Initialize(int SectorSize)
         {
-            sectorsContainedObjects=new List<BaseObject>();
+            sectorsContainedObjects = new List<BaseObject>();
             sectorSize = SectorSize;
             size = 14000 / sectorSize;
             sectors = new List<BaseObject>[size, size, size];
@@ -54,25 +54,25 @@ namespace Planetoid3D
                 indices[a + 7] = (short)(counter + 2);
                 indices[a + 8] = (short)(counter + 0);
                 indices[a + 9] = (short)(counter + 4);
-                indices[a + 10] =(short)(counter + 2);
-                indices[a + 11] =(short)(counter + 6);
-                indices[a + 12] =(short)(counter + 3);
-                indices[a + 13] =(short)(counter + 7);
-                indices[a + 14] =(short)(counter + 1);
-                indices[a + 15] =(short)(counter + 5);
-                indices[a + 16] =(short)(counter + 4);
-                indices[a + 17] =(short)(counter + 5);
-                indices[a + 18] =(short)(counter + 4);
-                indices[a + 19] =(short)(counter + 6);
-                indices[a + 20] =(short)(counter + 5);
-                indices[a + 21] =(short)(counter + 7);
-                indices[a + 22] =(short)(counter + 7);
-                indices[a + 23] =(short)(counter + 6);
+                indices[a + 10] = (short)(counter + 2);
+                indices[a + 11] = (short)(counter + 6);
+                indices[a + 12] = (short)(counter + 3);
+                indices[a + 13] = (short)(counter + 7);
+                indices[a + 14] = (short)(counter + 1);
+                indices[a + 15] = (short)(counter + 5);
+                indices[a + 16] = (short)(counter + 4);
+                indices[a + 17] = (short)(counter + 5);
+                indices[a + 18] = (short)(counter + 4);
+                indices[a + 19] = (short)(counter + 6);
+                indices[a + 20] = (short)(counter + 5);
+                indices[a + 21] = (short)(counter + 7);
+                indices[a + 22] = (short)(counter + 7);
+                indices[a + 23] = (short)(counter + 6);
                 counter += 8;
             }
         }
 
-        private static List<BaseObject>[, ,] sectors;
+        private static List<BaseObject>[,,] sectors;
         public static VertexPositionColor[] vertices;
         public static short[] indices;
         private static int sectorSize;
@@ -120,15 +120,15 @@ namespace Planetoid3D
                 {
                     for (int z = 0; z < size; z++)
                     {
-                        color = Color.Lerp(new Color(0.0f,1.0f,0.0f,0.0f), Color.Red, sectors[x, y, z].Count / 20f);
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 0].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 1].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 2].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 3].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 4].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 5].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 6].Color =color;
-                        vertices[x * 8 + y* size * 8 + z * size * size * 8 + 7].Color =color;
+                        color = Color.Lerp(new Color(0.0f, 1.0f, 0.0f, 0.0f), Color.Red, sectors[x, y, z].Count / 20f);
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 0].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 1].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 2].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 3].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 4].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 5].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 6].Color = color;
+                        vertices[x * 8 + y * size * 8 + z * size * size * 8 + 7].Color = color;
                     }
                 }
             }
@@ -153,7 +153,7 @@ namespace Planetoid3D
             }*/
         }
 
-        public static void FindObjectsInSectors<T>(Vector3 position,float radius)
+        public static void FindObjectsInSectors<T>(Vector3 position, float radius)
         {
             sectorsContainedObjects.Clear();
 
@@ -166,14 +166,14 @@ namespace Planetoid3D
             int covered = (int)Math.Ceiling(radius / sectorSize);
 
             //load objects contained in the covered sectors!
-            for (int x = Math.Max(0,xo-covered); x <= Math.Min(size-1,xo+covered); x++)
+            for (int x = Math.Max(0, xo - covered); x <= Math.Min(size - 1, xo + covered); x++)
             {
-                for (int y = Math.Max(0, yo - covered); y <= Math.Min(size-1, yo + covered); y++)
+                for (int y = Math.Max(0, yo - covered); y <= Math.Min(size - 1, yo + covered); y++)
                 {
-                    for (int z = Math.Max(0, zo - covered); z <= Math.Min(size-1, zo + covered); z++)
+                    for (int z = Math.Max(0, zo - covered); z <= Math.Min(size - 1, zo + covered); z++)
                     {
 
-                        sectorsContainedObjects.AddRange(sectors[x, y, z].Where(o=>o is T));
+                        sectorsContainedObjects.AddRange(sectors[x, y, z].Where(o => o is T));
                     }
                 }
             }

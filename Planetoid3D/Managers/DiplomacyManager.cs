@@ -362,7 +362,7 @@ namespace Planetoid3D
                     }
                     Util.DrawCenteredText(font,
                        PlayerManager.players[diplomacyTarget].cpuController.Adjective + " " + RaceManager.GetRace(PlayerManager.GetRace(diplomacyTarget)) + " (" + PlayerManager.GetState(diplomacyTarget) + ")" +
-                       "\n\nAbility: "+RaceManager.GetAbilityName(PlayerManager.GetRace(diplomacyTarget))+
+                       "\n\nAbility: " + RaceManager.GetAbilityName(PlayerManager.GetRace(diplomacyTarget)) +
                         "\nDiplomacy: " + PlayerManager.GetDualState(diplomacyTarget, 0)
                         + "\nStatus: " + PlayerManager.GetGeneralRelationLevel(diplomacyTarget, 0)
                         , center - new Vector2(0, 40), Util.PanelGray);

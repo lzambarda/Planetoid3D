@@ -46,7 +46,7 @@ namespace Planetoid3D
             {
                 if (PlayerManager.GetEnergy(owner) > 5)
                 {
-                    if (planet.available_keldanyum >0)
+                    if (planet.available_keldanyum > 0)
                     {
                         return "Status: Producing" + base.GetHudText();
                     }
@@ -68,7 +68,7 @@ namespace Planetoid3D
             //Update my owner resources
             //Decrease energy every "grow" switch
             //Increase keldanyum every two "grow" switches
-            if (PlayerManager.GetEnergy(owner) > 5 && active && planet.available_keldanyum>0)
+            if (PlayerManager.GetEnergy(owner) > 5 && active && planet.available_keldanyum > 0)
             {
                 if (grow)
                 {
@@ -79,7 +79,7 @@ namespace Planetoid3D
                     else
                     {
                         grow = false;
-                        PlayerManager.ChangeEnergy(owner, - 5);
+                        PlayerManager.ChangeEnergy(owner, -5);
                     }
                 }
                 else
@@ -91,12 +91,12 @@ namespace Planetoid3D
                     else
                     {
                         grow = true;
-                        PlayerManager.ChangeKeldanyum(owner, 10 + PlayerManager.players[owner].researchLevels[4]/2);
+                        PlayerManager.ChangeKeldanyum(owner, 10 + PlayerManager.players[owner].researchLevels[4] / 2);
                         planet.available_keldanyum -= (10 + PlayerManager.players[owner].researchLevels[4] / 2);
                         if (planet.available_keldanyum < 0)
                         {
                             planet.available_keldanyum = 0;
-                            if (owner==0)
+                            if (owner == 0)
                             {
                                 TextBoard.AddMessage("There is no keldanyum left on " + planet.name + "!");
                             }

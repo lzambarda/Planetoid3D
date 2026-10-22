@@ -74,7 +74,7 @@ namespace Planetoid3D
                     matrix *= Matrix.CreateRotationZ(MathHelper.ToRadians(speed.Z + 0.1f));
                     matrix.Translation = temp;
                 }
-                else if (this is BaseObjectBuilding && this is Catapult==false)
+                else if (this is BaseObjectBuilding && this is Catapult == false)
                 {
                     speed *= 0.98f;
                 }
@@ -85,12 +85,12 @@ namespace Planetoid3D
         /// <summary>
         /// Get the nearest planet within a given range
         /// </summary>
-        public void NearestPlanet(bool sun,ref Planet nearest)
+        public void NearestPlanet(bool sun, ref Planet nearest)
         {
             float minDist = float.MaxValue;
             float temp;
             nearest = null;
-            for (int a = (sun?0:1); a < GameEngine.planets.Count; a++)
+            for (int a = (sun ? 0 : 1); a < GameEngine.planets.Count; a++)
             {
                 if (GameEngine.planets[a].life > 0 && GameEngine.planets[a] != this)
                 {
@@ -107,7 +107,7 @@ namespace Planetoid3D
         /// <summary>
         /// Get the first colliding object on a planet withing a given radius
         /// </summary>
-        public void GetCollidingObject(float radius,ref BaseObject collider)
+        public void GetCollidingObject(float radius, ref BaseObject collider)
         {
             collider = planet.hominids.Find(h => Vector3.Distance(matrix.Translation, h.matrix.Translation) < radius);
             if (collider != null)
@@ -119,7 +119,7 @@ namespace Planetoid3D
             {
                 return;
             }
-            collider = planet.trees.Find(t => t.gaseous==false && Vector3.Distance(matrix.Translation, t.matrix.Translation) < radius);
+            collider = planet.trees.Find(t => t.gaseous == false && Vector3.Distance(matrix.Translation, t.matrix.Translation) < radius);
             if (collider != null)
             {
                 return;
@@ -129,7 +129,7 @@ namespace Planetoid3D
         /// <summary>
         /// Rotate the BaseObject matrix to face a given direction
         /// </summary>
-        public void RotateToFace(Vector3 wantedDirection,float turnSpeed)
+        public void RotateToFace(Vector3 wantedDirection, float turnSpeed)
         {
             wantedDirection.Normalize();
             Vector3 shipFront = matrix.Forward;
@@ -204,7 +204,7 @@ namespace Planetoid3D
         /// <summary>
         /// Create "amount" flames at BaseObject position
         /// </summary>
-        public void Burst(int amount, Color color,float radius)
+        public void Burst(int amount, Color color, float radius)
         {
             GameEngine.explosionParticles.SetColor(color);
             amount *= 2;

@@ -29,13 +29,13 @@ namespace Planetoid3D
         {
             get
             {
-                return (student!=null ? "Leave Student" : "Change Specialization");
+                return (student != null ? "Leave Student" : "Change Specialization");
             }
         }
 
         public override void DoSecondHUDAction()
         {
-            if (student==null)
+            if (student == null)
             {
                 selectedSpecialization++;
                 if (selectedSpecialization > Specialization.Pilot)
@@ -54,7 +54,7 @@ namespace Planetoid3D
         {
             if (learn > 0)
             {
-                string text="Currently training a " +selectedSpecialization + ":";
+                string text = "Currently training a " + selectedSpecialization + ":";
                 if (learn < 10)
                 {
                     text += "\nStudent: What??";
@@ -81,7 +81,7 @@ namespace Planetoid3D
                 }
                 return text + base.GetHudText();
             }
-            return "School for " + selectedSpecialization + "s is currently empty."+base.GetHudText();
+            return "School for " + selectedSpecialization + "s is currently empty." + base.GetHudText();
         }
 
         public override void InSerialization()
@@ -104,11 +104,11 @@ namespace Planetoid3D
 
         public override bool Update(float elapsed)
         {
-            if (student==null)
+            if (student == null)
             {
-                GetCollidingObject(15,ref collider);
+                GetCollidingObject(15, ref collider);
                 //Begin student training
-                if (collider != null && collider is Hominid && ((Hominid)collider).owner==owner && ((Hominid)collider).specialization==Specialization.Normal)
+                if (collider != null && collider is Hominid && ((Hominid)collider).owner == owner && ((Hominid)collider).specialization == Specialization.Normal)
                 {
                     learn = 0;
                     student = ((Hominid)collider);
@@ -120,14 +120,14 @@ namespace Planetoid3D
                 //If the learning timer is gone
                 if (learn < 100)
                 {
-                    learn += (elapsed*(2.5f+PlayerManager.players[owner].researchLevels[2]/2f));
+                    learn += (elapsed * (2.5f + PlayerManager.players[owner].researchLevels[2] / 2f));
                 }
                 else
                 {
                     //Finish student training
                     LeaveHominid();
                     planet.hominids.Last().specialization = selectedSpecialization;
-                    if (selectedSpecialization == Specialization.Soldier && owner==0)
+                    if (selectedSpecialization == Specialization.Soldier && owner == 0)
                     {
                         QuestManager.QuestCall(9);
                     }
@@ -139,14 +139,14 @@ namespace Planetoid3D
 
         public override bool LeaveHominid()
         {
-            if (student!=null)
+            if (student != null)
             {
-                student.matrix = GetMatrix(9, matrix.Right * 2 + matrix.Backward/2f);
+                student.matrix = GetMatrix(9, matrix.Right * 2 + matrix.Backward / 2f);
                 student.specialization = Specialization.Normal;
                 student.flying = true;
                 student.speed = Vector3.Zero;
                 planet.hominids.Add(student);
-                student=null;
+                student = null;
                 learn = 0;
                 return false;
             }

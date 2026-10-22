@@ -60,7 +60,7 @@ namespace Planetoid3D
             {
                 timer = 2;
             }
-            
+
 
             return base.Update(elapsed);
         }

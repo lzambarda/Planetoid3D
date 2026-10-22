@@ -23,7 +23,7 @@ namespace Planetoid3D
 
             //Set up
             starEffect.CurrentTechnique = starEffect.Techniques["StarField"];
-            stars = new VertexPositionColorTexture[starAmount*4];
+            stars = new VertexPositionColorTexture[starAmount * 4];
             indices = new short[starAmount * 6];
 
             //Initialize star positions
@@ -47,54 +47,54 @@ namespace Planetoid3D
                 stars[current + 2] = new VertexPositionColorTexture(position, color, new Vector2(radius, radius));
                 stars[current + 3] = new VertexPositionColorTexture(position, color, new Vector2(-radius, radius));
             }
-           /* for (int current = 0; current < starAmount * 4; current += 4)
-            {
-                theta = (float)(rand.NextDouble() * MathHelper.Pi);
-                phi = (float)(rand.NextDouble() * MathHelper.TwoPi);
+            /* for (int current = 0; current < starAmount * 4; current += 4)
+             {
+                 theta = (float)(rand.NextDouble() * MathHelper.Pi);
+                 phi = (float)(rand.NextDouble() * MathHelper.TwoPi);
 
-                radius = 12000 + rand.Next(250);
+                 radius = 12000 + rand.Next(250);
 
-                //Use position to create the color
-                position.Z = 0.5f + (float)rand.NextDouble() / 2f;
-                position.X = position.Z - (float)rand.NextDouble() / 4f;
-                position.Y = position.X;               
-                color = new Color(position);
+                 //Use position to create the color
+                 position.Z = 0.5f + (float)rand.NextDouble() / 2f;
+                 position.X = position.Z - (float)rand.NextDouble() / 4f;
+                 position.Y = position.X;               
+                 color = new Color(position);
 
-                position = radius * new Vector3(
+                 position = radius * new Vector3(
+                     (float)(Math.Sin(theta) * Math.Cos(phi)),
+                     (float)(Math.Sin(theta) * Math.Sin(phi)),
+                     (float)Math.Cos(theta));
+
+                 stars[current].Position = position;
+                 stars[current].Color = color;
+
+                 theta += 0.003f;
+                 position = radius * new Vector3(
                     (float)(Math.Sin(theta) * Math.Cos(phi)),
                     (float)(Math.Sin(theta) * Math.Sin(phi)),
                     (float)Math.Cos(theta));
 
-                stars[current].Position = position;
-                stars[current].Color = color;
+                 stars[current + 1].Position = position;
+                 stars[current + 1].Color = color;
 
-                theta += 0.003f;
-                position = radius * new Vector3(
-                   (float)(Math.Sin(theta) * Math.Cos(phi)),
-                   (float)(Math.Sin(theta) * Math.Sin(phi)),
-                   (float)Math.Cos(theta));
+                 phi += 0.003f;
+                 position = radius * new Vector3(
+                    (float)(Math.Sin(theta) * Math.Cos(phi)),
+                    (float)(Math.Sin(theta) * Math.Sin(phi)),
+                    (float)Math.Cos(theta));
 
-                stars[current + 1].Position = position;
-                stars[current + 1].Color = color;
+                 stars[current + 2].Position = position;
+                 stars[current + 2].Color = color;
 
-                phi += 0.003f;
-                position = radius * new Vector3(
-                   (float)(Math.Sin(theta) * Math.Cos(phi)),
-                   (float)(Math.Sin(theta) * Math.Sin(phi)),
-                   (float)Math.Cos(theta));
+                 theta -= 0.003f;
+                 position = radius * new Vector3(
+                    (float)(Math.Sin(theta) * Math.Cos(phi)),
+                    (float)(Math.Sin(theta) * Math.Sin(phi)),
+                    (float)Math.Cos(theta));
 
-                stars[current + 2].Position = position;
-                stars[current + 2].Color = color;
-
-                theta -= 0.003f;
-                position = radius * new Vector3(
-                   (float)(Math.Sin(theta) * Math.Cos(phi)),
-                   (float)(Math.Sin(theta) * Math.Sin(phi)),
-                   (float)Math.Cos(theta));
-
-                stars[current + 3].Position = position;
-                stars[current + 3].Color = color;
-            }*/
+                 stars[current + 3].Position = position;
+                 stars[current + 3].Color = color;
+             }*/
 
             int counter = 0;
             for (int current = 0; current < starAmount * 6; current += 6)
@@ -116,7 +116,7 @@ namespace Planetoid3D
         /// <summary>
         /// Render the starfield
         /// </summary>
-        public static void RenderStars(Game Game,Matrix view,Matrix projection)
+        public static void RenderStars(Game Game, Matrix view, Matrix projection)
         {
             starEffect.Parameters["World"].SetValue(Matrix.Identity);
             starEffect.Parameters["View"].SetValue(view);

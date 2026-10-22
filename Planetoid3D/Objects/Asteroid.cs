@@ -27,7 +27,7 @@ namespace Planetoid3D
                 matrix = Matrix.CreateTranslation(Util.random.Next(50) + 450, 20 - Util.random.Next(40), 0);
                 matrix *= Matrix.CreateFromAxisAngle(Vector3.Up, (float)Util.random.NextDouble() * MathHelper.TwoPi);
                 speed = Vector3.Normalize(-matrix.Translation);
-                speed = Vector3.Cross(Vector3.Up, speed)*10 + new Vector3(0, 2 - (float)Util.random.NextDouble() * 4, 0);
+                speed = Vector3.Cross(Vector3.Up, speed) * 10 + new Vector3(0, 2 - (float)Util.random.NextDouble() * 4, 0);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace Planetoid3D
             SetUpMatrixScaling();
         }
 
-        public Asteroid(Vector3 position,Vector3 Speed)
+        public Asteroid(Vector3 position, Vector3 Speed)
         {
             life = 0.25f + (float)(Util.random.NextDouble() * 0.5f);
             matrix = Matrix.CreateTranslation(position);
@@ -202,7 +202,7 @@ namespace Planetoid3D
             matrix *= Matrix.CreateFromAxisAngle(Vector3.Right, speed.X * elapsed);
             matrix *= Matrix.CreateFromAxisAngle(Vector3.Up, -speed.Y * elapsed);
             matrix *= Matrix.CreateFromAxisAngle(Vector3.Backward, speed.Z * elapsed);
-            matrix.Translation = position;;
+            matrix.Translation = position; ;
             return BlackHoleGravity();
         }
 

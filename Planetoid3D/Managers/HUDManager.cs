@@ -234,18 +234,18 @@ namespace Planetoid3D
 
                             PlanetoidGame.spriteBatch.Draw(panel_icons[index], position, null, temporaryPlanet.GetColor(), 0, new Vector2(50), 1, SpriteEffects.None, temporaryPlanet.transformed_position.Z - 0.0002f);
 
-                           /* string stat = "";
-                            if (race != -1)
-                            {
-                                if (PlayerManager.players[PlayerManager.GetRaceOwner(race)].cpuController != null)
-                                {
-                                    PlanetInterface p = PlayerManager.players[PlayerManager.GetRaceOwner(race)].cpuController.GetInterface(temporaryPlanet);
-                                    if (p != null)
-                                    {
-                                        stat = "\nInterface: {danger: " + p.danger + " ,action: " + p.action + "}";
-                                    }
-                                }
-                            }*/
+                            /* string stat = "";
+                             if (race != -1)
+                             {
+                                 if (PlayerManager.players[PlayerManager.GetRaceOwner(race)].cpuController != null)
+                                 {
+                                     PlanetInterface p = PlayerManager.players[PlayerManager.GetRaceOwner(race)].cpuController.GetInterface(temporaryPlanet);
+                                     if (p != null)
+                                     {
+                                         stat = "\nInterface: {danger: " + p.danger + " ,action: " + p.action + "}";
+                                     }
+                                 }
+                             }*/
 
 
                             PlanetoidGame.spriteBatch.DrawString(font,
@@ -253,7 +253,7 @@ namespace Planetoid3D
                                 "\nLife: " + Math.Round(temporaryPlanet.life, 1) +
                                 "\nPopulation: " + temporaryPlanet.TotalPopulation() + "/" + temporaryPlanet.maxPopulation +
                                 "\nAtmosphere: " + temporaryPlanet.atmosphere + (temporaryPlanet.atmosphere != Atmosphere.None ? " " + temporaryPlanet.atmosphere_level + "/100" : "") +
-                                "\nAvailable Keldanyum: "+(int)temporaryPlanet.available_keldanyum+
+                                "\nAvailable Keldanyum: " + (int)temporaryPlanet.available_keldanyum +
                                 "\nDiameter: " + temporaryPlanet.radius * 2 +
                                 /*"\nDistance: " + (temporaryPlanet.planet == null ? "ND" : "" + temporaryPlanet.distance) +*/
                                 "\nRace: " + (race == -1 ? "Inhabitated" : RaceManager.GetRace(race))/*+stat*/

@@ -68,12 +68,12 @@ namespace Planetoid3D
             scoreFinal += (scoreDestroyedBuildings * 15);
             scoreFinal += (scoreDestroyedAsteroids * 8);
             scoreFinal -= (scoreLostHominids * 5);
-            scoreFinal += (scoreSurvivedTime-1000)*2;
+            scoreFinal += (scoreSurvivedTime - 1000) * 2;
         }
 
         public static Planet PickFreePlanet(int player)
         {
-            Planet planet  = GameEngine.planets[1 + Util.random.Next(GameEngine.planets.Count - 1)];
+            Planet planet = GameEngine.planets[1 + Util.random.Next(GameEngine.planets.Count - 1)];
             while (planet.hominids.Count > 0 || planet.planet is Sun == false)
             {
                 planet = GameEngine.planets[1 + Util.random.Next(GameEngine.planets.Count - 1)];
@@ -92,6 +92,6 @@ namespace Planetoid3D
             cpuController = null;
             active_deals.Clear();
             CalculateScore();
-        }   
+        }
     }
 }

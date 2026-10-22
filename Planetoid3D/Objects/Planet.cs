@@ -13,8 +13,10 @@ using Microsoft.Xna.Framework.Media;
 
 using System.Xml.Serialization;
 
-namespace Planetoid3D {
-    public enum Atmosphere {
+namespace Planetoid3D
+{
+    public enum Atmosphere
+    {
         Oxygen,//no fading
         Metane,//fading blue
         Sulphur,//fading yellow
@@ -26,8 +28,10 @@ namespace Planetoid3D {
 
     [Serializable]
     [XmlInclude(typeof(Sun))]
-    public class Planet : BaseObject {
-        public Planet() {
+    public class Planet : BaseObject
+    {
+        public Planet()
+        {
             life = 10;
 
             name = RandomName();
@@ -37,7 +41,8 @@ namespace Planetoid3D {
             buildings = new List<BaseObjectBuilding>();
         }
 
-        public Planet(int index, int Radius, Planet orbitAround, float keldanyum_suppressor) {
+        public Planet(int index, int Radius, Planet orbitAround, float keldanyum_suppressor)
+        {
             name = RandomName();
             radius = Radius;
             texture_index = 1 + Util.random.Next(6);
@@ -46,13 +51,16 @@ namespace Planetoid3D {
             spinSpeed = (float)(MathHelper.Pi / 7000) * 120 / (1.5f + index);
             planet = orbitAround;
 
-            if (planet.name == "Sun") {
+            if (planet.name == "Sun")
+            {
                 distance = (int)(orbitAround.radius * 6 + Radius + (orbitAround.radius * 3 * index));
                 matrix = Matrix.CreateTranslation(new Vector3(distance, 0, 0));
                 matrix *= Matrix.CreateRotationZ(
                     MathHelper.ToRadians((float)(10 - (Util.random.NextDouble() * 20)))
                 );
-            } else {
+            }
+            else
+            {
                 distance = (int)(orbitAround.radius * 2 + Radius + (orbitAround.radius * 2 * index));
                 matrix = Matrix.CreateTranslation(new Vector3(distance, 0, 0));
                 matrix *= Matrix.CreateRotationZ(
@@ -77,9 +85,12 @@ namespace Planetoid3D {
             life = (int)Math.Sqrt(Radius * Radius / 8);
             maxPopulation = (int)(radius / 8);
             //atmosphere
-            if (Util.random.Next(3) < 2 && GameEngine.blackHole == null) {
+            if (Util.random.Next(3) < 2 && GameEngine.blackHole == null)
+            {
                 atmosphere = (Atmosphere)Util.random.Next(6);
-            } else {
+            }
+            else
+            {
                 atmosphere = Atmosphere.None;
             }
             atmosphere_level = 100;
@@ -112,51 +123,63 @@ namespace Planetoid3D {
         public List<Tree> trees;
         public float available_keldanyum;
 
-        public override void InSerialization() {
+        public override void InSerialization()
+        {
             base.InSerialization();
 
             //InSerialize linked objects
-            foreach (Hominid hominid in hominids) {
+            foreach (Hominid hominid in hominids)
+            {
                 hominid.InSerialization();
             }
-            foreach (Tree tree in trees) {
+            foreach (Tree tree in trees)
+            {
                 tree.InSerialization();
             }
-            foreach (BaseObjectBuilding building in buildings) {
+            foreach (BaseObjectBuilding building in buildings)
+            {
                 building.InSerialization();
             }
         }
 
-        public override void OutSerialization() {
+        public override void OutSerialization()
+        {
             base.OutSerialization();
 
             //OutSerialize linked objects
-            foreach (Hominid hominid in hominids) {
+            foreach (Hominid hominid in hominids)
+            {
                 hominid.OutSerialization();
             }
-            foreach (Tree tree in trees) {
+            foreach (Tree tree in trees)
+            {
                 tree.OutSerialization();
             }
-            foreach (BaseObjectBuilding building in buildings) {
+            foreach (BaseObjectBuilding building in buildings)
+            {
                 building.OutSerialization();
             }
         }
 
-        public Vector3 ParticleSpeedFix {
+        public Vector3 ParticleSpeedFix
+        {
             get { return (matrix.Translation - oldPosition) * 50; }
         }
 
         /// <summary>
         /// Get a random name
         /// </summary>
-        private string RandomName() {
+        private string RandomName()
+        {
             int count = 2 + Util.random.Next(3);
             int chosen = 0;
             char[] vocals = new char[] { 'a', 'e', 'i', 'o', 'u', 'y' };
             string name = "";
-            for (int a = 0; a < count; a++) {
+            for (int a = 0; a < count; a++)
+            {
                 chosen = Util.random.Next(20);
-                switch (chosen) {
+                switch (chosen)
+                {
                     case 0: name += "b" + vocals[Util.random.Next(6)]; break;
                     case 1: name += "c" + vocals[Util.random.Next(6)]; break;
                     case 2: name += "d" + vocals[Util.random.Next(6)]; break;
@@ -187,8 +210,10 @@ namespace Planetoid3D {
         /// <summary>
         /// Get planet's color, consider atmosphere type and level
         /// </summary>
-        public Color GetColor() {
-            if (HUDManager.strategyMode) {
+        public Color GetColor()
+        {
+            if (HUDManager.strategyMode)
+            {
                 int dr = DominatingRace();
                 return (dr == -1 ? Color.DimGray : RaceManager.GetColor(dr));
             }
@@ -198,10 +223,13 @@ namespace Planetoid3D {
         /// <summary>
         /// Add a variable number of trees
         /// </summary>
-        public void AddTrees() {
+        public void AddTrees()
+        {
             trees.Clear();
-            if (atmosphere != Atmosphere.None) {
-                for (int a = 1 + Util.random.Next((int)radius / 12); a >= 0; a--) {
+            if (atmosphere != Atmosphere.None)
+            {
+                for (int a = 1 + Util.random.Next((int)radius / 12); a >= 0; a--)
+                {
                     trees.Add(new Tree(this));
                     trees.Last().GrowMax();
                 }
@@ -211,8 +239,10 @@ namespace Planetoid3D {
         /// <summary>
         /// Get atmosphere color only
         /// </summary>
-        public static Color GetAtmoshpereColor(Atmosphere atmosphere) {
-            switch (atmosphere) {
+        public static Color GetAtmoshpereColor(Atmosphere atmosphere)
+        {
+            switch (atmosphere)
+            {
                 case Atmosphere.Ammonia:
                     return Color.Pink;
                 case Atmosphere.Chlorine:
@@ -232,9 +262,11 @@ namespace Planetoid3D {
         /// <summary>
         /// Populate the planet with the given "amount" of "race" hominids, also add trees and initialize them
         /// </summary>
-        public void Populate(int owner, int amount) {
+        public void Populate(int owner, int amount)
+        {
             //Adapt atmosphere
-            while (!RaceManager.Tolerate(PlayerManager.GetRace(owner), atmosphere)) {
+            while (!RaceManager.Tolerate(PlayerManager.GetRace(owner), atmosphere))
+            {
                 atmosphere = (Atmosphere)Util.random.Next(7);
             }
             //Clear trees
@@ -242,7 +274,8 @@ namespace Planetoid3D {
             //Generate atmosphere
             atmosphere_level = 100;
             //Generate hominids and trees
-            while (amount > 0) {
+            while (amount > 0)
+            {
                 hominids.Add(new Hominid(this, owner));
                 amount--;
             }
@@ -252,32 +285,39 @@ namespace Planetoid3D {
         /// <summary>
         /// Get the dominating race (maximum units count) on this planet
         /// </summary>
-        public int DominatingRace() {
+        public int DominatingRace()
+        {
             int max = 0;
             int index = -1;
             int[] counts = new int[9];
 
-            for (int a = 0; a < hominids.Count; a++) {
-                if (++counts[hominids[a].owner] > max) {
+            for (int a = 0; a < hominids.Count; a++)
+            {
+                if (++counts[hominids[a].owner] > max)
+                {
                     index = hominids[a].owner;
                     max = counts[index];
                 }
             }
 
-            for (int a = 0; a < buildings.Count; a++) {
-                if (buildings[a].flying == false) {
+            for (int a = 0; a < buildings.Count; a++)
+            {
+                if (buildings[a].flying == false)
+                {
                     if ((buildings[a] is House ||
                         (buildings[a] is School && (buildings[a] as School).student != null) ||
                        (buildings[a] is Rocket && (buildings[a] as Rocket).passengersCount > 0) ||
                         (buildings[a] is Hunter && (buildings[a] as Hunter).pilot != null)
                         )
-                        && ++counts[buildings[a].owner] > max) {
+                        && ++counts[buildings[a].owner] > max)
+                    {
                         index = buildings[a].owner;
                         max = counts[index];
                     }
                 }
             }
-            if (index == -1) {
+            if (index == -1)
+            {
                 return -1;
             }
             return PlayerManager.GetRace(index);
@@ -287,16 +327,24 @@ namespace Planetoid3D {
         /// Get the total population of a planet
         /// </summary>
         /// <returns></returns>
-        public int TotalPopulation() {
+        public int TotalPopulation()
+        {
             int total = 0;
             //Count hominids in buildings
-            foreach (BaseObjectBuilding building in buildings) {
-                if (building.flying == false) {
-                    if (building is Rocket) {
+            foreach (BaseObjectBuilding building in buildings)
+            {
+                if (building.flying == false)
+                {
+                    if (building is Rocket)
+                    {
                         total += ((Rocket)building).passengersCount;
-                    } else if (building is Hunter) {
+                    }
+                    else if (building is Hunter)
+                    {
                         total += (((Hunter)building).pilot != null ? 1 : 0);
-                    } else if (building is School) {
+                    }
+                    else if (building is School)
+                    {
                         total += (((School)building).student != null ? 1 : 0);
                     }
                 }
@@ -304,7 +352,8 @@ namespace Planetoid3D {
             return hominids.Count(h => h.owner < 8) + total;
         }
 
-        public bool CanBuild(int player) {
+        public bool CanBuild(int player)
+        {
             int owner = PlayerManager.GetRaceOwner(DominatingRace());
             return (owner == player || (PlayerManager.GetFriendship(owner, player) >= 0.5f && hominids.Exists(h => h.owner == player)));
         }
@@ -312,32 +361,40 @@ namespace Planetoid3D {
         /// <summary>
         /// Destroy all objects that are attached to this planet
         /// </summary>
-        private void DestroyChildObjects() {
+        private void DestroyChildObjects()
+        {
             int a;
             trees.Clear();
             hominids.Clear();
-            for (a = 0; a < buildings.Count; a++) {
+            for (a = 0; a < buildings.Count; a++)
+            {
                 //Save buildings which are flying, since they're not physically connected to the planet
-                if (buildings[a].flying == true) {
+                if (buildings[a].flying == true)
+                {
                     buildings[a].NearestPlanet(false, ref buildings[a].planet);
-                    if (buildings[a].planet != null) {
+                    if (buildings[a].planet != null)
+                    {
                         buildings[a].planet.buildings.Add(buildings[a]);
                         continue;
                     }
                     //No planet left to land on, the building is lost together with this one
-                    if (HUDManager.lastTargetObject == buildings[a]) {
+                    if (HUDManager.lastTargetObject == buildings[a])
+                    {
                         HUDManager.lastTargetObject = null;
                     }
                 }
-                if (buildings[a] is Radar) {
+                if (buildings[a] is Radar)
+                {
                     PlayerManager.players[buildings[a].owner].radarAmount--;
                 }
             }
             buildings.Clear();
 
             //Check if the dying planet has moons
-            for (a = 0; a < GameEngine.planets.Count; a++) {
-                if (GameEngine.planets[a].planet == this) {
+            for (a = 0; a < GameEngine.planets.Count; a++)
+            {
+                if (GameEngine.planets[a].planet == this)
+                {
                     //Set the moon free
                     Matrix oldMatrix = GameEngine.planets[a].matrix;
                     GameEngine.planets[a].Update(0.2f);
@@ -352,7 +409,8 @@ namespace Planetoid3D {
         /// <summary>
         /// Update the planet, every planet, from dieing ones to new born and flying moons MUST use this
         /// </summary>
-        public bool Update(float elapsed) {
+        public bool Update(float elapsed)
+        {
             //Fix atmosphere level
             atmosphere_level = (int)MathHelper.Clamp(atmosphere_level, 0, 100);
             atmosphere_graphic += (atmosphere_level - atmosphere_graphic) / 100f;
@@ -362,18 +420,23 @@ namespace Planetoid3D {
             float dist = matrix.Translation.Length();
 
             //Near to the sun
-            if (dist < 400 + GameEngine.planets[0].radius) {
+            if (dist < 400 + GameEngine.planets[0].radius)
+            {
                 //All the hominids scream!
-                for (int a = 0; a < hominids.Count; a++) {
+                for (int a = 0; a < hominids.Count; a++)
+                {
                     hominids[a].Speak(SpeechType.End);
                 }
                 //Fire damage
                 life -= (1 - dist / (400 + GameEngine.planets[0].radius)) / 200f;
             }
             //If I've a parent planet
-            if (planet != null) {
-                if (planet is Sun) {
-                    if (((Sun)planet).timer > 0 || GameEngine.gameMode == GameMode.Countdown) {
+            if (planet != null)
+            {
+                if (planet is Sun)
+                {
+                    if (((Sun)planet).timer > 0 || GameEngine.gameMode == GameMode.Countdown)
+                    {
                         //Use normalize to make planets always move at the same "speed"
                         matrix.Translation -= Vector3.Normalize(matrix.Translation) / 15;
 
@@ -382,7 +445,8 @@ namespace Planetoid3D {
                     }
                 }
 
-                if (Math.Abs(orbitSpeed) > 0.01f) {
+                if (Math.Abs(orbitSpeed) > 0.01f)
+                {
                     orbitSpeed *= 0.999f;
                     spinSpeed *= 0.999f;
                 }
@@ -391,9 +455,12 @@ namespace Planetoid3D {
                 matrix.Translation -= planet.oldPosition;
                 matrix *= Matrix.CreateFromAxisAngle(axis, orbitSpeed * elapsed);
                 matrix.Translation += planet.matrix.Translation;
-            } else {
+            }
+            else
+            {
                 //Never fly away
-                if (dist > 4000) {
+                if (dist > 4000)
+                {
                     speed -= Vector3.Normalize(matrix.Translation) / 10f;
                 }
 
@@ -406,19 +473,23 @@ namespace Planetoid3D {
                 }*/
 
                 //If I don't have a planet (I'm a free flying planet)
-                if (life > 0) {
+                if (life > 0)
+                {
                     //Get nearest planet
                     NearestPlanet(true, ref planet);
                     //If the moon is near enough to the nearest planet and the planet's radius is big enough
-                    if (planet != null && (planet.planet != null || planet is Sun) && planet.radius - 10 > radius) {
+                    if (planet != null && (planet.planet != null || planet is Sun) && planet.radius - 10 > radius)
+                    {
                         //Apply gravity
                         speed += (planet.matrix.Translation - matrix.Translation) / (Vector3.Distance(planet.matrix.Translation, matrix.Translation) * 6);
 
                         //If I'm in the right distance interval from the planet
                         dist = Vector3.Distance(matrix.Translation, planet.matrix.Translation);
-                        if (dist < Math.Pow(planet.radius * (planet is Sun ? 3 : 1), 1.4f) && dist > planet.radius * 2.5f) {
+                        if (dist < Math.Pow(planet.radius * (planet is Sun ? 3 : 1), 1.4f) && dist > planet.radius * 2.5f)
+                        {
                             float dot = Vector3.Dot(Vector3.Normalize(planet.matrix.Translation - matrix.Translation), Vector3.Normalize(speed));
-                            if (Math.Abs(dot) < 0.01f) {
+                            if (Math.Abs(dot) < 0.01f)
+                            {
                                 //Recalculate distance
                                 distance = (int)Vector3.Distance(matrix.Translation, planet.matrix.Translation);
 
@@ -457,24 +528,30 @@ namespace Planetoid3D {
 
 
             //The planet is alive
-            if (life > 0) {
+            if (life > 0)
+            {
                 //Collision between planets
                 Planet tempPlanet = planet;
                 NearestPlanet(true, ref tempPlanet);
-                if (tempPlanet != null) {
+                if (tempPlanet != null)
+                {
                     //Distance must be lower than radius+radius
-                    if (Vector3.Distance(matrix.Translation, tempPlanet.matrix.Translation) < radius + tempPlanet.radius) {
+                    if (Vector3.Distance(matrix.Translation, tempPlanet.matrix.Translation) < radius + tempPlanet.radius)
+                    {
                         //Damages are regulated with planets radius
                         Damage(null, tempPlanet.radius / 100);
-                        if (life <= 0) {
+                        if (life <= 0)
+                        {
                             //Directly explode!
                             life = 0;
                             deathTimer = 1f;
                         }
                         //The Sun doesn't receive damages from planets
-                        if (tempPlanet is Sun == false) {
+                        if (tempPlanet is Sun == false)
+                        {
                             tempPlanet.Damage(null, radius / 100);
-                            if (tempPlanet.life <= 0) {
+                            if (tempPlanet.life <= 0)
+                            {
                                 //Directly Explode!
                                 tempPlanet.life = 0;
                                 tempPlanet.deathTimer = 1f;
@@ -484,24 +561,30 @@ namespace Planetoid3D {
                 }
             }
             //The planet is dying
-            else {
+            else
+            {
                 //Consume Atmosphere
-                if (atmosphere_level > 0) {
+                if (atmosphere_level > 0)
+                {
                     atmosphere_level -= 1;
                 }
 
-                if (deathTimer < 1.005f) {
+                if (deathTimer < 1.005f)
+                {
                     deathTimer += 0.005f;
 
                     //The planet is going to explode
-                    if (deathTimer < 1) {
+                    if (deathTimer < 1)
+                    {
                         //Ground burst
-                        for (int a = 0; a < deathTimer * 20; a++) {
+                        for (int a = 0; a < deathTimer * 20; a++)
+                        {
                             GameEngine.explosionParticles.AddParticle(matrix.Translation + Util.RandomPointOnSphere(radius), Vector3.Zero);
                         }
                     }
                     //Real planet explosion
-                    else {
+                    else
+                    {
                         speed = Vector3.Zero;
                         deathTimer += 1;
                         //Delete atmosphere
@@ -513,31 +596,36 @@ namespace Planetoid3D {
                         //Destroy child objects
                         DestroyChildObjects();
                         //Create explosion sphere
-                        for (int a = 0; a < 200; a++) {
+                        for (int a = 0; a < 200; a++)
+                        {
                             GameEngine.explosionParticles.AddParticle(matrix.Translation + Util.RandomPointOnSphere(radius), Vector3.Zero);
                         }
                         //Create asteroids explosion
                         Vector3 temporary;
-                        for (int a = 0; a < radius; a++) {
+                        for (int a = 0; a < radius; a++)
+                        {
                             temporary = Util.RandomPointOnSphere(radius);
                             GameEngine.asteroids.Add(new Asteroid(matrix.Translation + temporary, temporary / 4));
                         }
                         AudioManager.Play3D(this, "planet_real_explosion");
                         Flash(1);
-                        if (GameEngine.planets.Find(p => p is Sun == false && p.life > 0) == null) {
+                        if (GameEngine.planets.Find(p => p is Sun == false && p.life > 0) == null)
+                        {
                             QuestManager.QuestCall(13);
                         }
                     }
 
                 }
                 //After the explosion a flaming ring is generated, the ring is the last planet action
-                else if (deathTimer < 100) {
+                else if (deathTimer < 100)
+                {
                     deathTimer += 0.25f * (elapsed * 100);
                     radius += 0.5f * (elapsed * 100);
                     Vector3 tmp;
                     float angle;
                     //Increase the ring radius and make it burst
-                    for (int a = 0; a <= (100 - deathTimer) / 3; a++) {
+                    for (int a = 0; a <= (100 - deathTimer) / 3; a++)
+                    {
                         angle = (float)(Util.random.NextDouble() * MathHelper.TwoPi);
                         tmp = new Vector3((float)Math.Cos(angle), 0, (float)Math.Sin(angle)) * radius;
 
@@ -545,7 +633,9 @@ namespace Planetoid3D {
 
                         GameEngine.explosionParticles.AddParticle(matrix.Translation + tmp, Vector3.Zero);
                     }
-                } else {
+                }
+                else
+                {
                     //The real death occurs
                     return true;
                 }
@@ -556,10 +646,14 @@ namespace Planetoid3D {
         /// <summary>
         /// Draw the planet using the selected effect
         /// </summary>
-        public void DrawPlanet(Camera camera, Effect effect) {
-            if (deathTimer < 1) {
-                foreach (ModelMesh mesh in RenderManager.GetModel(this).Meshes) {
-                    foreach (ModelMeshPart part in mesh.MeshParts) {
+        public void DrawPlanet(Camera camera, Effect effect)
+        {
+            if (deathTimer < 1)
+            {
+                foreach (ModelMesh mesh in RenderManager.GetModel(this).Meshes)
+                {
+                    foreach (ModelMeshPart part in mesh.MeshParts)
+                    {
                         part.Effect = effect;
                         effect.CurrentTechnique = effect.Techniques["Planet"];
                         effect.CurrentTechnique.Passes[0].Apply();
@@ -575,10 +669,13 @@ namespace Planetoid3D {
                         effect.Parameters["ChangeValue"].SetValue(Math.Max(deathTimer, 0.8f - Math.Min(0.8f, life / 4f)));
 
 
-                        if (this is Sun) {
+                        if (this is Sun)
+                        {
                             effect.Parameters["Color"].SetValue((this as Sun).realColor.ToVector4());
                             effect.Parameters["Sun"].SetValue(true);
-                        } else {
+                        }
+                        else
+                        {
                             effect.Parameters["Color"].SetValue(GetColor().ToVector4());
                             effect.Parameters["Sun"].SetValue(false);
                             effect.Parameters["LightDir"].SetValue(Vector3.Normalize(matrix.Translation));

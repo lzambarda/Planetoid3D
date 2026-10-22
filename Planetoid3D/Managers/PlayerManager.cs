@@ -86,7 +86,7 @@ namespace Planetoid3D
         {
             for (int p = 0; p < 8; p++)
             {
-                if (players[p].state>PlayerState.Open)
+                if (players[p].state > PlayerState.Open)
                 {
                     if (DeathRisk(p) > 95)
                     {
@@ -187,7 +187,7 @@ namespace Planetoid3D
         /// <summary>
         /// Set the DualState between two players, no matter the order of the players indices
         /// </summary>
-        public static void SetDualState(int player1, int player2,DualState state)
+        public static void SetDualState(int player1, int player2, DualState state)
         {
             players[player1].allianceState[player2] = state;
             players[player2].allianceState[player1] = state;
@@ -225,7 +225,7 @@ namespace Planetoid3D
         /// <summary>
         /// Modify the Friendship between two players
         /// </summary>
-        public static void ChangeFriendship(int player1, int player2,float change)
+        public static void ChangeFriendship(int player1, int player2, float change)
         {
             players[player1].friendState[player2] += change;
             players[player1].friendState[player2] = MathHelper.Clamp(players[player1].friendState[player2], -1, 1);
@@ -299,7 +299,7 @@ namespace Planetoid3D
                 else if (GetState(a) == PlayerState.Human)
                 {
                     //Add players
-                    Planet planet= Player.PickFreePlanet(a);
+                    Planet planet = Player.PickFreePlanet(a);
                     PlayerManager.SetKeldanyum(a, 2000);
                     PlayerManager.SetEnergy(a, 1500);
                     if (a == 0)
@@ -361,7 +361,7 @@ namespace Planetoid3D
                 players[player].active_deals = new List<Deal>();
             }
         }
-        
+
         /// <summary>
         /// Get an unique race, that is a race not used
         /// </summary>
@@ -370,7 +370,7 @@ namespace Planetoid3D
             int race;
             do
             {
-                race = Util.random.Next(RaceManager.TotalRaces-1);
+                race = Util.random.Next(RaceManager.TotalRaces - 1);
             }
             while (IsRaceTaken(player, race) || !RaceManager.IsUnlocked(race));
             return race;
@@ -405,7 +405,7 @@ namespace Planetoid3D
         /// <summary>
         /// Returns if a race is currently being used by someone
         /// </summary>
-        public static bool IsRaceTaken(int player,int race)
+        public static bool IsRaceTaken(int player, int race)
         {
             for (int a = 0; a < players.Length; a++)
             {
@@ -437,7 +437,7 @@ namespace Planetoid3D
                     risk -= (int)(3 - GameEngine.planets[a].life);
                 }
             }
-            return (100-risk*2);
+            return (100 - risk * 2);
         }
 
         /// <summary>
@@ -465,7 +465,7 @@ namespace Planetoid3D
                         {
                             return false;
                         }
-                        if (b is School && ((School)b).student!=null)
+                        if (b is School && ((School)b).student != null)
                         {
                             return false;
                         }
@@ -473,7 +473,7 @@ namespace Planetoid3D
                         {
                             return false;
                         }
-                        if (b is Hunter && ((Hunter)b).pilot!=null)
+                        if (b is Hunter && ((Hunter)b).pilot != null)
                         {
                             return false;
                         }
@@ -498,9 +498,9 @@ namespace Planetoid3D
             }
 
             //Also delete all diplomacy actions this player ever sent to other players
-            for (int p= 0; p < players.Length; p++)
+            for (int p = 0; p < players.Length; p++)
             {
-                if (players[p]!=null && PlayerManager.GetState(player)>PlayerState.Open && p != player)
+                if (players[p] != null && PlayerManager.GetState(player) > PlayerState.Open && p != player)
                 {
                     for (int d = 0; d < players[p].active_deals.Count; d++)
                     {
@@ -545,7 +545,7 @@ namespace Planetoid3D
                 AudioManager.battleIsHappening = 0;
                 CalculateResults();
             }
-            else if (GameEngine.gameMode!=GameMode.Tutorial)
+            else if (GameEngine.gameMode != GameMode.Tutorial)
             {
                 //check if only the player and his allies are together
                 allAllied = true;
@@ -619,7 +619,7 @@ namespace Planetoid3D
                     return "Weird";
                 }
             }
-            else if (t>=0)
+            else if (t >= 0)
             {
                 if (f >= 1)
                 {
@@ -680,8 +680,8 @@ namespace Planetoid3D
         /// <summary>
         /// Administrates diplomacy events following an attack
         /// </summary>
-        public static void PlayerAttack(int attacker,int attacked,float friendchange,float trustchange)
-        {  
+        public static void PlayerAttack(int attacker, int attacked, float friendchange, float trustchange)
+        {
             //Decrease stats
             if (GetState(attacked) > PlayerState.Human)
             {
@@ -691,7 +691,7 @@ namespace Planetoid3D
             //Modify relationships
             for (int a = 0; a < players.Length; a++)
             {
-                if (players[a] != null && players[a].state>PlayerState.Human && a != attacked && a != attacker)
+                if (players[a] != null && players[a].state > PlayerState.Human && a != attacked && a != attacker)
                 {
                     switch (GetDualState(a, attacked))
                     {
@@ -753,7 +753,7 @@ namespace Planetoid3D
         {
             PlanetoidGame.spriteBatch.Begin();
             Vector2 position = new Vector2(GameEngine.Game.GraphicsDevice.Viewport.Width / 2, 50);
-            Util.DrawCenteredText( font, "Game Finished!\nBattle Results:", position, Color.White);
+            Util.DrawCenteredText(font, "Game Finished!\nBattle Results:", position, Color.White);
 
             PlanetoidGame.spriteBatch.DrawString(font,
                 "Created Buildings: " +
@@ -769,7 +769,7 @@ namespace Planetoid3D
             for (int a = 0; a < 8; a++)
             {
                 //A player which has played at least 1 second will have this variable greater than 0
-                if (players[a].scoreSurvivedTime>0)
+                if (players[a].scoreSurvivedTime > 0)
                 {
                     //spriteBatch.DrawString(textFont, , position, RaceManager.GetColor(PlayerManager.GetRace(a)));
                     //position.Y += 50;

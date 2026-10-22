@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class Radar : BaseObjectBuilding
     {
-         public Radar() { }
+        public Radar() { }
         public Radar(Planet Planet, Matrix initial, int Owner)
         {
             planet = Planet;
@@ -25,7 +25,7 @@ namespace Planetoid3D
         public override bool Update(float elapsed)
         {
 
-            headAngle += elapsed/2;
+            headAngle += elapsed / 2;
             if (headAngle >= MathHelper.TwoPi)
             {
                 headAngle -= MathHelper.TwoPi;

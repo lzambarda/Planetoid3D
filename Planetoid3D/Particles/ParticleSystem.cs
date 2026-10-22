@@ -1,4 +1,4 @@
-#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
 // ParticleSystem.cs
 //
@@ -15,11 +15,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 #endregion
 
-namespace Planetoid3D {
+namespace Planetoid3D
+{
     /// <summary>
     /// The main component in charge of displaying particles.
     /// </summary>
-    public abstract class ParticleSystem : DrawableGameComponent {
+    public abstract class ParticleSystem : DrawableGameComponent
+    {
         // Settings class controls the appearance and animation of this particle system.
         ParticleSettings settings = new ParticleSettings();
 
@@ -149,7 +151,8 @@ namespace Planetoid3D {
         /// Constructor.
         /// </summary>
         protected ParticleSystem(Game game, ContentManager content)
-            : base(game) {
+            : base(game)
+        {
             this.content = content;
         }
 
@@ -157,13 +160,15 @@ namespace Planetoid3D {
         /// <summary>
         /// Initializes the component.
         /// </summary>
-        public override void Initialize() {
+        public override void Initialize()
+        {
             InitializeSettings(settings);
 
             // Allocate the particle array, and fill in the corner fields (which never change).
             particles = new ParticleVertex[settings.MaxParticles * 4];
 
-            for (int i = 0; i < settings.MaxParticles; i++) {
+            for (int i = 0; i < settings.MaxParticles; i++)
+            {
                 particles[i * 4 + 0].Corner = new Vector2(-1, -1);
                 particles[i * 4 + 1].Corner = new Vector2(1, -1);
                 particles[i * 4 + 2].Corner = new Vector2(1, 1);
@@ -184,7 +189,8 @@ namespace Planetoid3D {
         /// <summary>
         /// Loads graphics for the particle system.
         /// </summary>
-        protected override void LoadContent() {
+        protected override void LoadContent()
+        {
             LoadParticleEffect();
 
             // Create a dynamic vertex buffer.
@@ -194,7 +200,8 @@ namespace Planetoid3D {
             // Create and populate the index buffer.
             ushort[] indices = new ushort[settings.MaxParticles * 6];
 
-            for (int i = 0; i < settings.MaxParticles; i++) {
+            for (int i = 0; i < settings.MaxParticles; i++)
+            {
                 indices[i * 6 + 0] = (ushort)(i * 4 + 0);
                 indices[i * 6 + 1] = (ushort)(i * 4 + 1);
                 indices[i * 6 + 2] = (ushort)(i * 4 + 2);
@@ -213,7 +220,8 @@ namespace Planetoid3D {
         /// <summary>
         /// Helper for loading and initializing the particle effect.
         /// </summary>
-        void LoadParticleEffect() {
+        void LoadParticleEffect()
+        {
             Effect effect = content.Load<Effect>("ParticleEffect");
 
             // If we have several particle systems, the content manager will return
@@ -271,7 +279,8 @@ namespace Planetoid3D {
         /// <summary>
         /// Updates the particle system.
         /// </summary>
-        public override void Update(GameTime gameTime) {
+        public override void Update(GameTime gameTime)
+        {
             if (gameTime == null)
                 throw new ArgumentNullException("gameTime");
 
@@ -299,10 +308,12 @@ namespace Planetoid3D {
         /// their life. It moves old particles from the active area of the queue
         /// to the retired section.
         /// </summary>
-        void RetireActiveParticles() {
+        void RetireActiveParticles()
+        {
             float particleDuration = (float)settings.Duration.TotalSeconds;
 
-            while (firstActiveParticle != firstNewParticle) {
+            while (firstActiveParticle != firstNewParticle)
+            {
                 // Is this particle old enough to retire?
                 // We multiply the active particle index by four, because each
                 // particle consists of a quad that is made up of four vertices.
@@ -328,8 +339,10 @@ namespace Planetoid3D {
         /// enough that we can be sure the GPU is no longer using them. It moves
         /// old particles from the retired area of the queue to the free section.
         /// </summary>
-        void FreeRetiredParticles() {
-            while (firstRetiredParticle != firstActiveParticle) {
+        void FreeRetiredParticles()
+        {
+            while (firstRetiredParticle != firstActiveParticle)
+            {
                 // Has this particle been unused long enough that
                 // the GPU is sure to be finished with it?
                 // We multiply the retired particle index by four, because each
@@ -354,17 +367,20 @@ namespace Planetoid3D {
         /// <summary>
         /// Draws the particle system.
         /// </summary>
-        public override void Draw(GameTime gameTime) {
+        public override void Draw(GameTime gameTime)
+        {
             GraphicsDevice device = GraphicsDevice;
 
             // If there are any particles waiting in the newly added queue,
             // we'd better upload them to the GPU ready for drawing.
-            if (firstNewParticle != firstFreeParticle) {
+            if (firstNewParticle != firstFreeParticle)
+            {
                 AddNewParticlesToVertexBuffer();
             }
 
             // If there are any active particles, draw them now!
-            if (firstActiveParticle != firstFreeParticle) {
+            if (firstActiveParticle != firstFreeParticle)
+            {
                 device.BlendState = settings.BlendState;
                 device.DepthStencilState = DepthStencilState.DepthRead;
 
@@ -380,23 +396,28 @@ namespace Planetoid3D {
                 device.SetVertexBuffer(vertexBuffer);
                 device.Indices = indexBuffer;
                 // Activate the particle effect.
-                foreach (EffectPass pass in particleEffect.CurrentTechnique.Passes) {
+                foreach (EffectPass pass in particleEffect.CurrentTechnique.Passes)
+                {
                     pass.Apply();
 
-                    if (firstActiveParticle < firstFreeParticle) {
+                    if (firstActiveParticle < firstFreeParticle)
+                    {
                         // If the active particles are all in one consecutive range,
                         // we can draw them all in a single call.
                         device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0,
                                                      /*firstActiveParticle * 4, (firstFreeParticle - firstActiveParticle) * 4,*/
                                                      firstActiveParticle * 6, (firstFreeParticle - firstActiveParticle) * 2);
-                    } else {
+                    }
+                    else
+                    {
                         // If the active particle range wraps past the end of the queue
                         // back to the start, we must split them over two draw calls.
                         device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0,
                                                      /*firstActiveParticle * 4, (settings.MaxParticles - firstActiveParticle) * 4,*/
                                                      firstActiveParticle * 6, (settings.MaxParticles - firstActiveParticle) * 2);
 
-                        if (firstFreeParticle > 0) {
+                        if (firstFreeParticle > 0)
+                        {
                             device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0,
                                                          /*0, firstFreeParticle * 4,*/
                                                          0, firstFreeParticle * 2);
@@ -417,17 +438,21 @@ namespace Planetoid3D {
         /// Helper for uploading new particles from our managed
         /// array to the GPU vertex buffer.
         /// </summary>
-        void AddNewParticlesToVertexBuffer() {
+        void AddNewParticlesToVertexBuffer()
+        {
             int stride = ParticleVertex.SizeInBytes;
 
-            if (firstNewParticle < firstFreeParticle) {
+            if (firstNewParticle < firstFreeParticle)
+            {
                 // If the new particles are all in one consecutive range,
                 // we can upload them all in a single call.
                 vertexBuffer.SetData(firstNewParticle * stride * 4, particles,
                                      firstNewParticle * 4,
                                      (firstFreeParticle - firstNewParticle) * 4,
                                      stride, SetDataOptions.NoOverwrite);
-            } else {
+            }
+            else
+            {
                 // If the new particle range wraps past the end of the queue
                 // back to the start, we must split them over two upload calls.
                 vertexBuffer.SetData(firstNewParticle * stride * 4, particles,
@@ -435,7 +460,8 @@ namespace Planetoid3D {
                                      (settings.MaxParticles - firstNewParticle) * 4,
                                      stride, SetDataOptions.NoOverwrite);
 
-                if (firstFreeParticle > 0) {
+                if (firstFreeParticle > 0)
+                {
                     vertexBuffer.SetData(0, particles,
                                          0, firstFreeParticle * 4,
                                          stride, SetDataOptions.NoOverwrite);
@@ -455,7 +481,8 @@ namespace Planetoid3D {
         /// <summary>
         /// Set the size that will be passed to all new particles.
         /// </summary>
-        public void SetSize(float value) {
+        public void SetSize(float value)
+        {
             size = value;
         }
 
@@ -464,7 +491,8 @@ namespace Planetoid3D {
         /// the BlendState used for drawing is Addictive, black will make
         /// the particle invisibile and white will not change particles.
         /// </summary>
-        public void SetColor(Color value) {
+        public void SetColor(Color value)
+        {
             color = value;
         }
 
@@ -473,7 +501,8 @@ namespace Planetoid3D {
         /// Sets the camera view and projection matrices
         /// that will be used to draw this particle system.
         /// </summary>
-        public void SetCamera(Camera camera) {
+        public void SetCamera(Camera camera)
+        {
             effectViewParameter.SetValue(camera.viewMatrix);
             effectProjectionParameter.SetValue(camera.projectionMatrix);
             effectCamForwardParameter.SetValue(Vector3.Normalize(camera.tempTar - camera.position));
@@ -484,7 +513,8 @@ namespace Planetoid3D {
         /// <summary>
         /// Adds a new particle to the system.
         /// </summary>
-        public void AddParticle(Vector3 position, Vector3 velocity) {
+        public void AddParticle(Vector3 position, Vector3 velocity)
+        {
             if (size <= 0)
                 return;
 
@@ -510,7 +540,8 @@ namespace Planetoid3D {
                                            (byte)random.Next(255));
 
             // Fill in the particle vertex structure.
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++)
+            {
                 particles[firstFreeParticle * 4 + i].Position = position;
                 particles[firstFreeParticle * 4 + i].Velocity = velocity;
                 particles[firstFreeParticle * 4 + i].Random = randomValues;
@@ -522,8 +553,10 @@ namespace Planetoid3D {
             firstFreeParticle = nextFreeParticle;
         }
 
-        public void Clear() {
-            for (int a = 0; a < particles.Length; a++) {
+        public void Clear()
+        {
+            for (int a = 0; a < particles.Length; a++)
+            {
                 particles[a].Time = currentTime;
             }
         }

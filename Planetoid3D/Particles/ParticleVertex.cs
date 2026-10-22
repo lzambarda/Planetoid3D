@@ -1,4 +1,4 @@
-#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
 // ParticleVertex.cs
 //
@@ -22,7 +22,7 @@ namespace Planetoid3D
     {
 
 
-         // Stores which corner of the particle quad this vertex represents.
+        // Stores which corner of the particle quad this vertex represents.
         public Vector2 Corner;
 
         // Stores the starting position of the particle.
@@ -46,35 +46,35 @@ namespace Planetoid3D
         // Describe the layout of this vertex structure.
         public static readonly VertexDeclaration VertexDeclaration = new VertexDeclaration
         (
-                                                                                         /* new VertexElement(0, VertexElementFormat.Short2,
-                                                                                                               VertexElementUsage.Position, 0),
+            /* new VertexElement(0, VertexElementFormat.Short2,
+                                  VertexElementUsage.Position, 0),
 
-                                                                                          new VertexElement(4, VertexElementFormat.Vector3,
-                                                                                                               VertexElementUsage.Position, 1),
+             new VertexElement(4, VertexElementFormat.Vector3,
+                                  VertexElementUsage.Position, 1),
 
-                                                                                          new VertexElement(16, VertexElementFormat.Vector3,
-                                                                                                                VertexElementUsage.Normal, 0),
+             new VertexElement(16, VertexElementFormat.Vector3,
+                                   VertexElementUsage.Normal, 0),
 
-                                                                                          new VertexElement(28, VertexElementFormat.Color,
-                                                                                                                VertexElementUsage.Color, 0),
+             new VertexElement(28, VertexElementFormat.Color,
+                                   VertexElementUsage.Color, 0),
 
-                                                                                          new VertexElement(32, VertexElementFormat.Single,
-                                                                                                                VertexElementUsage.TextureCoordinate, 0),
+             new VertexElement(32, VertexElementFormat.Single,
+                                   VertexElementUsage.TextureCoordinate, 0),
 
-                                                                                          new VertexElement(36, VertexElementFormat.Single,
-                                                                                                                VertexElementUsage.TextureCoordinate, 1),
+             new VertexElement(36, VertexElementFormat.Single,
+                                   VertexElementUsage.TextureCoordinate, 1),
 
-                                                                                          new VertexElement(40, VertexElementFormat.Color,
-                                                                                                                VertexElementUsage.Color, 1)*/
+             new VertexElement(40, VertexElementFormat.Color,
+                                   VertexElementUsage.Color, 1)*/
 
             new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
-            new VertexElement(8, VertexElementFormat.Vector3,VertexElementUsage.Position, 1),
-            new VertexElement(20, VertexElementFormat.Vector3,VertexElementUsage.Normal, 0),
-            new VertexElement(32, VertexElementFormat.Color,VertexElementUsage.Color, 0),
+            new VertexElement(8, VertexElementFormat.Vector3, VertexElementUsage.Position, 1),
+            new VertexElement(20, VertexElementFormat.Vector3, VertexElementUsage.Normal, 0),
+            new VertexElement(32, VertexElementFormat.Color, VertexElementUsage.Color, 0),
             new VertexElement(36, VertexElementFormat.Color, VertexElementUsage.Color, 1),
-            new VertexElement(40, VertexElementFormat.Single,VertexElementUsage.TextureCoordinate, 0),
-            new VertexElement(44, VertexElementFormat.Single,VertexElementUsage.TextureCoordinate, 1)
-           
+            new VertexElement(40, VertexElementFormat.Single, VertexElementUsage.TextureCoordinate, 0),
+            new VertexElement(44, VertexElementFormat.Single, VertexElementUsage.TextureCoordinate, 1)
+
 
         );
         /* float3 Position : SV_POSITION;
@@ -85,13 +85,13 @@ namespace Planetoid3D
     float Time : TEXCOORD0;
 	float Size : TEXCOORD1;*/
 
-       /*float2 Corner : POSITION0;
-    float3 Position : POSITION1;
-    float3 Velocity : NORMAL0;
-    float4 Random : COLOR0;
-	float4 Color : COLOR1;
-    float Time : TEXCOORD0;
-	float Size : TEXCOORD1;*/
+        /*float2 Corner : POSITION0;
+     float3 Position : POSITION1;
+     float3 Velocity : NORMAL0;
+     float4 Random : COLOR0;
+     float4 Color : COLOR1;
+     float Time : TEXCOORD0;
+     float Size : TEXCOORD1;*/
 
 
         // Describe the size of this vertex structure.

@@ -103,7 +103,7 @@ namespace Planetoid3D
                 }
                 else
                 {
-                    AudioManager.Play3D(this,"building_sold");
+                    AudioManager.Play3D(this, "building_sold");
                 }
                 if (this == HUDManager.lastTargetObject)
                 {
@@ -162,7 +162,7 @@ namespace Planetoid3D
             matrix.Translation -= planet.oldPosition;
             matrix *= Matrix.CreateFromAxisAngle(planet.axis, planet.spinSpeed * elapsed);
             matrix.Translation += planet.matrix.Translation;
-            
+
             //Generate smoke and flames when my life is below the optimal, I am damaged
             if (life < MaxLife && life > 0)
             {

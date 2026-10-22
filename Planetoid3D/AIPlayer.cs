@@ -24,7 +24,7 @@ namespace Planetoid3D
         public float danger;
     }
 
-    
+
     [Serializable]
     public class AIPlayer
     {
@@ -32,7 +32,7 @@ namespace Planetoid3D
         /// <summary>
         /// Create a new AIPlayer, specify Egoism, Skill and Pacifism values from 0.0f to 1.0f, also the AIplayer needs the playerIndex from PlayerManager
         /// </summary>
-        public AIPlayer(float Egoism, float Skill, float Pacifism,int playerIndex)
+        public AIPlayer(float Egoism, float Skill, float Pacifism, int playerIndex)
         {
             stat_egoism = Egoism;
             stat_pacifism = Pacifism;
@@ -47,7 +47,7 @@ namespace Planetoid3D
                     stat_skill = MathHelper.Clamp(Skill, 0.25f, 0.5f);
                     break;
                 case PlayerState.Challenging:
-                    stat_skill = MathHelper.Clamp(Skill * 2f,0.5f,0.75f);
+                    stat_skill = MathHelper.Clamp(Skill * 2f, 0.5f, 0.75f);
                     stat_pacifism /= 1.2f;
                     break;
                 case PlayerState.Hardcore:
@@ -59,7 +59,7 @@ namespace Planetoid3D
 
             myPlayerIndex = playerIndex;
 
-            researchTimer = 4 * (2 + stat_skill*2);
+            researchTimer = 4 * (2 + stat_skill * 2);
 
             //Get the race chosen for you
             int race = PlayerManager.GetRace(myPlayerIndex);
@@ -113,7 +113,7 @@ namespace Planetoid3D
         /// </summary>
         int decision;
         int decisionPriority;
-        
+
         /// <summary>
         /// The timer which tells the AI whenever a deal can be read
         /// Without this all the deals would be analyze immediately, just a little delay
@@ -176,7 +176,7 @@ namespace Planetoid3D
         {
             get
             {
-                string returner="";
+                string returner = "";
                 if (stat_skill < 0.2f)
                 {
                     returner = "Dumb";
@@ -196,7 +196,7 @@ namespace Planetoid3D
                         returner = "Peaceful";
                     }
                 }
-                else if (stat_egoism<0.6f)
+                else if (stat_egoism < 0.6f)
                 {
                     if (stat_pacifism < 0.3f)
                     {
@@ -219,7 +219,7 @@ namespace Planetoid3D
                     }
                     else if (stat_pacifism < 0.6f)
                     {
-                        returner ="Opportunist";
+                        returner = "Opportunist";
                     }
                     else
                     {
@@ -390,7 +390,7 @@ namespace Planetoid3D
                 }
             }
 
-            if (PlayerManager.players[myPlayerIndex].radarAmount>0)
+            if (PlayerManager.players[myPlayerIndex].radarAmount > 0)
             {
                 float friend;
                 float trust;
@@ -490,7 +490,7 @@ namespace Planetoid3D
                                     if (deal.result == DealResult.Yes)
                                     {
                                         PlayerManager.ChangeFriendship(myPlayerIndex, deal.claimer, 0.1f + stat_pacifism / 5f);
-                                        PerformTrade(deal.claimer,myPlayerIndex);
+                                        PerformTrade(deal.claimer, myPlayerIndex);
                                     }
                                     else
                                     {
@@ -673,7 +673,7 @@ namespace Planetoid3D
                                             else
                                             {
                                                 //This can also raise trust
-                                                PlayerManager.ChangeTrust(myPlayerIndex, deal.claimer, ((friend - 0.4f) / 5 + stat_pacifism ) / 4);
+                                                PlayerManager.ChangeTrust(myPlayerIndex, deal.claimer, ((friend - 0.4f) / 5 + stat_pacifism) / 4);
                                                 DiplomacyManager.AnswerDeal(myPlayerIndex, deal.claimer, DealAction.Greeting, DealResult.Yes);
                                             }
                                         }
@@ -733,7 +733,7 @@ namespace Planetoid3D
 
                             //#### ASK HELP + TRADE #####
                             //Ask help only if the risk of death is high enough
-                            if (state!=DualState.War && risk / 100f >= friend - trust - stat_egoism / 2f && trust > 0.3f)
+                            if (state != DualState.War && risk / 100f >= friend - trust - stat_egoism / 2f && trust > 0.3f)
                             {
                                 Point need = PlayerManager.NeededResources(myPlayerIndex);
                                 if (need.X > 400 || need.Y > 300)
@@ -785,7 +785,7 @@ namespace Planetoid3D
                             }
 
                             //GREETING
-                            if (trust > 0.4f - stat_pacifism/2f && state != DualState.War && stat_egoism < 0.7f /*&& friend <= stat_pacifism*/)
+                            if (trust > 0.4f - stat_pacifism / 2f && state != DualState.War && stat_egoism < 0.7f /*&& friend <= stat_pacifism*/)
                             {
                                 DiplomacyManager.AddDeal(myPlayerIndex, c, DealAction.Greeting);
                                 continue;
@@ -793,7 +793,7 @@ namespace Planetoid3D
 
                             //HATE
                             //now it is used only when received a bad message
-                            if ((deal!=null && deal.action<DealAction.Greeting && deal.claimer==c) && state != DualState.Alliance && stat_egoism < 0.7f && friend < stat_pacifism)
+                            if ((deal != null && deal.action < DealAction.Greeting && deal.claimer == c) && state != DualState.Alliance && stat_egoism < 0.7f && friend < stat_pacifism)
                             {
                                 //Prevent the AI to send too many of these
                                 PlayerManager.ChangeFriendship(myPlayerIndex, c, -0.05f);
@@ -811,15 +811,15 @@ namespace Planetoid3D
 
         public void ManageRadars(int priority)
         {
-            if (PlayerManager.players[myPlayerIndex].radarAmount<1)
+            if (PlayerManager.players[myPlayerIndex].radarAmount < 1)
             {
-                EvaluateAction(BuildingType.Radar, (int)(4 - stat_egoism * 2 + stat_pacifism * 5)+priority);
+                EvaluateAction(BuildingType.Radar, (int)(4 - stat_egoism * 2 + stat_pacifism * 5) + priority);
             }
         }
 
         public void ManageTurrets(int priority)
         {
-            if (CountBuildings(BuildingType.Turret,false) < currentInterface.planet.life / 10f + stat_skill * 2)
+            if (CountBuildings(BuildingType.Turret, false) < currentInterface.planet.life / 10f + stat_skill * 2)
             {
                 EvaluateAction(BuildingType.Turret, (int)(currentInterface.planet.life / 10f + stat_skill * 2) - CountBuildings(BuildingType.Turret, false));
             }
@@ -841,7 +841,7 @@ namespace Planetoid3D
             }
         }
 
-        public void ManageSchool(int priority,int builders,int soldiers,int pilots)
+        public void ManageSchool(int priority, int builders, int soldiers, int pilots)
         {
             int num = CountBuildings(BuildingType.School, false);
             if (num < 2)
@@ -849,17 +849,17 @@ namespace Planetoid3D
                 EvaluateAction(BuildingType.School, (int)(2 - num + stat_skill * 2));
                 return;
             }
-            School school=(School)FirstBuilding(BuildingType.School,false);
-            if (school!=null)
+            School school = (School)FirstBuilding(BuildingType.School, false);
+            if (school != null)
             {
-                ManageHominids(school,builders, soldiers, pilots);
+                ManageHominids(school, builders, soldiers, pilots);
             }
 
         }
 
         public void ManageHouse(int priority)
         {
-            if (currentInterface.planet.hominids.Count < currentInterface.planet.maxPopulation / 2f + priority && CountBuildings(BuildingType.House,false) < currentInterface.planet.radius / 20)
+            if (currentInterface.planet.hominids.Count < currentInterface.planet.maxPopulation / 2f + priority && CountBuildings(BuildingType.House, false) < currentInterface.planet.radius / 20)
             {
                 EvaluateAction(BuildingType.House, (int)(currentInterface.planet.maxPopulation / 2f + priority));
             }
@@ -879,7 +879,7 @@ namespace Planetoid3D
             {
                 EvaluateAction(BuildingType.LKE, (int)((2000 - currentInterface.planet.available_keldanyum) / 100f) + priority);
             }
-            if (currentInterface.planet.available_keldanyum < 2000 && CountBuildings(BuildingType.Reactor, false) <= currentInterface.planet.radius / 10 && CountBuildings(BuildingType.School,false)>0)
+            if (currentInterface.planet.available_keldanyum < 2000 && CountBuildings(BuildingType.Reactor, false) <= currentInterface.planet.radius / 10 && CountBuildings(BuildingType.School, false) > 0)
             {
                 EvaluateAction(BuildingType.Reactor, (int)((2000 - currentInterface.planet.available_keldanyum) / 80f) + priority);
             }
@@ -889,17 +889,17 @@ namespace Planetoid3D
                 if (CountBuildings(BuildingType.Radar, false) > 0 && CountBuildings(BuildingType.Radar, true) > 1)
                 {
                     BaseObjectBuilding radar = FirstBuilding(BuildingType.Radar, false);
-                    if (radar!=null)
+                    if (radar != null)
                     {
                         radar.Sell();
                     }
                 }
                 if (currentInterface.planet.available_keldanyum < 500)
                 {
-                    if (CountBuildings(BuildingType.Extractor, false) > currentInterface.planet.available_keldanyum/10)
+                    if (CountBuildings(BuildingType.Extractor, false) > currentInterface.planet.available_keldanyum / 10)
                     {
                         BaseObjectBuilding extractor = FirstBuilding(BuildingType.Extractor, false);
-                        if (extractor!=null)
+                        if (extractor != null)
                         {
                             extractor.Sell();
                         }
@@ -908,7 +908,7 @@ namespace Planetoid3D
             }
         }
 
-        public void ManageHominids(School school,int builders, int soldiers, int pilots)
+        public void ManageHominids(School school, int builders, int soldiers, int pilots)
         {
             int count;
             bool send = false;
@@ -916,7 +916,7 @@ namespace Planetoid3D
             count = CountHominids(Specialization.Builder);
             if (count < builders + (int)currentInterface.planet.radius / 40)
             {
-                send=true;
+                send = true;
                 school.selectedSpecialization = Specialization.Builder;
             }
             else
@@ -925,7 +925,7 @@ namespace Planetoid3D
                 count = CountHominids(Specialization.Soldier);
                 if (count < soldiers + (int)currentInterface.planet.radius / 40)
                 {
-                    send=true;
+                    send = true;
                     school.selectedSpecialization = Specialization.Soldier;
                 }
                 else
@@ -934,24 +934,24 @@ namespace Planetoid3D
                     count = CountHominids(Specialization.Pilot);
                     if (count < pilots + (int)currentInterface.planet.radius / 40)
                     {
-                        send=true;
+                        send = true;
                         school.selectedSpecialization = Specialization.Pilot;
                     }
                 }
             }
             if (send)
             {
-                SendNearestHominid(school);              
+                SendNearestHominid(school);
             }
         }
 
-        public void ManageRockets(int hunterPriority,int rocketPriority,int catapultPriority)
+        public void ManageRockets(int hunterPriority, int rocketPriority, int catapultPriority)
         {
-            if (CountBuildings(BuildingType.House, false) == 0 || (!currentInterface.planet.hominids.Any(h=>h.owner==myPlayerIndex) && currentInterface.planet.TotalPopulation()==currentInterface.planet.maxPopulation) || currentInterface.action==PlanetAction.Defend)
+            if (CountBuildings(BuildingType.House, false) == 0 || (!currentInterface.planet.hominids.Any(h => h.owner == myPlayerIndex) && currentInterface.planet.TotalPopulation() == currentInterface.planet.maxPopulation) || currentInterface.action == PlanetAction.Defend)
             {
                 for (int a = 0; a < currentInterface.planet.buildings.Count; a++)
                 {
-                    if (currentInterface.planet.buildings[a].owner==myPlayerIndex && currentInterface.planet.buildings[a].flying == false)
+                    if (currentInterface.planet.buildings[a].owner == myPlayerIndex && currentInterface.planet.buildings[a].flying == false)
                     {
                         currentInterface.planet.buildings[a].LeaveHominid();
                     }
@@ -963,7 +963,7 @@ namespace Planetoid3D
                 //If on war, you can use hunter to invade planets
                 if (active != null)
                 {
-                    if ((active as Hunter).pilot==null)
+                    if ((active as Hunter).pilot == null)
                     {
                         SendNearestHominid(active);
                     }
@@ -1160,7 +1160,7 @@ namespace Planetoid3D
                 {
                     if (voice.researchLevels[a] > BuildingManager.ResearchLevels(myPlayerIndex)[a] - 1)
                     {
-                        if (researchTimer<=0 && MyKeldanyum >= BuildingManager.researches[a].cost.X * BuildingManager.ResearchLevels(myPlayerIndex)[a] &&
+                        if (researchTimer <= 0 && MyKeldanyum >= BuildingManager.researches[a].cost.X * BuildingManager.ResearchLevels(myPlayerIndex)[a] &&
                             MyEnergy >= BuildingManager.researches[a].cost.Y * BuildingManager.ResearchLevels(myPlayerIndex)[a] && CountBuildings(BuildingType.Extractor, true) > 2 && CountBuildings(BuildingType.Solar, true) > 2)
                         {
                             PlayerManager.ChangeKeldanyum(myPlayerIndex, -BuildingManager.researches[a].cost.X * BuildingManager.ResearchLevels(myPlayerIndex)[a]);
@@ -1170,7 +1170,7 @@ namespace Planetoid3D
                             BuildingManager.ResearchLevels(myPlayerIndex)[a]++;
 
                             //Set the timer
-                            researchTimer = (1 + BuildingManager.ResearchLevels(myPlayerIndex)[a]) * (3 - stat_skill*stat_skill);
+                            researchTimer = (1 + BuildingManager.ResearchLevels(myPlayerIndex)[a]) * (3 - stat_skill * stat_skill);
                             a--;
                         }
                         else
@@ -1210,7 +1210,7 @@ namespace Planetoid3D
         {
             for (int a = 0; a < currentInterface.planet.buildings.Count; a++)
             {
-                if (currentInterface.planet.buildings[a] is Repulser && currentInterface.planet.buildings[a].owner==myPlayerIndex)
+                if (currentInterface.planet.buildings[a] is Repulser && currentInterface.planet.buildings[a].owner == myPlayerIndex)
                 {
                     currentInterface.planet.buildings[a].Switch(active);
                     break;
@@ -1221,14 +1221,14 @@ namespace Planetoid3D
         /// <summary>
         /// Count buildings this AI owns with specific parameters
         /// </summary>
-        private int CountBuildings(BuildingType type,bool all)
+        private int CountBuildings(BuildingType type, bool all)
         {
             if (all)
             {
                 int total = 0;
                 for (int a = 0; a < myPlanets.Count; a++)
                 {
-                    total += myPlanets[a].planet.buildings.Count(b => b.type == type && b.owner==myPlayerIndex);
+                    total += myPlanets[a].planet.buildings.Count(b => b.type == type && b.owner == myPlayerIndex);
                 }
                 return total;
             }
@@ -1251,32 +1251,32 @@ namespace Planetoid3D
         private BaseObjectBuilding FirstBuilding(BuildingType type, bool all)
         {
             Planet planet;
-                for (int a = 0; a < myPlanets.Count; a++)
+            for (int a = 0; a < myPlanets.Count; a++)
+            {
+                planet = (all ? myPlanets[a].planet : currentInterface.planet);
+                for (int b = 0; b < planet.buildings.Count; b++)
                 {
-                    planet=(all?myPlanets[a].planet:currentInterface.planet);
-                    for (int b = 0; b < planet.buildings.Count; b++)
+                    if (planet.buildings[b] is PreBuilding == false && planet.buildings[b].type == type && planet.buildings[b].owner == myPlayerIndex && planet.buildings[b].flying == false)
                     {
-                        if (planet.buildings[b] is PreBuilding==false &&  planet.buildings[b].type==type && planet.buildings[b].owner==myPlayerIndex && planet.buildings[b].flying==false)
+                        if (planet.buildings[b] is School && (planet.buildings[b] as School).student != null)
                         {
-                            if (planet.buildings[b] is School && (planet.buildings[b] as School).student!=null)
-                            {
-                                continue;
-                            }
-                            return planet.buildings[b];
+                            continue;
                         }
-                    }
-                    if (all)
-                    {
-                        break;
+                        return planet.buildings[b];
                     }
                 }
-                return null;
+                if (all)
+                {
+                    break;
+                }
+            }
+            return null;
         }
 
         /// <summary>
         /// Get the nearest hominid on a planet near to a position
         /// </summary>
-        private int NearestHominid(Vector3 position,Specialization specialization,bool specializationCount)
+        private int NearestHominid(Vector3 position, Specialization specialization, bool specializationCount)
         {
             float min = float.MaxValue;
             float dist;
@@ -1369,11 +1369,11 @@ namespace Planetoid3D
         public void PerformTrade(int A, int B)
         {
             //Can use maximum half of the player resources
-            Point resA = new Point((int)PlayerManager.GetKeldanyum(A)/2, (int)PlayerManager.GetEnergy(A)/2);
-            Point resB = new Point((int)PlayerManager.GetKeldanyum(B)/2, (int)PlayerManager.GetEnergy(B)/2);
+            Point resA = new Point((int)PlayerManager.GetKeldanyum(A) / 2, (int)PlayerManager.GetEnergy(A) / 2);
+            Point resB = new Point((int)PlayerManager.GetKeldanyum(B) / 2, (int)PlayerManager.GetEnergy(B) / 2);
 
-            Point needA=PlayerManager.NeededResources(A);
-            Point needB=PlayerManager.NeededResources(B);
+            Point needA = PlayerManager.NeededResources(A);
+            Point needB = PlayerManager.NeededResources(B);
 
             Point toA;
             Point toB;
@@ -1401,7 +1401,7 @@ namespace Planetoid3D
             PlayerManager.ChangeKeldanyum(B, toB.X);
             PlayerManager.ChangeEnergy(B, toB.Y);
 
-            if (A==0)
+            if (A == 0)
             {
                 TextBoard.AddMessage("    You gave: " + (toB.X > toB.Y ? toB.X + " of keldanyum" : toB.Y + " of energy") + " for " + (toA.X > toA.Y ? toA.X + " of keldanyum" : toA.Y + " of energy"));
                 TextBoard.AddMessage("Trade with " + RaceManager.GetRace(PlayerManager.GetRace(B)) + " successfull!");

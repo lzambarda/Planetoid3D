@@ -26,7 +26,7 @@ namespace Planetoid3D
 
         public override string GetHudText()
         {
-            return "Status: "+(life<25?"DANGER!!":(life<50?"Warning!":(life<75?"Must be repaired":"Good"))) + base.GetHudText();
+            return "Status: " + (life < 25 ? "DANGER!!" : (life < 50 ? "Warning!" : (life < 75 ? "Must be repaired" : "Good"))) + base.GetHudText();
         }
 
         public override void Sell()
@@ -54,13 +54,13 @@ namespace Planetoid3D
             }
 
             //Leave some troglother smoke, just to warn about the incomin menace
-            if (life < 10 && life>0 && Util.random.Next((int)life)<2)
+            if (life < 10 && life > 0 && Util.random.Next((int)life) < 2)
             {
                 Burst(1, Color.Purple, 10);
             }
 
             //Explode
-            if (life <= 0 && sold==false)
+            if (life <= 0 && sold == false)
             {
                 Flash(100 / Vector3.Distance(matrix.Translation, GameEngine.gameCamera.position));
                 AudioManager.Play3D(this, "planet_real_explosion");
@@ -69,15 +69,15 @@ namespace Planetoid3D
                     TextBoard.AddMessage("A reactor exploded on " + planet.name + "!!!");
                 }
 
-                for (int a=0;a<25;a++)
+                for (int a = 0; a < 25; a++)
                 {
                     GameEngine.explosionParticles.SetColor(Color.Purple);
-                    GameEngine.explosionParticles.AddParticle(matrix.Translation , Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, (float)Util.random.NextDouble() * MathHelper.TwoPi)) * (float)Util.random.NextDouble() *3);
+                    GameEngine.explosionParticles.AddParticle(matrix.Translation, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, (float)Util.random.NextDouble() * MathHelper.TwoPi)) * (float)Util.random.NextDouble() * 3);
                     GameEngine.explosionParticles.SetColor(Color.OrangeRed);
-                    GameEngine.explosionParticles.AddParticle(matrix.Translation , Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, (float)Util.random.NextDouble() * MathHelper.TwoPi)) * (float)Util.random.NextDouble()*3);
+                    GameEngine.explosionParticles.AddParticle(matrix.Translation, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, (float)Util.random.NextDouble() * MathHelper.TwoPi)) * (float)Util.random.NextDouble() * 3);
                     GameEngine.explosionParticles.SetColor(Color.White);
                 }
-                
+
                 float dist;
                 //Damage nearby buildings
                 for (int a = 0; a < planet.buildings.Count; a++)
@@ -87,7 +87,7 @@ namespace Planetoid3D
                         dist = Vector3.Distance(matrix.Translation, planet.buildings[a].matrix.Translation);
                         if (dist < 50)
                         {
-                            planet.buildings[a].life -= (150-dist);
+                            planet.buildings[a].life -= (150 - dist);
                         }
                     }
                 }
@@ -122,8 +122,8 @@ namespace Planetoid3D
 
             Matrix temp = matrix;
             temp.Translation = Vector3.Zero;
-            temp *= Matrix.CreateFromAxisAngle(matrix.Right, (float)(Math.Sin(angle*2f) * Math.Pow(1 - life / 100f,2)));
-            temp *= Matrix.CreateFromAxisAngle(matrix.Up, (float)(Math.Cos(angle) * Math.Pow(1 - life / 100f,2)));
+            temp *= Matrix.CreateFromAxisAngle(matrix.Right, (float)(Math.Sin(angle * 2f) * Math.Pow(1 - life / 100f, 2)));
+            temp *= Matrix.CreateFromAxisAngle(matrix.Up, (float)(Math.Cos(angle) * Math.Pow(1 - life / 100f, 2)));
             temp *= Matrix.CreateFromAxisAngle(matrix.Backward, angle);
             temp.Translation = planet.matrix.Translation + (matrix.Backward * (planet.radius + 10f));
             model.Bones["Ring"].Transform = temp;

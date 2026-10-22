@@ -1,4 +1,4 @@
-#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
 // PrimitiveBatch.cs
 //
@@ -239,9 +239,9 @@ namespace Planetoid3D
             int numVertsPerPrimitive;
             switch (primitive)
             {
-               /* case PrimitiveType.PointList:
-                    numVertsPerPrimitive = 1;
-                    break;*/
+                /* case PrimitiveType.PointList:
+                     numVertsPerPrimitive = 1;
+                     break;*/
                 case PrimitiveType.LineList:
                     numVertsPerPrimitive = 2;
                     break;

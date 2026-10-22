@@ -270,7 +270,7 @@ namespace Planetoid3D
                 cost = new Point(350, 350),
                 seconds = 20,
                 modelIndex = 3,
-                researchLevels = new int[] { 4, 0, 2, 2,2,3 }
+                researchLevels = new int[] { 4, 0, 2, 2, 2, 3 }
                 //ene,laser,struct,poly,engine,gravit
             };
 
@@ -840,7 +840,7 @@ namespace Planetoid3D
                                         break;
                                     }
                                 }
-                                else if ((GameEngine.gameCamera.target as Planet).CanBuild(0)==false)
+                                else if ((GameEngine.gameCamera.target as Planet).CanBuild(0) == false)
                                 {
                                     TextBoard.AddMessage("You can build only on your planets!");
                                     AudioManager.Play("error");

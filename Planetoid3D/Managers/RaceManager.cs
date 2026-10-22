@@ -45,7 +45,7 @@ namespace Planetoid3D
                 //Name
                 names.Add(race.ChildNodes[0].InnerText);
                 //Description
-                descriptions.Add(race.ChildNodes[2].InnerText.Replace("\\n","\n"));
+                descriptions.Add(race.ChildNodes[2].InnerText.Replace("\\n", "\n"));
                 //Atmosphere
                 atmospheres.Add((Atmosphere)Enum.Parse(typeof(Atmosphere), race.ChildNodes[1].InnerText));
                 //Texture
@@ -107,7 +107,7 @@ namespace Planetoid3D
             }
 
             //Every time you start the game, the initial video has a different color :D
-            todayIntroColor = Color.Lerp(colors[Util.random.Next(colors.Count)],Color.White,0.25f);
+            todayIntroColor = Color.Lerp(colors[Util.random.Next(colors.Count)], Color.White, 0.25f);
         }
 
         private static List<string> names;
@@ -192,7 +192,7 @@ namespace Planetoid3D
 
         public static string GetAbilityText(int index)
         {
-            return abilityNames[abilities[index]]+"\n("+abilityDescription[abilities[index]]+")";
+            return abilityNames[abilities[index]] + "\n(" + abilityDescription[abilities[index]] + ")";
         }
 
         public static string GetAbilityName(int index)
@@ -240,7 +240,7 @@ namespace Planetoid3D
         /// </summary>
         public static bool Tolerate(int index, Atmosphere type)
         {
-            return (atmospheres[index] == type) || atmospheres[index]==Atmosphere.None;
+            return (atmospheres[index] == type) || atmospheres[index] == Atmosphere.None;
         }
     }
 }

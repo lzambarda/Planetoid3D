@@ -27,29 +27,29 @@ namespace Planetoid3D
             soundBank = new SoundBank(audioEngine, "Content//Audio//Sound Bank.xsb");
 
             //Load directory info, abort if none
-           // audioCollection["asteroid_death"] = Content.Load<Song>("Audio/asteroid_death");
- 
-           /* DirectoryInfo dir = new DirectoryInfo(Content.RootDirectory + "\\Audio");
-            if (!dir.Exists)
-                throw new DirectoryNotFoundException();
-            //Init the resulting list
-            soundEffects = new Dictionary<string, SoundEffect>();
-            songs = new Dictionary<string, Song>();
+            // audioCollection["asteroid_death"] = Content.Load<Song>("Audio/asteroid_death");
 
-            //Load all files that matches the file filter
-            FileInfo[] files = dir.GetFiles("*.*");
-            foreach (FileInfo file in files)
-            {
-                string key = Path.GetFileNameWithoutExtension(file.Name);
-                if (key.StartsWith("music"))
-                {
-                    songs[key] = Content.Load<Song>("Audio/" + key);
-                }
-                else
-                {
-                    soundEffects[key] = Content.Load<SoundEffect>("Audio/" + key);
-                }
-            }*/
+            /* DirectoryInfo dir = new DirectoryInfo(Content.RootDirectory + "\\Audio");
+             if (!dir.Exists)
+                 throw new DirectoryNotFoundException();
+             //Init the resulting list
+             soundEffects = new Dictionary<string, SoundEffect>();
+             songs = new Dictionary<string, Song>();
+
+             //Load all files that matches the file filter
+             FileInfo[] files = dir.GetFiles("*.*");
+             foreach (FileInfo file in files)
+             {
+                 string key = Path.GetFileNameWithoutExtension(file.Name);
+                 if (key.StartsWith("music"))
+                 {
+                     songs[key] = Content.Load<Song>("Audio/" + key);
+                 }
+                 else
+                 {
+                     soundEffects[key] = Content.Load<SoundEffect>("Audio/" + key);
+                 }
+             }*/
 
             planetoid = soundBank.GetCue("planetoid_loop");
             battle = soundBank.GetCue("battle_theme");
@@ -154,18 +154,18 @@ namespace Planetoid3D
         public static void StopMusic()
         {
             StopMusicCue(ingame, AudioStopOptions.AsAuthored);
-           // MediaPlayer.Stop();
+            // MediaPlayer.Stop();
         }
 
         public static void ChangeVolume(string category, int volume)
         {
-           AudioCategory cat = audioEngine.GetCategory(category);
-           cat.SetVolume(volume / 10f);
+            AudioCategory cat = audioEngine.GetCategory(category);
+            cat.SetVolume(volume / 10f);
         }
 
         public static void Play(string name)
         {
-           soundBank.PlayCue(name);
+            soundBank.PlayCue(name);
             //soundEffects[name].Play();
         }
 
@@ -179,7 +179,7 @@ namespace Planetoid3D
             audio = soundBank.GetCue("turbina_loop");
         }
 
-        public static void Play3D(BaseObject source,string name)
+        public static void Play3D(BaseObject source, string name)
         {
             emitter.Position = source.matrix.Translation;
             emitter.Velocity = source.speed;
@@ -194,7 +194,7 @@ namespace Planetoid3D
         {
             if (sound_volume > 0)
             {
-               if (swish.IsPlaying)
+                if (swish.IsPlaying)
                 {
                     swish.Stop(AudioStopOptions.Immediate);
                 }
@@ -230,7 +230,7 @@ namespace Planetoid3D
             //CHANGE BETWEEN BATTLE MUSIC AND NORMAL MUSIC
             if (music_volume > 0)
             {
-                if (battleIsHappening>10)// || GameEngine.planets.Exists(p => p.PlayerBattle() == true))
+                if (battleIsHappening > 10)// || GameEngine.planets.Exists(p => p.PlayerBattle() == true))
                 {
                     battleIsHappening -= 1;
                     if (battleFlag == false)
@@ -239,8 +239,8 @@ namespace Planetoid3D
                         battle = soundBank.GetCue("battle_theme");
                         battle.Play();
                         battleFlag = true;
-                       /* MediaPlayer.Stop();
-                        MediaPlayer.Play(songs["music_battle"]);*/
+                        /* MediaPlayer.Stop();
+                         MediaPlayer.Play(songs["music_battle"]);*/
                     }
                 }
                 else if (battleFlag)
@@ -262,7 +262,7 @@ namespace Planetoid3D
         {
             planetoid = soundBank.GetCue("planetoid_loop");
             planetoid.Play();
-           // MediaPlayer.Play(songs["music_planetoid"]);
+            // MediaPlayer.Play(songs["music_planetoid"]);
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace Planetoid3D
         /// </summary>
         public static void StopPlanetoid()
         {
-           planetoid.Stop(AudioStopOptions.Immediate);
+            planetoid.Stop(AudioStopOptions.Immediate);
         }
 
         /// <summary>

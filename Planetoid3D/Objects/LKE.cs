@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class LKE : BaseObjectBuilding
     {
-         public LKE() { }
+        public LKE() { }
         public LKE(Planet Planet, Matrix initial, int Race)
         {
             planet = Planet;
@@ -33,14 +33,14 @@ namespace Planetoid3D
             NearestAsteroid();
 
             //There is a valid target
-            if (myTarget != null && PlayerManager.GetEnergy(owner)>0)
+            if (myTarget != null && PlayerManager.GetEnergy(owner) > 0)
             {
                 //Use energy...
-                PlayerManager.ChangeEnergy(owner, - 0.9f * elapsed * 16);
+                PlayerManager.ChangeEnergy(owner, -0.9f * elapsed * 16);
                 //...to increase keldanyum
-                PlayerManager.ChangeKeldanyum(owner,1+ 2 * elapsed * 2*PlayerManager.players[owner].researchLevels[1]/3f);
+                PlayerManager.ChangeKeldanyum(owner, 1 + 2 * elapsed * 2 * PlayerManager.players[owner].researchLevels[1] / 3f);
                 //Extract asteroid keldanyum, so consume it
-                myTarget.life -= 0.002f * elapsed*16;
+                myTarget.life -= 0.002f * elapsed * 16;
                 if (PlanetoidGame.details > 0)
                 {
                     //Create burst at asteroid position
@@ -60,7 +60,7 @@ namespace Planetoid3D
             float dist = 600;
             float temp;
             myTarget = null;
-            Ray collisionRay = new Ray(matrix.Translation+matrix.Backward*16, Vector3.Zero);
+            Ray collisionRay = new Ray(matrix.Translation + matrix.Backward * 16, Vector3.Zero);
             BoundingSphere planetSphere = new BoundingSphere(planet.matrix.Translation, planet.radius);
             foreach (Asteroid asteroid in GameEngine.asteroids)
             {
@@ -88,7 +88,7 @@ namespace Planetoid3D
 
         public override void SecondDraw()
         {
-            if (myTarget!=null)
+            if (myTarget != null)
             {
                 if (PlanetoidGame.details > 0)
                 {

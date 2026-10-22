@@ -433,7 +433,7 @@ namespace Planetoid3D
                         QuestManager.QuestCall(17);
                     }
                     break;
-                #endregion
+                    #endregion
             }
 
             //Update the fading of the cinematic mode

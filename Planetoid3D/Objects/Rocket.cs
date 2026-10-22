@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planetoid3D
 {
-     [Serializable]
+    [Serializable]
     public class Rocket : BaseObjectBuilding
     {
-         public Rocket() { }
+        public Rocket() { }
         public Rocket(Planet Start, Matrix Initial, int Owner)
         {
             type = BuildingType.Rocket;
@@ -24,7 +24,7 @@ namespace Planetoid3D
             passengers = new Hominid[3];
             life = 150;
         }
-       
+
         public Planet destination;
         public int index_destination;
 
@@ -109,14 +109,14 @@ namespace Planetoid3D
         {
             if (passengersCount > 0)
             {
-                string text="Passengers:\n   ";
+                string text = "Passengers:\n   ";
                 for (int a = 0; a < passengersCount; a++)
                 {
                     text += passengers[a].specialization + "  ";
                 }
                 return text + base.GetHudText();
             }
-            return "NO PASSENGERS"+base.GetHudText();
+            return "NO PASSENGERS" + base.GetHudText();
         }
 
         public override void LiftOff(Planet Destination)
@@ -127,23 +127,23 @@ namespace Planetoid3D
                 TextBoard.AddMessage("YOU CAN'T COLONIZE THE SUN!");
                 return;
             }
-            if (passengersCount==3)
+            if (passengersCount == 3)
             {
                 destination = Destination;
                 if (flying == false)
                 {
-                    
+
                 }
                 flying = true;
-                
+
             }
             else
             {
-                TextBoard.AddMessage("YOU NEED "+(3-passengersCount)+" MORE PASSENGER"+(passengersCount<2?"S":""));
+                TextBoard.AddMessage("YOU NEED " + (3 - passengersCount) + " MORE PASSENGER" + (passengersCount < 2 ? "S" : ""));
             }
         }
 
-        public override bool  LeaveHominid()
+        public override bool LeaveHominid()
         {
             if (flying == false)
             {
@@ -151,7 +151,7 @@ namespace Planetoid3D
                 {
                     //Add the hominids and reload their specializations
                     passengers[a].planet = planet;
-                    passengers[a].matrix= GetMatrix(20, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, a)));
+                    passengers[a].matrix = GetMatrix(20, Vector3.Transform(matrix.Left, Matrix.CreateFromAxisAngle(matrix.Backward, a)));
                     passengers[a].speed = Vector3.Zero;
                     planet.hominids.Add(passengers[a]);
                     passengers[a] = null;
@@ -190,7 +190,7 @@ namespace Planetoid3D
                         //If my base planet is dead, search for the nearest planet
                         if (planet == null || planet.life <= 0)
                         {
-                            NearestPlanet(false,ref destination);
+                            NearestPlanet(false, ref destination);
                             //If there is no planet nearby
                             if (destination == null)
                             {
@@ -212,7 +212,7 @@ namespace Planetoid3D
                     }
 
                     //Get nearest planet
-                    NearestPlanet(false,ref planet);
+                    NearestPlanet(false, ref planet);
                     if (planet == null)
                     {
                         life = 0;
@@ -272,7 +272,7 @@ namespace Planetoid3D
 
                     //Smoothly rotate to facing direction and move in the direction faced
                     RotateToFace(-direction, 0.05f);
-                    if (passengers[0].Ability==6 ||
+                    if (passengers[0].Ability == 6 ||
                         passengers[0].specialization == Specialization.Pilot ||
                         passengers[1].specialization == Specialization.Pilot ||
                         passengers[2].specialization == Specialization.Pilot)
@@ -320,7 +320,7 @@ namespace Planetoid3D
                     matrix.Translation = planet.matrix.Translation + (matrix.Backward * (9 + planet.radius));
                     if (passengersCount < 3)
                     {
-                        GetCollidingObject( 15,ref collider);
+                        GetCollidingObject(15, ref collider);
                         if (collider != null && collider is Hominid && ((Hominid)collider).owner == owner)
                         {
                             passengers[passengersCount++] = ((Hominid)collider);

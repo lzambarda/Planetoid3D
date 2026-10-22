@@ -6,8 +6,10 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Runtime.Serialization.Formatters.Binary;
-namespace Planetoid3D {
-    public static class DataManager {
+namespace Planetoid3D
+{
+    public static class DataManager
+    {
         /// <summary>
         /// Convert an object to a byte array
         /// </summary>
@@ -37,9 +39,11 @@ namespace Planetoid3D {
         /// <summary>
         /// Shift every character of the text by the key, forward to encrypt and backward to decrypt
         /// </summary>
-        private static string Transform(string text, int direction) {
+        private static string Transform(string text, int direction)
+        {
             char[] content = text.ToCharArray();
-            for (int a = 0; a < content.Length; a++) {
+            for (int a = 0; a < content.Length; a++)
+            {
                 content[a] = (char)(content[a] + direction * key[a % key.Length]);
             }
             return new string(content);
@@ -48,19 +52,22 @@ namespace Planetoid3D {
         /// <summary>
         /// Read and decrypt a given text file, the file on disk is left untouched
         /// </summary>
-        public static string ReadDecrypted(string filename) {
+        public static string ReadDecrypted(string filename)
+        {
             return Transform(File.ReadAllText(filename), -1);
         }
 
         /// <summary>
         /// Encrypt a text and write it to the given file, replacing it only once fully written
         /// </summary>
-        public static void WriteEncrypted(string filename, string text) {
+        public static void WriteEncrypted(string filename, string text)
+        {
             string temporary = filename + ".tmp";
             File.WriteAllText(temporary, Transform(text, 1));
             File.Move(temporary, filename, true);
             //Keep a backup copy of the settings
-            if (filename == MenuManager.GetSettingPath()) {
+            if (filename == MenuManager.GetSettingPath())
+            {
                 File.Copy(filename, filename + "~1", true);
             }
         }
@@ -68,22 +75,26 @@ namespace Planetoid3D {
         /// <summary>
         /// Load an encrypted XML file into the given document, the file on disk is left untouched
         /// </summary>
-        public static void LoadEncryptedXml(XmlDocument document, string filename) {
+        public static void LoadEncryptedXml(XmlDocument document, string filename)
+        {
             document.LoadXml(ReadDecrypted(filename));
         }
 
         /// <summary>
         /// Encrypt the given document and save it to a file
         /// </summary>
-        public static void SaveEncryptedXml(XmlDocument document, string filename) {
+        public static void SaveEncryptedXml(XmlDocument document, string filename)
+        {
             WriteEncrypted(filename, document.OuterXml);
         }
 
         /// <summary>
         /// Encrypt a given plain text file in place
         /// </summary>
-        public static void Encrypt(string filename) {
-            if (File.Exists(filename)) {
+        public static void Encrypt(string filename)
+        {
+            if (File.Exists(filename))
+            {
                 WriteEncrypted(filename, File.ReadAllText(filename));
             }
         }

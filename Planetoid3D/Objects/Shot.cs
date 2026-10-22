@@ -17,7 +17,7 @@ namespace Planetoid3D
     public class Shot : BaseObjectOwned
     {
         public Shot() { }
-        public Shot(Matrix Matrix,Vector3 Speed,int Owner,int damages)
+        public Shot(Matrix Matrix, Vector3 Speed, int Owner, int damages)
         {
             life = damages;
             matrix = Matrix;
@@ -157,7 +157,7 @@ namespace Planetoid3D
 
                     effect.DiffuseColor = RaceManager.GetColor(PlayerManager.GetRace(owner)).ToVector3();
 
-                    Matrix tmp = matrix * Matrix.CreateScale(life/5f);
+                    Matrix tmp = matrix * Matrix.CreateScale(life / 5f);
                     tmp.Translation = matrix.Translation;
 
                     effect.World = tmp;

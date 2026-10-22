@@ -63,7 +63,7 @@ namespace Planetoid3D
         {
             for (int a = messages.Length - 1; a >= 0; a--)
             {
-                if (timers[a]>0.2f && messages[a].Contains(message))
+                if (timers[a] > 0.2f && messages[a].Contains(message))
                 {
                     //Refresh interested message
                     timers[a] = 1;
@@ -92,7 +92,7 @@ namespace Planetoid3D
                         timers[a] -= 0.01f;
                     }
                 }
-                spriteBatch.DrawString(font, messages[a], startPoint + new Vector2(0, a * 20+(GameEngine.gameMode==GameMode.Tutorial?100:0)), Color.Lerp(Color.Transparent, Color.White, (timers[a]-a/20f)*(1-TutorialManager.CinematicFade)));
+                spriteBatch.DrawString(font, messages[a], startPoint + new Vector2(0, a * 20 + (GameEngine.gameMode == GameMode.Tutorial ? 100 : 0)), Color.Lerp(Color.Transparent, Color.White, (timers[a] - a / 20f) * (1 - TutorialManager.CinematicFade)));
             }
             spriteBatch.End();
         }

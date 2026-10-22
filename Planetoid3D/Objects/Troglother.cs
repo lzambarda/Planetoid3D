@@ -67,7 +67,7 @@ namespace Planetoid3D
 
         public override string GetHudText()
         {
-            return "A savage Troglother\nLife :" +(int)life;
+            return "A savage Troglother\nLife :" + (int)life;
         }
 
         public override bool Update(float elapsed)
@@ -141,7 +141,7 @@ namespace Planetoid3D
             }
             else
             {
-                LookAt(tempGoal.Translation+planet.matrix.Translation);
+                LookAt(tempGoal.Translation + planet.matrix.Translation);
             }
 
 
@@ -170,7 +170,7 @@ namespace Planetoid3D
                 {
                     //Update goal position following planet's rotation
                     UpdateGoal(elapsed);
-                  
+
                     //Move to goalPosition
                     matrix *= Matrix.CreateFromAxisAngle(crossVector, UpdateAnimation());// 0.0025f);
                 }
@@ -269,7 +269,7 @@ namespace Planetoid3D
             //walking cycle
             if (stepSwitch)
             {
-               if (legAngles[legSwitch].X < MathHelper.PiOver2)
+                if (legAngles[legSwitch].X < MathHelper.PiOver2)
                 {
                     //Take forward the leg
                     legAngles[legSwitch].X += 0.01f * speed.X;
@@ -331,7 +331,7 @@ namespace Planetoid3D
                 if (scream < 0)
                 {
                     direction = Util.RandomPointOnSphere(1);
-                    GameEngine.gameCamera.shake += 5/Vector3.Distance(matrix.Translation,GameEngine.gameCamera.position);
+                    GameEngine.gameCamera.shake += 5 / Vector3.Distance(matrix.Translation, GameEngine.gameCamera.position);
                     if (scream < -5)
                     {
                         scream = 20;
@@ -372,7 +372,7 @@ namespace Planetoid3D
 
         public override void Draw()
         {
-           // Util.DrawMatrixAxis(matrix, GameEngine.gameCamera, 10);
+            // Util.DrawMatrixAxis(matrix, GameEngine.gameCamera, 10);
             //Place the head on the body as it is now, after this frame's movement
             UpdateHeadMatrix();
 

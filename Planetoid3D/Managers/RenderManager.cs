@@ -8,13 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
-namespace Planetoid3D {
+namespace Planetoid3D
+{
     /// <summary>
     /// Render Manager, last review on version 1.0.2
     /// </summary>
-    public static class RenderManager {
+    public static class RenderManager
+    {
         //Model load
-        public static void LoadModels(Game Game) {
+        public static void LoadModels(Game Game)
+        {
             game = Game;
             //Models
             planetModel = game.Content.Load<Model>("Models//planet");
@@ -27,7 +30,8 @@ namespace Planetoid3D {
             treeModel[2] = game.Content.Load<Model>("Models//Trees//sulphur_rock");
             treeModel[3] = game.Content.Load<Model>("Models//Trees//cyanide_rock");
             treeTextures = new Texture2D[treeModel.Length];
-            for (int a = 0; a < treeModel.Length; a++) {
+            for (int a = 0; a < treeModel.Length; a++)
+            {
                 treeTextures[a] = treeModel[a].Meshes[0].Effects[0].Parameters["Texture"].GetValueTexture2D();
             }
 
@@ -60,10 +64,12 @@ namespace Planetoid3D {
             buildingsModels[13] = game.Content.Load<Model>("Models//repulser");
 
             buildingsTextures = new Texture2D[buildingsModels.Length][];
-            for (int a = 0; a < buildingsModels.Length; a++) {
+            for (int a = 0; a < buildingsModels.Length; a++)
+            {
                 buildingsTextures[a] = new Texture2D[buildingsModels[a].Meshes.Count];
 
-                for (int b = 0; b < buildingsTextures[a].Length; b++) {
+                for (int b = 0; b < buildingsTextures[a].Length; b++)
+                {
                     buildingsTextures[a][b] = buildingsModels[a].Meshes[b].Effects[0].Parameters["Texture"].GetValueTexture2D();
                 }
             }
@@ -95,7 +101,8 @@ namespace Planetoid3D {
             //Planets textures loading
             textures_planet = new Texture2D[8];
             //textures_normals_planet = new Texture2D[8];
-            for (int a = 0; a < textures_planet.Length; a++) {
+            for (int a = 0; a < textures_planet.Length; a++)
+            {
                 textures_planet[a] = game.Content.Load<Texture2D>("Textures//terrain" + a);
                 //textures_normals_planet[a] = game.Content.Load<Texture2D>("Textures//terrain" + a+"_Normal");
             }
@@ -166,29 +173,38 @@ namespace Planetoid3D {
         /// <summary>
         /// Get the correct model based on the given object
         /// </summary>
-        public static Model GetModel(BaseObject baseObject) {
-            if (baseObject is Troglother) {
+        public static Model GetModel(BaseObject baseObject)
+        {
+            if (baseObject is Troglother)
+            {
                 return troglotherModel;
             }
-            if (baseObject is Hominid) {
+            if (baseObject is Hominid)
+            {
                 return hominidModel;
             }
-            if (baseObject is Asteroid) {
+            if (baseObject is Asteroid)
+            {
                 return asteroidModel;
             }
-            if (baseObject is Planet) {
+            if (baseObject is Planet)
+            {
                 return planetModel;
             }
-            if (baseObject is BaseObjectBuilding) {
+            if (baseObject is BaseObjectBuilding)
+            {
                 return buildingsModels[(int)(baseObject as BaseObjectBuilding).type - 1];
             }
-            if (baseObject is Tree) {
+            if (baseObject is Tree)
+            {
                 return treeModel[(int)((Tree)baseObject).myAtmosphere];
             }
-            if (baseObject is Planetoid) {
+            if (baseObject is Planetoid)
+            {
                 return planetoidModel;
             }
-            if (baseObject is Shot) {
+            if (baseObject is Shot)
+            {
                 return shotModel;
             }
             return null;
@@ -197,26 +213,30 @@ namespace Planetoid3D {
         /// <summary>
         /// Get the correct hat for each specialization
         /// </summary>
-        public static Model GetHat(Specialization specialization) {
+        public static Model GetHat(Specialization specialization)
+        {
             return hatModel[(int)specialization - 1];
         }
 
         /// <summary>
         /// Draw all the asteroids in game with a single draw call, use the hardware instancing
         /// </summary>
-        public static void DrawAllAsteroids() {
+        public static void DrawAllAsteroids()
+        {
             if (GameEngine.asteroids.Count == 0)
                 return;
 
             //Copy asteroid data in a single array
             instancingTransforms = new Matrix[GameEngine.asteroids.Count];
-            for (int a = 0; a < instancingTransforms.Length; a++) {
+            for (int a = 0; a < instancingTransforms.Length; a++)
+            {
                 instancingTransforms[a] = GameEngine.asteroids[a].matrix * Matrix.CreateScale(GameEngine.asteroids[a].life * 1.5f);
                 instancingTransforms[a].Translation = GameEngine.asteroids[a].matrix.Translation;
             }
 
             // If we have more instances than room in our vertex buffer, grow it to the neccessary size.
-            if (instanceVertexBuffer == null || instancingTransforms.Length > instanceVertexBuffer.VertexCount) {
+            if (instanceVertexBuffer == null || instancingTransforms.Length > instanceVertexBuffer.VertexCount)
+            {
                 if (instanceVertexBuffer != null)
                     instanceVertexBuffer.Dispose();
 
@@ -227,8 +247,10 @@ namespace Planetoid3D {
             // Transfer the latest instance transform matrices into the instanceVertexBuffer.
             instanceVertexBuffer.SetData(instancingTransforms, 0, instancingTransforms.Length, SetDataOptions.Discard);
 
-            foreach (ModelMesh mesh in asteroidModel.Meshes) {
-                foreach (ModelMeshPart meshPart in mesh.MeshParts) {
+            foreach (ModelMesh mesh in asteroidModel.Meshes)
+            {
+                foreach (ModelMeshPart meshPart in mesh.MeshParts)
+                {
                     // Tell the GPU to read from both the model vertex buffer plus our instanceVertexBuffer.
                     game.GraphicsDevice.SetVertexBuffers(
                         new VertexBufferBinding(meshPart.VertexBuffer, meshPart.VertexOffset, 0),
@@ -250,7 +272,8 @@ namespace Planetoid3D {
                     asteroidShader.Parameters["LightColor"].SetValue(GameEngine.planets[0].color.ToVector3());
 
                     // Draw all the instance copies in a single call.
-                    foreach (EffectPass pass in asteroidShader.CurrentTechnique.Passes) {
+                    foreach (EffectPass pass in asteroidShader.CurrentTechnique.Passes)
+                    {
                         pass.Apply();
 
                         // baseVertex is 0: the vertex buffer binding above already applies meshPart.VertexOffset
@@ -262,9 +285,12 @@ namespace Planetoid3D {
             }
         }
 
-        public static void DrawShield(Repulser repulser) {
-            foreach (ModelMesh mesh in shieldModel.Meshes) {
-                foreach (ModelMeshPart part in mesh.MeshParts) {
+        public static void DrawShield(Repulser repulser)
+        {
+            foreach (ModelMesh mesh in shieldModel.Meshes)
+            {
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                {
                     part.Effect = shieldShader;
                     shieldShader.CurrentTechnique = shieldShader.Techniques["Shield"];
                     Matrix m = Matrix.CreateScale(repulser.planet.radius * 2);

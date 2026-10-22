@@ -18,14 +18,14 @@ namespace Planetoid3D
     }
     public static class MessageBox
     {
-        public static void Initialize(GameWindow window,GraphicsDeviceManager graphics, ContentManager Content)
+        public static void Initialize(GameWindow window, GraphicsDeviceManager graphics, ContentManager Content)
         {
             texture = Content.Load<Texture2D>("messagebox_texture");
             position = new Vector2(graphics.PreferredBackBufferWidth / 2 - 251, graphics.PreferredBackBufferHeight / 2 - 88);
             accept = new Button(new Vector2(graphics.PreferredBackBufferWidth / 2 - 210, position.Y + 130), "Ok", 200, null);
             cancel = new Button(new Vector2(graphics.PreferredBackBufferWidth / 2 + 10, position.Y + 130), "Cancel", 200, null);
-            atbutton = new Button(new Vector2(graphics.PreferredBackBufferWidth / 2 - 25, position.Y +130), "@", 50, null);
-            
+            atbutton = new Button(new Vector2(graphics.PreferredBackBufferWidth / 2 - 25, position.Y + 130), "@", 50, null);
+
             text = "";
             input = "";
             title = "";
@@ -356,7 +356,7 @@ namespace Planetoid3D
         {
             PlanetoidGame.spriteBatch.Draw(texture, position, Color.White);
             PlanetoidGame.spriteBatch.DrawString(font, title, position + new Vector2(8), Util.PanelGray);
-            Util.DrawCenteredText(font, text + " " +(title.Equals("Login Password")?new string('*', input.Length):input) + (inputType == 1 ? "_" : ""), position + new Vector2(texture.Width / 2, texture.Height / 2 - 25), Util.PanelGray);
+            Util.DrawCenteredText(font, text + " " + (title.Equals("Login Password") ? new string('*', input.Length) : input) + (inputType == 1 ? "_" : ""), position + new Vector2(texture.Width / 2, texture.Height / 2 - 25), Util.PanelGray);
             if (inputType < 2)
             {
                 accept.Draw(font, Color.LawnGreen);

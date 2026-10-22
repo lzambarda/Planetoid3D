@@ -10,8 +10,8 @@ namespace Planetoid3D
     [Serializable]
     public class SAgun : BaseObjectBuilding
     {
-         public SAgun() { }
-         public SAgun(Planet Planet, Matrix initial, int Owner)
+        public SAgun() { }
+        public SAgun(Planet Planet, Matrix initial, int Owner)
         {
             planet = Planet;
             matrix = initial;
@@ -59,7 +59,7 @@ namespace Planetoid3D
                 //Now get the direction from the head position to the asteroid position
                 //Add the asteroid speed and the value found before to the asteroid position
                 //THIS DIRECTION STARTS FROM THE HEAD POSITION AND GOES TO THE ASTEROID FUTURE POSITION
-                direction = myTarget.matrix.Translation + 10*(myTarget is Hunter?myTarget.matrix.Down:myTarget.matrix.Backward) * amount - (matrix.Translation + matrix.Backward * 9);
+                direction = myTarget.matrix.Translation + 10 * (myTarget is Hunter ? myTarget.matrix.Down : myTarget.matrix.Backward) * amount - (matrix.Translation + matrix.Backward * 9);
                 if (direction.Length() > 0)
                 {
                     direction.Normalize();

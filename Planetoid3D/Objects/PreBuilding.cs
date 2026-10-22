@@ -62,9 +62,9 @@ namespace Planetoid3D
 
         public override string GetHudText()
         {
-            return "Under Construction... "+(int)((1-timer/total)*100)+"%"+base.GetHudText();
+            return "Under Construction... " + (int)((1 - timer / total) * 100) + "%" + base.GetHudText();
         }
-        
+
         /// <summary>
         /// Used to return a value between 0.0 and 1.0 indicating the percentual of building completion
         /// </summary>
@@ -79,7 +79,7 @@ namespace Planetoid3D
             //Slowly raise from the ground
             if (timer > 0)
             {
-                if /*(planet.DominatingRace() != PlayerManager.GetRace(owner))*/(PlayerManager.GetFriendship(PlayerManager.GetRaceOwner(planet.DominatingRace()),owner)<0.5f && !planet.hominids.Exists(h=>h.owner==owner) )
+                if /*(planet.DominatingRace() != PlayerManager.GetRace(owner))*/(PlayerManager.GetFriendship(PlayerManager.GetRaceOwner(planet.DominatingRace()), owner) < 0.5f && !planet.hominids.Exists(h => h.owner == owner))
                 {
                     timer += step * 25 * elapsed;
                     if (timer >= total)
@@ -92,13 +92,13 @@ namespace Planetoid3D
                 {
                     if (planet.hominids[a].target == this && PlayerManager.GetFriendship(owner, planet.hominids[a].owner) >= 0.5f && Vector3.Distance(matrix.Translation, planet.hominids[a].matrix.Translation) < (GameEngine.gameMode == GameMode.Giant ? 60 : 30))
                     {
-                        if (owner>0 && planet.hominids[a].owner != owner)
+                        if (owner > 0 && planet.hominids[a].owner != owner)
                         {
                             //AI will be glad if someone helps it
                             PlayerManager.ChangeFriendship(planet.hominids[a].owner, owner, 0.0002f);
                             PlayerManager.ChangeTrust(planet.hominids[a].owner, owner, 0.0001f);
                         }
-                        howmany += (planet.hominids[a].Ability == 3 ? 1.5f : 1)/(howmany==0?1:3);//don't give too much boost during construction
+                        howmany += (planet.hominids[a].Ability == 3 ? 1.5f : 1) / (howmany == 0 ? 1 : 3);//don't give too much boost during construction
                         planet.hominids[a].Speak(SpeechType.Build);
                     }
                 }
@@ -135,14 +135,14 @@ namespace Planetoid3D
             mybuilding.matrix *= Matrix.CreateFromAxisAngle(planet.axis, planet.spinSpeed * elapsed);
             mybuilding.matrix.Translation += planet.matrix.Translation;
             //Rotate with planet
-            bool returner=base.Update(elapsed);
+            bool returner = base.Update(elapsed);
             tempPos = matrix.Translation;
             matrix.Translation = mybuilding.matrix.Translation;
             return returner;
         }
 
         public override void Draw()
-        {        
+        {
             Vector3 temp = mybuilding.matrix.Translation;
             mybuilding.matrix.Translation = tempPos;
             mybuilding.Draw();
