@@ -240,9 +240,9 @@ namespace Planetoid3D
                         StopMusicCue(ingame, AudioStopOptions.AsAuthored);
                         battle = soundBank.GetCue("battle_theme");
                         battle.Play();
+                        battleFlag = true;
                        /* MediaPlayer.Stop();
-                        MediaPlayer.Play(songs["music_battle"]);
-                        battleFlag = true;*/
+                        MediaPlayer.Play(songs["music_battle"]);*/
                     }
                 }
                 else if (battleFlag)
@@ -250,9 +250,9 @@ namespace Planetoid3D
                     StopMusicCue(battle, AudioStopOptions.AsAuthored);
                     ingame = soundBank.GetCue("music_ingame");
                     ingame.Play();
+                    battleFlag = false;
                     /*MediaPlayer.Stop();
-                    MediaPlayer.Play(ingame);
-                    battleFlag = false;*/
+                    MediaPlayer.Play(ingame);*/
                 }
             }
         }
@@ -311,6 +311,7 @@ namespace Planetoid3D
         public static void ToggleMusic(AudioStopOptions stopOptions)
         {
             StopMusicCue(battle, AudioStopOptions.AsAuthored);
+            battleFlag = false;
             //Play the title music
             if (ingame.Name == "music_title")
             {
