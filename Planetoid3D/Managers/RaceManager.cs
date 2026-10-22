@@ -88,7 +88,10 @@ namespace Planetoid3D
                             //Ability
                             abilities.Add(ability);
                             //Texture
-                            textures.Add(Texture2D.FromStream(GameEngine.Game.GraphicsDevice, File.OpenRead(dir + "//texture.png")));
+                            using (FileStream texture = File.OpenRead(dir + "//texture.png"))
+                            {
+                                textures.Add(Texture2D.FromStream(GameEngine.Game.GraphicsDevice, texture));
+                            }
                             //Color
                             Color[] myUint = new Color[1];
                             textures.Last().GetData(0, new Rectangle(47, 77, 1, 1), myUint, 0, 1);
