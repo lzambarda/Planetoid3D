@@ -101,7 +101,9 @@ float4 ComputeParticlePosition(float3 position, float3 velocity,
                              (endVelocity - startVelocity) * normalizedAge *
                                                              normalizedAge / 2;
      
-    position += normalize(velocity) * velocityIntegral * Duration;
+    // Equivalent to normalize(velocity) but safe for zero velocity: normalize(0) is NaN,
+    // and since branches get flattened into arithmetic a NaN can't simply be skipped with an if.
+    position += velocity * (velocityIntegral * Duration / max(startVelocity, 1e-6));
         
     // Apply the camera view and projection transforms.
     return mul(mul(float4(position, 1), View), Projection);

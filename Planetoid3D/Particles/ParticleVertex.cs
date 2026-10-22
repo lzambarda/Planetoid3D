@@ -69,7 +69,7 @@ namespace Planetoid3D
 
             new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
             new VertexElement(8, VertexElementFormat.Vector3,VertexElementUsage.Position, 1),
-            new VertexElement(20, VertexElementFormat.Vector3,VertexElementUsage.Normal, 1),
+            new VertexElement(20, VertexElementFormat.Vector3,VertexElementUsage.Normal, 0),
             new VertexElement(32, VertexElementFormat.Color,VertexElementUsage.Color, 0),
             new VertexElement(36, VertexElementFormat.Color, VertexElementUsage.Color, 1),
             new VertexElement(40, VertexElementFormat.Single,VertexElementUsage.TextureCoordinate, 0),
