@@ -178,7 +178,9 @@ namespace Planetoid3D
                 {
                     Vector3 dir = Vector3.Normalize(matrix.Translation);
 
-                    matrix = Matrix.Invert(Matrix.CreateLookAt(matrix.Translation, Vector3.Zero, Vector3.Up));
+                    //CreateLookAt needs an up vector not parallel to the view direction (troglother on a pole)
+                    Vector3 up = (Math.Abs(Vector3.Dot(dir, Vector3.Up)) > 0.999f ? Vector3.Forward : Vector3.Up);
+                    matrix = Matrix.Invert(Matrix.CreateLookAt(matrix.Translation, Vector3.Zero, up));
                     matrix *= Matrix.CreateFromAxisAngle(matrix.Backward, rotation);
                     matrix.Translation = dir * planet.radius;
 
@@ -308,12 +310,21 @@ namespace Planetoid3D
             return Math.Abs(legAngles[legSwitch].X - MathHelper.PiOver2) / 350f;
         }
 
+        //Maximum head rotation relative to the body, in radians
+        private const float maxHeadYaw = 1.3f;
+        private const float maxHeadPitch = 0.8f;
+
+        /// <summary>
+        /// Turn the head towards the given position, return whether it is in sight.
+        /// The head pose is kept as angles relative to the body (headAngles.Y yaw, headAngles.Z pitch),
+        /// so it can't drift away from the body like an accumulated matrix would
+        /// </summary>
         protected bool LookAt(Vector3 position)
         {
             bool see = false;
-            headMatrix.Translation = Vector3.Transform(new Vector3(0, -7.5f, 14f), matrix);
-
-            Vector3 direction = Vector3.Normalize(position - headMatrix.Translation);
+            Vector3 eye = Vector3.Transform(new Vector3(0, -7.5f, 14f), matrix);
+            Vector3 toTarget = position - eye;
+            Vector3 direction = (toTarget.LengthSquared() > 0.0001f ? Vector3.Normalize(toTarget) : matrix.Down);
 
             if (Vector3.Distance(direction, matrix.Down) < 1.2f)
             {
@@ -326,30 +337,45 @@ namespace Planetoid3D
                         scream = 20;
                     }
                 }
-
-                headAngles.Y = Vector3.Dot(headMatrix.Right, direction) / 10f;
-                headMatrix *= Matrix.CreateFromAxisAngle(matrix.Backward, headAngles.Y);
-                headAngles.Z = Vector3.Dot(headMatrix.Backward, direction) / 10f;
-                headMatrix *= Matrix.CreateFromAxisAngle(matrix.Left, headAngles.Z);
                 see = true;
             }
             else
             {
-                headAngles.Y = Vector3.Dot(headMatrix.Right, matrix.Down) / 10f;
-                headMatrix *= Matrix.CreateFromAxisAngle(matrix.Backward, headAngles.Y);
-                headAngles.Z = Vector3.Dot(headMatrix.Backward, matrix.Down) / 10f;
-                headMatrix *= Matrix.CreateFromAxisAngle(matrix.Left, headAngles.Z);
+                //Nothing in sight, look forward
+                direction = matrix.Down;
             }
-            headMatrix.Left = Vector3.Normalize(headMatrix.Left);
-            headMatrix.Backward = Vector3.Normalize(headMatrix.Backward);
-            headMatrix.Up = Vector3.Normalize(headMatrix.Up);
-            headMatrix.Translation = Vector3.Transform(new Vector3(0, -7.5f, 16f), matrix);
+
+            //Direction in the body space, where the body faces Down (0, -1, 0) and Backward (0, 0, 1) points away from the planet
+            Matrix bodyRotation = matrix;
+            bodyRotation.Translation = Vector3.Zero;
+            Vector3 local = Vector3.TransformNormal(direction, Matrix.Transpose(bodyRotation));
+            float yaw = MathHelper.Clamp((float)Math.Atan2(local.X, -local.Y), -maxHeadYaw, maxHeadYaw);
+            float pitch = MathHelper.Clamp((float)Math.Atan2(local.Z, new Vector2(local.X, local.Y).Length()), -maxHeadPitch, maxHeadPitch);
+
+            //Turn the head smoothly (a NaN, e.g. from a broken body matrix, would otherwise stick in the angles)
+            if (!float.IsNaN(yaw) && !float.IsNaN(pitch))
+            {
+                headAngles.Y += (yaw - headAngles.Y) / 10f;
+                headAngles.Z += (pitch - headAngles.Z) / 10f;
+            }
             return see;
+        }
+
+        /// <summary>
+        /// Build the head matrix from the current body matrix and the head angles
+        /// </summary>
+        private void UpdateHeadMatrix()
+        {
+            headMatrix = Matrix.CreateFromAxisAngle(Vector3.Left, headAngles.Z) * Matrix.CreateFromAxisAngle(Vector3.Backward, headAngles.Y) * matrix;
+            headMatrix.Translation = Vector3.Transform(new Vector3(0, -7.5f, 16f), matrix);
         }
 
         public override void Draw()
         {
            // Util.DrawMatrixAxis(matrix, GameEngine.gameCamera, 10);
+            //Place the head on the body as it is now, after this frame's movement
+            UpdateHeadMatrix();
+
             Vector3 temp = matrix.Translation;
             matrix.Translation += matrix.Backward * 13;
 
