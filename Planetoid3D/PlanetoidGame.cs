@@ -138,6 +138,9 @@ public class PlanetoidGame : Game
         //Font loading
         textFont = Content.Load<SpriteFont>("Arial");
         pageFont = Content.Load<SpriteFont>("Pages");
+        //Draw characters missing from the fonts (e.g. from custom races or localized dates) as '?' instead of throwing
+        textFont.DefaultCharacter = '?';
+        pageFont.DefaultCharacter = '?';
 
         //Cursor loading
         mouse_standard = Content.Load<Texture2D>("mouse_standard");

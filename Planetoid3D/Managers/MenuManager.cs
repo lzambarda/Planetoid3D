@@ -1992,7 +1992,7 @@ namespace Planetoid3D
 
                 for (int a = 0; a < load_slotsDetails.Count; a++)
                 {
-                    load_slots.Add(new Button(new Vector2(back.Width / 2 - 250, 200 + a * 60), load_slotsDetails[a].Name.Split('.')[0] + " - " + load_slotsDetails[a].CreationTime.ToString(CultureInfo.CurrentCulture), 500, null));
+                    load_slots.Add(new Button(new Vector2(back.Width / 2 - 250, 200 + a * 60), load_slotsDetails[a].Name.Split('.')[0] + " - " + load_slotsDetails[a].CreationTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture), 500, null));
                 }
                 load_selected = -1;
                 yspdload = 0;
