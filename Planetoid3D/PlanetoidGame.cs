@@ -435,6 +435,7 @@ public class PlanetoidGame : Game
             }
         }
 
+        AudioManager.Update((float)gameTime.ElapsedGameTime.TotalMilliseconds);
         GameEngine.SaveLastInputState();
         if (HUDManager.showDebug)
         {

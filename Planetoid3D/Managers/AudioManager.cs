@@ -84,6 +84,65 @@ namespace Planetoid3D
         private static bool battleFlag;
         public static int battleIsHappening;
 
+        //Music cues fading out, and the length in milliseconds of the fadeSound RPC ReleaseTime curve
+        private static List<Cue> releasingCues = new List<Cue>();
+        private const float musicReleaseDuration = 14000;
+
+
+        /// <summary>
+        /// Advance the audio engine, must be called once per frame
+        /// </summary>
+        public static void Update(float elapsedMilliseconds)
+        {
+            //MonoGame doesn't advance the XACT AttackTime/ReleaseTime variables, which drive the music fade in/out (fadeSound RPC)
+            AdvanceAttackTime(ingame, elapsedMilliseconds);
+            AdvanceAttackTime(battle, elapsedMilliseconds);
+            for (int a = 0; a < releasingCues.Count; a++)
+            {
+                Cue cue = releasingCues[a];
+                float releaseTime = cue.GetVariable("ReleaseTime") + elapsedMilliseconds;
+                cue.SetVariable("ReleaseTime", releaseTime);
+                if (releaseTime >= musicReleaseDuration || !cue.IsPlaying)
+                {
+                    cue.Stop(AudioStopOptions.Immediate);
+                    releasingCues.RemoveAt(a);
+                    a--;
+                }
+            }
+            audioEngine.Update();
+        }
+
+        /// <summary>
+        /// Stop a music cue, fading it out along its ReleaseTime curve when stopping as authored
+        /// </summary>
+        private static void StopMusicCue(Cue cue, AudioStopOptions stopOptions)
+        {
+            if (cue == null || !cue.IsPlaying)
+            {
+                return;
+            }
+            if (stopOptions == AudioStopOptions.AsAuthored)
+            {
+                if (!releasingCues.Contains(cue))
+                {
+                    cue.SetVariable("ReleaseTime", 0);
+                    releasingCues.Add(cue);
+                }
+            }
+            else
+            {
+                releasingCues.Remove(cue);
+                cue.Stop(stopOptions);
+            }
+        }
+
+        private static void AdvanceAttackTime(Cue cue, float elapsedMilliseconds)
+        {
+            if (cue != null && cue.IsPlaying)
+            {
+                cue.SetVariable("AttackTime", cue.GetVariable("AttackTime") + elapsedMilliseconds);
+            }
+        }
 
         public static void StartMusic()
         {
@@ -96,7 +155,7 @@ namespace Planetoid3D
 
         public static void StopMusic()
         {
-            ingame.Stop(AudioStopOptions.AsAuthored);
+            StopMusicCue(ingame, AudioStopOptions.AsAuthored);
            // MediaPlayer.Stop();
         }
 
@@ -178,7 +237,7 @@ namespace Planetoid3D
                     battleIsHappening -= 1;
                     if (battleFlag == false)
                     {
-                        ingame.Stop(AudioStopOptions.AsAuthored);
+                        StopMusicCue(ingame, AudioStopOptions.AsAuthored);
                         battle = soundBank.GetCue("battle_theme");
                         battle.Play();
                        /* MediaPlayer.Stop();
@@ -188,7 +247,7 @@ namespace Planetoid3D
                 }
                 else if (battleFlag)
                 {
-                    battle.Stop(AudioStopOptions.AsAuthored);
+                    StopMusicCue(battle, AudioStopOptions.AsAuthored);
                     ingame = soundBank.GetCue("music_ingame");
                     ingame.Play();
                     /*MediaPlayer.Stop();
@@ -251,19 +310,16 @@ namespace Planetoid3D
         /// </summary>
         public static void ToggleMusic(AudioStopOptions stopOptions)
         {
-            if (battle != null)
-            {
-                battle.Stop(AudioStopOptions.AsAuthored);
-            }
+            StopMusicCue(battle, AudioStopOptions.AsAuthored);
             //Play the title music
             if (ingame.Name == "music_title")
             {
-                ingame.Stop(stopOptions);
+                StopMusicCue(ingame, stopOptions);
                 ingame = soundBank.GetCue("music_ingame");
             }
             else
             {
-                ingame.Stop(stopOptions);
+                StopMusicCue(ingame, stopOptions);
                 ingame = soundBank.GetCue("music_title");
             }
             ingame.Play();
