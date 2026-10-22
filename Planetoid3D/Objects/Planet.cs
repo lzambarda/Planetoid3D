@@ -320,9 +320,16 @@ namespace Planetoid3D {
                 //Save buildings which are flying, since they're not physically connected to the planet
                 if (buildings[a].flying == true) {
                     buildings[a].NearestPlanet(false, ref buildings[a].planet);
-                    buildings[a].planet.buildings.Add(buildings[a]);
-                    continue;
-                } else if (buildings[a] is Radar) {
+                    if (buildings[a].planet != null) {
+                        buildings[a].planet.buildings.Add(buildings[a]);
+                        continue;
+                    }
+                    //No planet left to land on, the building is lost together with this one
+                    if (HUDManager.lastTargetObject == buildings[a]) {
+                        HUDManager.lastTargetObject = null;
+                    }
+                }
+                if (buildings[a] is Radar) {
                     PlayerManager.players[buildings[a].owner].radarAmount--;
                 }
             }
