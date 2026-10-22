@@ -42,6 +42,8 @@ namespace Planetoid3D
 
     public class Research
     {
+        //Not saved with the game: XmlSerializer can't serialize textures, and in progress researches don't use it
+        [System.Xml.Serialization.XmlIgnore]
         public Texture2D icon;
         public string title;
         public string description;
