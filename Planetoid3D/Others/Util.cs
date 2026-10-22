@@ -271,7 +271,7 @@ namespace Planetoid3D
             vertices[5].Color = Color.Blue;
             vertices[5].Position = matrix.Translation + (matrix.Backward * size);
 
-            GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineList, vertices, 0, vertices.Length / 2, VertexPositionColorTexture.VertexDeclaration);
+            GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineList, vertices, 0, vertices.Length / 2, VertexPositionColor.VertexDeclaration);
 
         }
 
@@ -346,7 +346,7 @@ namespace Planetoid3D
             lineVertices[0].Color = colorA;
             lineVertices[1].Position = B;
             lineVertices[1].Color = colorB;
-            GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineStrip, lineVertices, 0, 1, VertexPositionColorTexture.VertexDeclaration);
+            GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineStrip, lineVertices, 0, 1, VertexPositionColor.VertexDeclaration);
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace Planetoid3D
                 atmo_vertices[a].Color = color;
             }
 
-            GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, atmo_vertices, 0, atmo_vertices.Length / 3, VertexPositionColorTexture.VertexDeclaration);
+            GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, atmo_vertices, 0, atmo_vertices.Length / 3, VertexPositionColor.VertexDeclaration);
         }
 
         /// <summary>
@@ -548,7 +548,7 @@ namespace Planetoid3D
             lineVertices[0].Color = colorA;
             lineVertices[1].Position = B;
             lineVertices[1].Color = colorB;*/
-            GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineList, v, 0, v.Length / 2, VertexPositionColorTexture.VertexDeclaration);
+            GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineList, v, 0, v.Length / 2, VertexPositionColor.VertexDeclaration);
         }
 
 
