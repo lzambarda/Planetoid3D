@@ -21,7 +21,7 @@ float radius;
 
 float4 BlurFadeCinematic(float2 TextureCoordinate : TEXCOORD0) : SV_Target
 {
-	float4 color=ScreenTexture.Sample(TextureSampler, TextureCoordinate);
+	float4 color=tex2D(TextureSampler, TextureCoordinate);
 	if (cameraSpeed>0)
 	{
 		float BlurStart = 1.0;

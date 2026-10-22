@@ -77,7 +77,7 @@ PixelToFrame TexturedNoShadingPS(VertexToPixel PSIn)
 {
 	PixelToFrame Output = (PixelToFrame)0;		
 	
-	Output.Color = xTexture.Sample(TextureSampler, PSIn.TextureCoords);
+	Output.Color = tex2D(TextureSampler, PSIn.TextureCoords);
 
 	return Output;
 }
