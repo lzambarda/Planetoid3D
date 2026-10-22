@@ -2053,6 +2053,9 @@
 /processorParam:TextureFormat=Color
 /build:questSign.png
 
+#begin RandomGameNames.txt
+/copy:RandomGameNames.txt
+
 #begin Races/Alien.png
 /importer:TextureImporter
 /processor:TextureProcessor

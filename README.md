@@ -21,10 +21,11 @@ Content is built with MGCB (MonoGame Content Builder) as part of `dotnet build`.
 ### Building
 
 ```sh
-cd Planetoid3D
-dotnet build   # restores the mgcb tool, builds Content/Content.mgcb, then the game
-dotnet run
+scripts/run.sh             # builds content (MGCB) and the game, then runs it
+scripts/run.sh --release   # same, in Release configuration
 ```
+
+The game loads some data files relative to the working directory, so it must be run from its build output directory (which `scripts/run.sh` does).
 
 The MonoGame package versions in `Planetoid3D.csproj` must match the tool versions in `.config/dotnet-tools.json`.
 
