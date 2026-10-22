@@ -38,7 +38,7 @@ public class PlanetoidGame : Game
     Texture2D mouse_target;
 
     //Utility variables
-    public const string GAME_VERSION = "1.0.7";
+    public const string GAME_VERSION = "1.1.0-beta";
 
     //GAME VARIABLES
     public static Thread loader;
