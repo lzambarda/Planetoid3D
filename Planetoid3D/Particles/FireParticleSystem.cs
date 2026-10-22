@@ -26,7 +26,9 @@ namespace Planetoid3D {
         protected override void InitializeSettings(ParticleSettings settings) {
             settings.TextureName = "Particles//fire";
 
-            settings.MaxParticles = 5000;
+            // The sun alone keeps up to ~6000 particles alive on High details (50 per frame, 2s duration),
+            // leave room for rockets, asteroids, explosions... (the 16 bit index buffer allows up to 16383)
+            settings.MaxParticles = 10000;
 
             settings.Duration = TimeSpan.FromSeconds(2);
 
