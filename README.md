@@ -5,6 +5,25 @@ This is the original code from Planetoid 3D minus some authentication code I had
 ## Development
 
 The game uses [MonoGame](https://github.com/mono/MonoGame) as a replacement for XNA.
+Content is built with MGCB (MonoGame Content Builder) as part of `dotnet build`.
+
+### Prerequisites
+
+- .NET SDK 8 or newer, with a working `dotnet` on `PATH` (a broken `dotnet` symlink earlier on `PATH` makes shader compilation fail).
+- [git-lfs](https://git-lfs.com/): the `.wav` files are stored in LFS.
+- On macOS/Linux, Wine is required to compile the `.fx` shaders
+  (see [MonoGame's macOS setup guide](https://docs.monogame.net/articles/getting_started/1_setting_up_your_os_for_development_macos.html)),
+  with `MGFXC_WINE_PATH` pointing at the Wine prefix (e.g. `~/.winemonogame`).
+
+### Building
+
+```sh
+cd Planetoid3D
+dotnet build   # restores the mgcb tool, builds Content/Content.mgcb, then the game
+dotnet run
+```
+
+The MonoGame package versions in `Planetoid3D.csproj` must match the tool versions in `.config/dotnet-tools.json`.
 
 ## Notable issues
 
