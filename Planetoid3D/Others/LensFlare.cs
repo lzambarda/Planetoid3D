@@ -99,7 +99,7 @@ namespace Planetoid3D
 
                 Color color = Color.White * (hiddenAmount / 2f);
 
-                float scale =  MathHelper.Clamp((6000- GameEngine.gameCamera.position.Length()) / 4 / glow.Width,0,10);
+                float scale = MathHelper.Clamp((6000 - GameEngine.gameCamera.position.Length()) / 4 / glow.Width, 0, 10);
 
                 spriteBatch.Draw(glow, new Vector2(sunPosition.X, sunPosition.Y), null, color, 0,
                                  origin, scale, SpriteEffects.None, 0);

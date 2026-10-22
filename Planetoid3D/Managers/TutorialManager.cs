@@ -51,9 +51,9 @@ namespace Planetoid3D
                     if (beginMission)
                     {
                         MissionName = "Intro";
-                        MissionDescription = "|G| - Build a house\n|W| - Use B to enter in the menu mode and place it on the planet.\n - Right Mouse Button to cancel building.\n - Middle Mouse Button to move camera view.";
+                        MissionDescription = "|G| - Build a house\n|W| - Use B to enter in the menu mode and place it on the planet.\n - Right Mouse Button to cancel building.\n - Middle Mouse Button (or Left Alt Key) to move camera view.";
                         CinematicMode = true;
-                        cinematicSpan = new TimeSpan(0, 0, 30);
+                        cinematicSpan = new TimeSpan(0, 0, 1);
                         beginMission = false;
                         CameraLocked = true;
                         //Look at sun
@@ -88,7 +88,7 @@ namespace Planetoid3D
                     }
                     else if (cinematicSpan > new TimeSpan(0, 0, 5))
                     {
-                        TextToDisplay = "But we are not going to watch this fireball forever, aren't we?";
+                        TextToDisplay = "But we are not going to watch this fireball forever, are we?";
                         if (GameEngine.gameCamera.horizontalAngle < 1)
                         {
                             GameEngine.gameCamera.horizontalAngle += 0.002f;

@@ -42,8 +42,8 @@ public class PlanetoidGame : Game
 
     //GAME VARIABLES
     public static Thread loader;
-    public static GameScreen game_screen = GameScreen.Intro;
-    public static GameScreen game_screen_next = GameScreen.Intro;
+    public static GameScreen game_screen = GameScreen.Loading;
+    public static GameScreen game_screen_next = GameScreen.Loading;
     public static float game_screen_fader = 1;
     public static bool loaded = true;
     public static float elapsed;
