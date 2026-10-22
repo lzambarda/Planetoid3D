@@ -80,183 +80,19 @@ namespace Planetoid3D {
                 }
             } catch (IOException) { }
 
-            int option = 0;
-            if (!File.Exists(GetSettingPath())) {
-                //CREATE THE FILE
-                option = 1;
-            } else {
-                //IF FILE CORRUPTED, RECREATE IT
-                try {
-                    DataManager.Decrypt(GetSettingPath());
-                    document.Load(GetSettingPath());
-                    DataManager.Encrypt(GetSettingPath());
-                } catch (XmlException) {
-                    bool lost = false;
-                    if (!File.Exists(GetSettingPath() + "~1")) {
-                        lost = true;
-                    }
-                    {
-                        try {
-                            DataManager.Decrypt(GetSettingPath() + "~1");
-                            document.Load(GetSettingPath() + "~1");
-                            DataManager.Encrypt(GetSettingPath() + "~1");
-                            File.Copy(GetSettingPath() + "~1", GetSettingPath(), true);
-                        } catch (XmlException) {
-                            lost = true;
-                        }
-                    }
-                    if (lost) {
-                        option = 2;
-                        File.Delete(GetSettingPath());
-                        MessageBox.ShowDialog("Oh no!", "The settings file seems to be corrupted!\nI'll try to fix it!", 0);
-                    }
-                }
-            }
-
-            //IF THE SETTINGS FILE DOESN'T EXISTS CREATE IT WITH DEFAULT SETTINGS
-            if (option > 0) {
-                XmlTextWriter textWriter = new XmlTextWriter(GetSettingPath(), null);
-                //File.SetAttributes(GetSettingPath(), FileAttributes.Hidden);
-                textWriter.WriteStartDocument();
-                textWriter.WriteStartElement("Settings");
-
-                textWriter.WriteStartElement("Music");
-                textWriter.WriteValue(10);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Sound");
-                textWriter.WriteValue(10);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Fullscreen");
-                textWriter.WriteValue(false);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Details");
-                textWriter.WriteValue(1);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Cameye");
-                textWriter.WriteValue(false);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Lens");
-                textWriter.WriteValue(false);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("ShortNames");
-                textWriter.WriteValue(Keys.X.ToString());
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("ShortBuild");
-                textWriter.WriteValue(Keys.B.ToString());
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("ShortDiplomacy");
-                textWriter.WriteValue(Keys.D.ToString());
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("ShortStrategy");
-                textWriter.WriteValue(Keys.S.ToString());
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Enabled");
-                textWriter.WriteValue((option == 2 ? "keyLost!" : "false"));
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Resolution");
-                textWriter.WriteValue(0);
-                textWriter.WriteEndElement();
-
-                textWriter.WriteStartElement("Orbits");
-                textWriter.WriteValue(1);
-                textWriter.WriteEndElement();
-
-
-                textWriter.WriteStartElement("Quests");
-                for (int a = 0; a < 20; a++) {
-                    textWriter.WriteStartElement("Quest");
-                    textWriter.WriteValue(0);
-                    textWriter.WriteEndElement();
-                }
-                textWriter.WriteEndElement();
-                textWriter.WriteEndDocument();
-                textWriter.Close();
-                DataManager.Encrypt(GetSettingPath());
-            }
+            //LOAD THE SETTINGS, RECREATING THEM IF MISSING OR CORRUPTED
+            document = LoadSettings();
             #endregion
 
-            DataManager.Decrypt(GetSettingPath());
-            //LOAD AND READ
-            document.Load(GetSettingPath());
-            //music volume
-            AudioManager.music_volume = int.Parse(document.GetElementsByTagName("Music")[0].FirstChild.Value);
-            //sound volume
-            AudioManager.sound_volume = int.Parse(document.GetElementsByTagName("Sound")[0].FirstChild.Value);
-            //fullscreen
-            graphics.IsFullScreen = bool.Parse(document.GetElementsByTagName("Fullscreen")[0].FirstChild.Value);
-            graphics.ApplyChanges();
-            //details
-            PlanetoidGame.details = short.Parse(document.GetElementsByTagName("Details")[0].FirstChild.Value);
-            Util.InitializeVertices();
-            //dynamic camera
-            GameEngine.gameCamera.eyeCorner = bool.Parse(document.GetElementsByTagName("Cameye")[0].FirstChild.Value);
-            //Lens Flare
-            PlanetoidGame.lens.Enabled = bool.Parse(document.GetElementsByTagName("Lens")[0].FirstChild.Value);
-            //Get the resolution, only at the beginning of the game
-            currentResolution = (Resolution)int.Parse(document.GetElementsByTagName("Resolution")[0].FirstChild.Value);
-            //Get the orbits setting
-            currentOrbit = (Orbit)int.Parse(document.GetElementsByTagName("Orbits")[0].FirstChild.Value);
-
-            SetViewport();
-
-            //Shortcuts
-            HUDManager.button_names = new Button(new Vector2(390, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortNames")[0].FirstChild.Value[0]);
-            HUDManager.button_build = new Button(new Vector2(440, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortBuild")[0].FirstChild.Value[0]);
-            HUDManager.button_diplomacy = new Button(new Vector2(490, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortDiplomacy")[0].FirstChild.Value[0]);
-            HUDManager.button_strategy = new Button(new Vector2(540, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortStrategy")[0].FirstChild.Value[0]);
-
-            /* if (document.GetElementsByTagName("Enabled")[0].FirstChild.Value.Equals("false") || !document.GetElementsByTagName("Identifier")[0].FirstChild.Value.Equals(GetProcessorId()))
-             {
-                 PlanetoidGame.game_enabled = false;
-                 //Check online if there's a code with my CPU identifier
-                 /*try
-                 {
-                     WebClient objWebClient = new WebClient();
-                     System.Collections.Specialized.NameValueCollection values = new System.Collections.Specialized.NameValueCollection();
-                     values.Add("identifier", MenuManager.GetProcessorId());
-                     byte[] bytes = objWebClient.UploadValues("http://www.metalsoulstudios.net/reenableGame.php", "POST", values);
-                     if (bytes.Length > 0 && (char)bytes[0] != '#')
-                     {
-                         document.GetElementsByTagName("Enabled")[0].FirstChild.Value = System.Text.UTF8Encoding.UTF8.GetString(bytes);
-                         document.GetElementsByTagName("Identifier")[0].FirstChild.Value = GetProcessorId();
-                         PlanetoidGame.game_enabled = true;
-                     }
-                 }
-                 catch (WebException e)
-                 {
-
-                 }*/
-            /* }
-             else
-             {
-                 PlanetoidGame.game_enabled = true;
-             }
-             */
-
-            AudioManager.ChangeVolume("Music", AudioManager.music_volume);
-            AudioManager.ChangeVolume("Sound", AudioManager.sound_volume);
-
-            //Add the achievement in the manager
-            int count = 0;
-            foreach (XmlNode achievement in document.GetElementsByTagName("Quests")[0].ChildNodes) {
-                QuestManager.SetQuest(
-                    count,
-                    int.Parse(achievement.InnerText)
-                    );
-                count++;
+            try {
+                ApplySettings();
+            } catch (Exception e) when (e is FormatException || e is OverflowException || e is NullReferenceException || e is IndexOutOfRangeException) {
+                //A setting has an invalid value, go back to the default ones
+                document = CreateDefaultSettings(false);
+                DataManager.SaveEncryptedXml(document, GetSettingPath());
+                MessageBox.ShowDialog("Oh no!", "The settings file seems to be corrupted!\nI'll try to fix it!", 0);
+                ApplySettings();
             }
-            DataManager.Encrypt(GetSettingPath());
 
             currentPanel = 0;//main
             nextPanel = 0;
@@ -375,6 +211,156 @@ namespace Planetoid3D {
         /// <summary>
         /// Get the path to the settings file
         /// </summary>
+        /// <summary>
+        /// Load the settings file (or its backup), recreating it with the default values when missing or corrupted
+        /// and adding the settings it doesn't contain yet (e.g. when written by an older version of the game)
+        /// </summary>
+        private static XmlDocument LoadSettings() {
+            XmlDocument settings = null;
+            bool corrupted = false;
+            foreach (string path in new[] { GetSettingPath(), GetSettingPath() + "~1" }) {
+                if (File.Exists(path)) {
+                    try {
+                        settings = new XmlDocument();
+                        DataManager.LoadEncryptedXml(settings, path);
+                        break;
+                    } catch (XmlException) {
+                        settings = null;
+                        corrupted = true;
+                    }
+                }
+            }
+
+            XmlDocument defaults = CreateDefaultSettings(corrupted);
+            if (settings == null) {
+                if (corrupted) {
+                    MessageBox.ShowDialog("Oh no!", "The settings file seems to be corrupted!\nI'll try to fix it!", 0);
+                }
+                settings = defaults;
+            } else {
+                XmlElement root = settings.DocumentElement;
+                foreach (XmlNode setting in defaults.DocumentElement.ChildNodes) {
+                    if (root[setting.Name] == null) {
+                        root.AppendChild(settings.ImportNode(setting, true));
+                    }
+                }
+                //New quests may have been added too
+                XmlNode quests = root["Quests"];
+                XmlNode defaultQuests = defaults.DocumentElement["Quests"];
+                for (int a = quests.ChildNodes.Count; a < defaultQuests.ChildNodes.Count; a++) {
+                    quests.AppendChild(settings.ImportNode(defaultQuests.ChildNodes[a], true));
+                }
+            }
+            DataManager.SaveEncryptedXml(settings, GetSettingPath());
+            return settings;
+        }
+
+        /// <summary>
+        /// Create the settings document with the default values
+        /// </summary>
+        private static XmlDocument CreateDefaultSettings(bool keyLost) {
+            XmlDocument settings = new XmlDocument();
+            XmlElement root = settings.CreateElement("Settings");
+            settings.AppendChild(root);
+            void Add(XmlElement parent, string name, string value) {
+                XmlElement element = settings.CreateElement(name);
+                element.InnerText = value;
+                parent.AppendChild(element);
+            }
+            Add(root, "Music", "10");
+            Add(root, "Sound", "10");
+            Add(root, "Fullscreen", "false");
+            Add(root, "Details", "1");
+            Add(root, "Cameye", "false");
+            Add(root, "Lens", "false");
+            Add(root, "ShortNames", Keys.X.ToString());
+            Add(root, "ShortBuild", Keys.B.ToString());
+            Add(root, "ShortDiplomacy", Keys.D.ToString());
+            Add(root, "ShortStrategy", Keys.S.ToString());
+            Add(root, "Enabled", keyLost ? "keyLost!" : "false");
+            Add(root, "Resolution", "0");
+            Add(root, "Orbits", "1");
+            XmlElement quests = settings.CreateElement("Quests");
+            root.AppendChild(quests);
+            for (int a = 0; a < 20; a++) {
+                Add(quests, "Quest", "0");
+            }
+            return settings;
+        }
+
+        /// <summary>
+        /// Apply the settings stored in the settings document
+        /// </summary>
+        private static void ApplySettings() {
+                //music volume
+                AudioManager.music_volume = int.Parse(document.GetElementsByTagName("Music")[0].FirstChild.Value);
+                //sound volume
+                AudioManager.sound_volume = int.Parse(document.GetElementsByTagName("Sound")[0].FirstChild.Value);
+                //fullscreen
+                graphics.IsFullScreen = bool.Parse(document.GetElementsByTagName("Fullscreen")[0].FirstChild.Value);
+                graphics.ApplyChanges();
+                //details
+                PlanetoidGame.details = short.Parse(document.GetElementsByTagName("Details")[0].FirstChild.Value);
+                Util.InitializeVertices();
+                //dynamic camera
+                GameEngine.gameCamera.eyeCorner = bool.Parse(document.GetElementsByTagName("Cameye")[0].FirstChild.Value);
+                //Lens Flare
+                PlanetoidGame.lens.Enabled = bool.Parse(document.GetElementsByTagName("Lens")[0].FirstChild.Value);
+                //Get the resolution, only at the beginning of the game
+                currentResolution = (Resolution)int.Parse(document.GetElementsByTagName("Resolution")[0].FirstChild.Value);
+                //Get the orbits setting
+                currentOrbit = (Orbit)int.Parse(document.GetElementsByTagName("Orbits")[0].FirstChild.Value);
+
+                SetViewport();
+
+                //Shortcuts
+                HUDManager.button_names = new Button(new Vector2(390, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortNames")[0].FirstChild.Value[0]);
+                HUDManager.button_build = new Button(new Vector2(440, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortBuild")[0].FirstChild.Value[0]);
+                HUDManager.button_diplomacy = new Button(new Vector2(490, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortDiplomacy")[0].FirstChild.Value[0]);
+                HUDManager.button_strategy = new Button(new Vector2(540, GameEngine.Game.GraphicsDevice.Viewport.Height - 60), "", 50, document.GetElementsByTagName("ShortStrategy")[0].FirstChild.Value[0]);
+
+                /* if (document.GetElementsByTagName("Enabled")[0].FirstChild.Value.Equals("false") || !document.GetElementsByTagName("Identifier")[0].FirstChild.Value.Equals(GetProcessorId()))
+                 {
+                     PlanetoidGame.game_enabled = false;
+                     //Check online if there's a code with my CPU identifier
+                     /*try
+                     {
+                         WebClient objWebClient = new WebClient();
+                         System.Collections.Specialized.NameValueCollection values = new System.Collections.Specialized.NameValueCollection();
+                         values.Add("identifier", MenuManager.GetProcessorId());
+                         byte[] bytes = objWebClient.UploadValues("http://www.metalsoulstudios.net/reenableGame.php", "POST", values);
+                         if (bytes.Length > 0 && (char)bytes[0] != '#')
+                         {
+                             document.GetElementsByTagName("Enabled")[0].FirstChild.Value = System.Text.UTF8Encoding.UTF8.GetString(bytes);
+                             document.GetElementsByTagName("Identifier")[0].FirstChild.Value = GetProcessorId();
+                             PlanetoidGame.game_enabled = true;
+                         }
+                     }
+                     catch (WebException e)
+                     {
+
+                     }*/
+                /* }
+                 else
+                 {
+                     PlanetoidGame.game_enabled = true;
+                 }
+                 */
+
+                AudioManager.ChangeVolume("Music", AudioManager.music_volume);
+                AudioManager.ChangeVolume("Sound", AudioManager.sound_volume);
+
+                //Add the achievement in the manager
+                int count = 0;
+                foreach (XmlNode achievement in document.GetElementsByTagName("Quests")[0].ChildNodes) {
+                    QuestManager.SetQuest(
+                        count,
+                        int.Parse(achievement.InnerText)
+                        );
+                    count++;
+                }
+        }
+
         public static string GetSettingPath() {
             return GetBasePath() + "//settings.xnb";
         }
@@ -785,9 +771,7 @@ namespace Planetoid3D {
                                     bool succeded = true;
                                     string fn = MenuManager.GetSavePath(GameEngine.gameToLoad + ".xml");
                                     try {
-                                        DataManager.Decrypt(fn);
-                                        MenuManager.document.Load(fn);
-                                        DataManager.Encrypt(fn);
+                                        DataManager.LoadEncryptedXml(MenuManager.document, fn);
                                     } catch (XmlException) {
                                         succeded = false;
                                         MessageBox.ShowDialog("Nooo", "This save game appears to be corrupted :(\nPress OK to delete it.", 0);
@@ -879,9 +863,8 @@ namespace Planetoid3D {
                             hover = true;
                             infoText = "Save and return to main menu";
                             if (all_back.IsClicked()) {
-                                DataManager.Decrypt(GetSettingPath());
                                 //save settings
-                                document.Load(GetSettingPath());
+                                DataManager.LoadEncryptedXml(document, GetSettingPath());
                                 document.GetElementsByTagName("Music")[0].FirstChild.Value = AudioManager.music_volume.ToString();
                                 document.GetElementsByTagName("Sound")[0].FirstChild.Value = AudioManager.sound_volume.ToString();
                                 document.GetElementsByTagName("Fullscreen")[0].FirstChild.Value = graphics.IsFullScreen.ToString();
@@ -894,9 +877,8 @@ namespace Planetoid3D {
                                 document.GetElementsByTagName("ShortStrategy")[0].FirstChild.Value = HUDManager.button_strategy.shortcut.ToString();
                                 document.GetElementsByTagName("Resolution")[0].FirstChild.Value = "" + (int)currentResolution;
                                 document.GetElementsByTagName("Orbits")[0].FirstChild.Value = "" + (int)currentOrbit;
-                                document.Save(GetSettingPath());
+                                DataManager.SaveEncryptedXml(document, GetSettingPath());
                                 nextPanel = 0;
-                                DataManager.Encrypt(GetSettingPath());
                             }
                         }
 

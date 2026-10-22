@@ -134,13 +134,12 @@ namespace Planetoid3D
                     completed = false;
                     signPosition = new Vector2(GameEngine.Game.GraphicsDevice.Viewport.Width / 2 - 200, -50);
                 }
+
+                //Update data, only when the quest progressed (completed quests are called every frame by some checks)
+                DataManager.LoadEncryptedXml(MenuManager.document, MenuManager.GetSettingPath());
+                MenuManager.document.GetElementsByTagName("Quest")[quest].InnerText = quests[quest].actual.ToString();
+                DataManager.SaveEncryptedXml(MenuManager.document, MenuManager.GetSettingPath());
             }
-            //Update data
-            DataManager.Decrypt(MenuManager.GetSettingPath());
-            MenuManager.document.Load(MenuManager.GetSettingPath());
-            MenuManager.document.GetElementsByTagName("Quest")[quest].InnerText = quests[quest].actual.ToString();
-            MenuManager.document.Save(MenuManager.GetSettingPath());
-            DataManager.Encrypt(MenuManager.GetSettingPath());
         }
 
         /// <summary>

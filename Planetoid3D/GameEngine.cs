@@ -864,12 +864,9 @@ namespace Planetoid3D {
             // Get the path of the save game
             savename = MenuManager.GetSavePath(savename + ".xml");
 
-            //Decrypt File
-            DataManager.Decrypt(savename);
-
             // Open the file
             //FileStream stream = File.Open(fullpath, FileMode.OpenOrCreate,FileAccess.Read);
-            MenuManager.document.Load(savename);
+            DataManager.LoadEncryptedXml(MenuManager.document, savename);
 
             //<PLANETS>
             //Declare the serializer type to get
@@ -987,9 +984,6 @@ namespace Planetoid3D {
                 MessageBox.ShowDialog("Warning!", "One or more custom races used in this game are missing!\nRandom races will be picked.", 0);
             }
             //</GAME>
-
-            //Encrypt File
-            DataManager.Encrypt(savename);
         }
 
         /// <summary>
