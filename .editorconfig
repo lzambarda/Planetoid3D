@@ -1,0 +1,26 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.cs]
+# Match the dominant style of the codebase
+end_of_line = crlf
+charset = utf-8-bom
+insert_final_newline = true
+
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+
+# The managers are static classes exposing public (static) fields by design
+dotnet_diagnostic.CA1051.severity = none
+dotnet_diagnostic.CA2211.severity = none
+# Names like game_screen and music_volume are part of the existing code
+dotnet_diagnostic.CA1707.severity = none
+
+[*.{fx,Fx}]
+end_of_line = crlf
